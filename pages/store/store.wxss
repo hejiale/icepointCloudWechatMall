@@ -1,0 +1,184 @@
+/* pages/store/store.wxss */
+
+/* pages/store/store.wxss */
+
+page {
+  background-color: #fbf9fe;
+}
+
+.loginView {
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+  width: 100%;
+}
+
+.textView {
+  display: flex;
+  align-content: center;
+  height: 50px;
+  width: 100%;
+}
+
+.clickView {
+  display: flex;
+  align-items: center;
+  bottom: 10px;
+  width: 100%;
+  height: 50px;
+}
+
+.loginButton {
+  width: 200px;
+  height: 35px;
+  background-color: #63a0d4;
+  color: white;
+  font-size: 12px;
+}
+
+.loginText {
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 13px;
+  color: gray;
+  text-align: center;
+}
+
+.topView{
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 1000; 
+  background-color: #fbf9fe;
+}
+
+.searchView{
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.seachImage{
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+.searchInput{
+  margin-left: 10px;
+  width: calc(100% - 25px);
+  height: 100%;
+  line-height: 30px;
+  font-size: 13px;
+}
+
+.storeListView {
+  margin-top: 50px;
+  width: 100%;
+  height: calc(100%-50px);
+}
+
+.contentView {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1px;
+  width: 100%;
+  /* height: 120px; */
+  background-color: white;
+}
+.storeLeftView{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0px;
+  width: 100%;
+  /* height: 100%; */
+}
+.storeNameView{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+}
+
+.distanceView{
+  display: flex;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.storeAddressView{
+  display: flex;
+  /* align-items: center; */
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+}
+
+.contentText {
+  margin-left: 10px;
+  margin-top: 0px;
+  font-size: 12px;
+  width: 80%;
+  line-height: 25px;
+  color: gray;
+}
+.addressText{
+  margin-top: 0px;
+  margin-left: 10px;
+  font-size: 16px;
+  width: 70%;
+  line-height: 20px;
+}
+
+.addressImage{
+  width: 20px;
+  height: 20px;
+}
+
+.distanceText{
+  margin-left: 5px;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.storeContacterLine {
+  margin-left: 1px;
+  width: 1px;
+  height: 70%;
+}
+
+.callPhoneView {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-left: 1px;
+  width: calc(30% - 13px);
+  height: 100%;
+}
+
+.callImage {
+  width: 32px;
+  height: 32px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

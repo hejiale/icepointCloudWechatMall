@@ -1,0 +1,46 @@
+<view class="page">
+  <view class='topView'>
+    <view class='searchView'>
+      <image class='seachImage' src='../images/icon_seach@2x.png'></image>
+      <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;'></input>
+    </view>
+    <view class='searchMenuView'>
+      <view class='orderMenuView' style='color:#4D9FD8;'>全部订单</view>
+      <view class='orderMenuView'>待付款</view>
+      <view class='orderMenuView'>待发货</view>
+      <view class='orderMenuView'>待收货</view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="scrollView">
+    <block wx:for-items="{{orderList}}">
+      <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
+        <view class="codeView">
+          <text class="title">订单号：212312312323</text>
+          <text class="statusTitle">交易成功</text>
+        </view>
+        <view class='line'></view>
+        <view class='productListView'>
+          <block wx:for-items="{{orderList}}">
+            <view class='productContentView'>
+              <image mode="aspectFit" class="productImage"></image>
+              <view class="productInfo">
+                <text class="productNameText">防辐射平光镜 金属质感圆框眼镜眼镜…</text>
+                <view class="priceView">
+                  <text class="numText">x1</text>
+                  <text class="price">￥ 88.88</text>
+                </view>
+              </view>
+            </view>
+            <view class='line'></view>
+          </block>
+        </view>
+        <view class='orderPriceView'>
+          <view class='totalAmountView'>
+            <text class='totalAmountTitle'>总金额:</text>
+            <text class='totalAmountValue'>￥2122.00</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

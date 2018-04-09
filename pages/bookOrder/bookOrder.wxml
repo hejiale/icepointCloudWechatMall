@@ -1,0 +1,171 @@
+<!--pages/bookOrder/bookOrder.wxml-->
+<view class='memberRightsEditView {{isShowMemberRights}}'>
+  <view id="classViewCover"></view>
+  <view class='memberRightsBgView'>
+    <view class='memberBgTitleView'>
+      <text class='memberBgTitle'>会员权益</text>
+      <text class='memberCancleButton' bindtap='onCoverClicked'>取消</text>
+    </view>
+    <view class='memberRightsBgLine'></view>
+    <view class='offsetAmountView'>
+      <text class='offsetAmountTitle'>当前抵付金额</text>
+      <text class='offsetAmountValue'>￥ 0.00</text>
+    </view>
+    <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;'></input>
+    <view class='memberRightsBgBottomLine'></view>
+    <view class='memberRightsSureButton'>确定</view>
+  </view>
+</view>
+<view class="page">
+  <view class="scrollView">
+    <view class="deliveryModeView">
+      <text class="deliveryModeTitle">提货方式</text>
+      <image class='deliveryModeImage {{isExtractEmail}}' src='../images/extract_switch_left@2x.png' mode="aspectFit" bindtap='onExtractEmail'></image>
+      <image class='deliveryModeImage {{isExtractSelf}}' src='../images/extract_switch_right@2x.png' mode="aspectFit" bindtap='onExtractSelf'></image>
+    </view>
+    <view class="addressInfoView" bindtap='onSelectAddress'>
+      <image class="addressIconImage" src='../images/address@2x.png'></image>
+      <view class="contactInfoView">
+        <view class="contactNameView">
+          <text class="contactNameText">都小睿  15221665605</text>
+        </view>
+        <view class="contactAddressView">
+          <text class="contactAddressText">上海市静安区中山北路756号D102</text>
+        </view>
+      </view>
+      <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
+    </view>
+    <!-- <view class="selectOpmetoryInfo {{isShowOpmetory}}">
+      <view class="opmetoryInfoView">
+        <view class="rightView">
+          <view class="IconView">
+            <image src="../images/R.png" class="iconImage" mode="aspectFit"></image>
+          </view>
+          <view class="rightOpmetroy">
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">球镜/SPH</text>
+              <text class="opmetoryValue">{{defaultOpmetory.sphRight}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">柱镜/CYL</text>
+              <text class="opmetoryValue">{{defaultOpmetory.cylRight}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">轴位/AXLS</text>
+              <text class="opmetoryValue">{{defaultOpmetory.axisRight}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">下加光/ADD</text>
+              <text class="opmetoryValue">{{defaultOpmetory.addRight}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">矫正视力/VA</text>
+              <text class="opmetoryValue">{{defaultOpmetory.correctedVisionRight}}</text>
+            </view>
+            <view class="opmetorySpace"></view>
+          </view>
+        </view>
+        <view class="leftView">
+          <view class="IconView">
+            <image src="../images/L.png" class="iconImage" mode="aspectFit"></image>
+          </view>
+          <view class="leftOpmetroy">
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">球镜/SPH</text>
+              <text class="opmetoryValue">{{defaultOpmetory.sphLeft}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">柱镜/CYL</text>
+              <text class="opmetoryValue">{{defaultOpmetory.cylLeft}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">轴位/AXLS</text>
+              <text class="opmetoryValue">{{defaultOpmetory.axisLeft}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">下加光/ADD</text>
+              <text class="opmetoryValue">{{defaultOpmetory.addLeft}}</text>
+            </view>
+            <view class="opmetoryInfo">
+              <text class="opmetoryText">矫正视力/VA</text>
+              <text class="opmetoryValue">{{defaultOpmetory.correctedVisionLeft}}</text>
+            </view>
+            <view class="opmetorySpace"></view>
+          </view>
+        </view>
+        <view class="pdView">
+          <view class="opmetoryInfo">
+            <text class="opmetoryText">双眼瞳距/PD</text>
+            <text class="opmetoryValue">{{defaultOpmetory.distance}}</text>
+          </view>
+        </view>
+      </view>
+    </view> -->
+    <!-- <view class="storeAddressView">
+      <view class="addressView">
+        <text class="addressText">{{storeAddress}} {{storeName}}</text>
+        <text class="addressText">{{storePhone}}</text>
+      </view>
+    </view> -->
+    <view class='productContentView'>
+      <block wx:for-items="{{productList}}">
+        <view class="productView">
+          <image mode="aspectFit" class="productImage"></image>
+          <view class="productInfo">
+            <text class="productNameText">防辐射平光镜 金属质感圆框眼镜眼镜…</text>
+            <view class="priceView">
+              <text class="numText">x1</text>
+              <text class="price">￥ 88.88</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='shouldPayAmountView'>
+      <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
+      <text class="shouldPayAmountTitle">商品应付金额</text>
+      <text class="shouldPayAmountText">￥170.76</text>
+    </view>
+    <view class='memberRightsView'>
+      <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
+      <view class="memberContentView">
+        <view class="memberRightsTitleView" bindtap='onShowMemberRightsView'>会员权益</view>
+        <image class="memberLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+        <view class='memberDiscountView'>
+          <view class="memberDiscounTextView">
+            <text class="memberDiscounTextTitle">会员折扣</text>
+          </view>
+          <view class="memberDiscounTextView">
+            <text class="memberDiscounTextTitle">储值抵扣</text>
+          </view>
+          <view class="memberDiscounTextView">
+            <text class="memberDiscounTextTitle">积分</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='storeInfoView'>
+      <image class="storeIconImage" src='../images/address@2x.png'></image>
+      <view class='storeContentView'>
+        <view class="storeTitleView">线下服务点</view>
+        <image class="storeLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+        <view class='storeAddressInfoView'>
+          <view class='storeContactInfoView' bindtap='onSelectStore'>
+            <view class='storeNameView'>
+              <view class="storeNameTextView">上海中山北路自营店</view>
+              <view class='storeDistanceView'>0.5km</view>
+            </view>
+            <view class='storeAddressView'>上海市静安区中山北路756号D102</view>
+          </view>
+          <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
+          <view class='callPhoneView' bindtap="onCall">
+            <image class='callImage' src='../images/icon_phone.png'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="footView" bindtap='offerOrder'>
+    <image class='offerOrderImage' src='../images/icon_offerOrder.png' mode="aspectFit"></image>
+  </view>
+</view>

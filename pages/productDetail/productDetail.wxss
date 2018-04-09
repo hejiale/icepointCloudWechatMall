@@ -1,0 +1,220 @@
+/* pages/productDetail/productDetail.wxss */
+
+/* pages/productDetail/productDetail.wxss */
+
+page {
+  background-color: #fbf9fe;
+}
+
+.contentView {
+  padding-bottom: 50px;
+}
+
+.swiper_box {
+  width: 100%;
+  background-color: white;
+}
+
+.bannerView {
+  width: 100%;
+  height: 280rpx;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+}
+
+.productName {
+  margin-left: 20px;
+  width: 100%;
+  height: 45px;
+  line-height: 20px;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priceText {
+  margin-top: 0px;
+  margin-left: 20px;
+  font-size: 15px;
+  color: red;
+  font-family: "Helvetica Neue",
+                 Helvetica,
+                 Arial,
+                 "Hiragino Sans GB",
+                 "PingFang SC",
+                 "Microsoft YaHei",
+                 "WenQuanYi Micro Hei",
+                 sans-serif;
+  font-weight: 900;
+}
+
+.specificationView {
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  background-color: white;
+  margin-top: 5px;
+}
+
+.specificationImage {
+  width: 100%;
+  height: 140px;
+}
+
+.specifications {
+  margin: 0px;
+  width: 100%;
+  height: 140px;
+}
+
+.FrameView {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.specificationItem {
+  display: inline-block;
+  width: 100%;
+  height: 25px;
+}
+
+.keyText {
+  margin-left: 20px;
+  font-size: 16px;
+  width: 20%;
+  line-height: 25px;
+}
+
+.valueText {
+  margin-left: 10px;
+  font-size: 16px;
+  width: 80%;
+  color: lightgrey;
+  line-height: 25px;
+}
+
+.webView {
+  margin-top: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+.footView {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: #fbf9fe;
+}
+
+.glassTryView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  background-color: white;
+}
+
+.rightTryFootView {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.cartButton {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.cartImage {
+  flex: 1;
+  width: 22px;
+  height: 22px;
+}
+
+.phoneImage {
+  flex: 1;
+  width: 22px;
+  height: 22px;
+  border-right: 1px solid #999999;
+}
+
+
+.addCartButton {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  width: 108px;
+  height: 100%;
+}
+
+.addCartImage {
+  width: 108px;
+  height: 36px;
+}
+
+.payOrderButton {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 108px;
+  height: 100%;
+}
+
+.payOrderImage {
+  width: 108px;
+  height: 36px;
+}
+
+.bookText {
+  font-size: 14px;
+  width: 50%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  background-color: #63a0d4;
+}
+
+.addCartText {
+  font-size: 14px;
+  color: white;
+  width: 50%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  background-color: #ffd700;
+}
+
+.tryImage {
+  width: 40px;
+  height: 40px;
+}

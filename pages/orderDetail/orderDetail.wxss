@@ -1,0 +1,545 @@
+page {
+  background-color: #fbf9fe;
+}
+
+.scrollView {
+  margin: 0px;
+  width: 100%;
+  padding-bottom: 45px;
+}
+
+.orderStatusView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.orderStatusTitle {
+  margin-left: 10px;
+  width: 50%;
+  height: 20px;
+  font-size: 20px;
+  color: #222;
+  line-height: 20px;
+}
+
+.orderCodeTitle {
+  margin-right: 10px;
+  width: calc(50% - 10px);
+  height: 20px;
+  font-size: 14px;
+  color: #999;
+  line-height: 20px;
+  text-align: right;
+}
+
+.deliveryModeView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+  background-color: white;
+  width: 100%;
+  height: 60px;
+}
+
+.deliveryModeLeftView {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  width: calc(50% - 10px);
+  height: 20px;
+}
+
+.deliveryModeRightView {
+  margin-right: 10px;
+  width: calc(50% - 10px);
+  height: 100%;
+}
+
+.pickUpGoodsImage {
+  width: 20px;
+  height: 20px;
+}
+
+.pickUpGoodsTitle {
+  margin-left: 5px;
+  width: 70px;
+  height: 20px;
+  font-size: 16px;
+}
+
+.addressInfoView {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+}
+
+.addressIconImage {
+  margin-left: 10px;
+  width: 23px;
+  height: 32px;
+}
+
+.contactInfoView {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 80%;
+  height: 100%;
+}
+
+.contactNameView {
+  display: flex;
+  margin-left: 0px;
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+}
+
+.contactNameText {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+  font-size: 16px;
+}
+
+.contactAddressView {
+  display: flex;
+  margin-left: 0px;
+  width: 100%;
+  height: 30px;
+}
+
+.contactAddressText {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.rightIconImage {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.productContentView {
+  display: flex;
+  flex-flow: column;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.productView {
+  display: flex;
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  background-color: white;
+}
+
+.productImage {
+  margin-left: 10px;
+  width: 80px;
+  height: 80px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  width: calc(100% - 90px);
+}
+
+.productNameText {
+  font-size: 15px;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.priceView {
+  margin-top: 20px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.numText {
+  font-size: 14px;
+  height: 100%;
+  line-height: 40px;
+  text-align: right;
+}
+
+.price {
+  font-size: 14px;
+  height: 100%;
+  line-height: 40px;
+}
+
+.shouldPayAmountView {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+}
+
+.shouldPayAmountTitle{
+  margin-left: 5px;
+  width: 50%;
+  height: 100%;
+  font-size: 18px;
+  color: #222;
+  line-height: 80px;
+}
+
+.shouldPayAmountText {
+  margin-left: 0px;
+  margin-right: 10px;
+  width: 50%;
+  height: 100%;
+  text-align: right;
+  line-height: 80px;
+  font-size: 15px;
+}
+
+.memberRightsView {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  height: 167px;
+  background-color: white;
+}
+
+.shouldPayIconImage {
+  margin-left: 10px;
+  width: 21px;
+  height: 20px;
+}
+
+.memberRightsIconImage {
+  margin-left: 10px;
+  margin-top: 17px;
+  width: 20px;
+  height: 16px;
+}
+
+.memberContentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5px;
+  width: calc(100% - 35px);
+  height: 100%;
+}
+
+.memberRightsTitleView {
+  margin: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.memberLineImage {
+  margin: 0px;
+  width: 100%;
+  height: 1px;
+}
+
+.memberDiscountView {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  width: 100%;
+  height: calc(100%-52px);
+}
+
+.memberDiscounTextView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px;
+  width: 100%;
+  height: 38px;
+}
+
+.memberDiscounTextTitle {
+  margin: 0px;
+  font-size: 14px;
+}
+
+.storeInfoView {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  height: 150px;
+  background-color: white;
+}
+
+.storeIconImage {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 23px;
+  height: 32px;
+}
+
+.storeContentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5px;
+  width: calc(100% - 35px);
+  height: 100%;
+}
+
+.storeTitleView {
+  margin: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.storeLineImage {
+  margin: 0px;
+  width: 100%;
+  height: 1px;
+}
+
+.storeAddressInfoView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px;
+  width: 100%;
+  height: 98px;
+}
+
+.storeContactInfoView {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  width: 70%;
+  height: 100%;
+}
+
+.storeContacterLine {
+  margin-left: 1px;
+  width: 1px;
+  height: 70%;
+}
+
+.callPhoneView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1px;
+  width: calc(30% - 3px);
+  height: 100%;
+}
+
+.callImage {
+  width: 32px;
+  height: 32px;
+}
+
+.storeNameView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  height: 50%;
+}
+
+.storeAddressView {
+  margin-top: 0px;
+  width: 100%;
+  height: 50%;
+  font-size: 13px;
+}
+
+.storeNameTextView {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  width: 70%;
+  height: 100%;
+  font-size: 15px;
+}
+
+.storeDistanceView {
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 44px;
+  text-align: center;
+}
+
+.footView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  bottom: 0px;
+  background-color: white;
+}
+
+.offerOrderImage {
+  padding: 5px;
+  height: 40px;
+}
+
+.memberRightsEditView {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 888;
+}
+
+#classViewCover {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #333;
+  opacity: 0.7;
+}
+
+.memberRightsBgView {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10%;
+  margin-top: 100px;
+  width: 80%;
+  height: 260px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.memberBgTitleView {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  width: 100%;
+  height: 60px;
+}
+
+.memberBgTitle {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.memberCancleButton {
+  position: absolute;
+  font-size: 15px;
+  right: 0px;
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #4d9fd8;
+  text-align: center;
+}
+
+.memberRightsBgLine {
+  margin: 0px;
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+
+.offsetAmountView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px;
+  width: 100%;
+  height: 50px;
+}
+
+.offsetAmountTitle {
+  margin-left: 10px;
+  width: 100px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.offsetAmountValue {
+  margin-right: 10px;
+  width: 150px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.offsetAmountInput {
+  margin-top: 15px;
+  width: 90%;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+}
+
+.memberRightsBgBottomLine {
+  margin-top: 30px;
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+
+.memberRightsSureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 90%;
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  background-color: #4d9fd8;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

@@ -1,0 +1,97 @@
+<view class="showPropertyBgView {{showOrHide}}">
+  <view id="classViewCover" bindtap="onBgClicked"></view>
+  <view class="popContentView">
+    <view class="propertyClassView">
+      <scroll-view scroll-y="true" class="scrollView" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" style="height:calc(100% - 40px)">
+        <view class="priceView">
+          <text class="TitleText">价格</text>
+          <view class="priceSpaceView">
+            <text class="priceSpaceText">价格区间(元)</text>
+            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{startPrice}}" />
+            <view class="priceSpace"></view>
+            <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{endPrice}}" />
+          </view>
+        </view>
+        <view class="popClassView">
+          <text class="TitleText">类别</text>
+          <view class="classesView">
+            <block wx:for-items="{{classList}}">
+              <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{currentTypeName != item}}" data-key="{{item}}" bindtap="onSelectedClass">
+                <label class="classItemText" style="color:#222222">{{item}}</label>
+              </view>
+              <view class="classItem" style="background-color: #63a0d4;" wx:else bindtap="onSelectedClass" data-key="{{item}}">
+                <label class="classItemText" style="color: white;">{{item}}</label>
+              </view>
+            </block>
+          </view>
+        </view>
+        <!-- <block wx:for-items="{{allProperty}}">
+          <view class="popPropertyView">
+            <view class="popPropertyTitleView">
+              <text class="TitleText">{{item.title}}</text>
+              <view class="propertyOpenView {{item.isShowOpen}}" bindtap="onFilterOpen" data-key="{{item}}">
+                <image src="../images/filter_open.png" class="openImage" wx:if="{{!item.isOpen}}"></image>
+                <image src="../images/filter_closed.png" class="openImage" wx:else></image>
+              </view>
+            </view>
+            <view class="{{item.isOpen ? 'openBar':'propertysView'}}">
+              <block wx:for-items="{{item.value}}">
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #fbf9fe;" wx:if="{{!item.isSelected}}">
+                  <text class="classItemText" style="color:gray">{{item.title}}</text>
+                </view>
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #63a0d4;" wx:else>
+                  <text class="classItemText" style="color:white">{{item.title}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block> -->
+      </scroll-view>
+    </view>
+    <view class="footView">
+      <view class="resetView" bindtap="onResetProperty">
+      重置
+      </view>
+      <view class="sureView" bindtap="onSureFilterProducts">
+        确定
+      </view>
+    </view>
+  </view>
+</view>
+<view class="searchContentView">
+  <view class="topMenuView">
+    <view class="search-input">
+      <image class="search-icon" src="../images/icon_seach@2x.png" mode="aspectFit" />
+      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 13px;color:#999999;" bindfocus="onSearchEditFocus" bindblur="onCancleEditFocus" bindinput="onSearchInput" value="{{inputKeyWord}}" />
+    </view>
+    <view class="searchRightView" bindtap='onClassClicked'>
+      <image class='filter-icon' src='../images/icon_filterClass@2x.png' mode="aspectFit"></image>
+    </view>
+  </view>
+  <view class="hotSearchView {{isShowSearchView}}" wx:if="{{historySearchWords.length > 0}}">
+    <view class="hotSearchTopView">
+      <text class="hotTitle">最近搜索</text>
+      <text style="font-size: 12px;color: #999999;margin-right: 15px;" bindtap="onClearHistoryWords">清空</text>
+    </view>
+    <view class="hotItemView">
+      <block wx:for-items="{{historySearchWords}}">
+        <view class="searchClassItem" style="background-color: #FFFFFF;" data-key="{{item}}" bindtap='onLastesItem'>
+          <label class="searchClassItemText" style="color:gray">雷朋眼镜</label>
+        </view>
+      </block>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore">
+    <block wx:for-items="{{allProductList}}">
+      <view class='productContentView' bindtap="onProductDetail">
+        <view class="productView">
+          <image src="../images/临时商品图片@2x.png" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
+          <view class="productInfoView">
+            <text class="productText">饰水晶方形镜框太阳眼镜</text>
+            <text class="priceText">￥9980</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

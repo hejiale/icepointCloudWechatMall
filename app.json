@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/logs/logs",
+    "pages/order/order",
+    "pages/address/address",
+    "pages/opmetory/opmetory",
+    "pages/editAddress/editAddress",
+    "pages/productDetail/productDetail",
+    "pages/bookOrder/bookOrder",
+    "pages/login/login",
+    "pages/bindPhone/bindPhone",
+    "pages/cart/cart",
+    "pages/store/store",
+    "pages/productList/productList",
+    "pages/myBook/myBook",
+    "pages/tryGlass/tryGlass",
+    "pages/searchPage/searchPage",
+    "pages/person/person",
+    "pages/orderDetail/orderDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  }
+}

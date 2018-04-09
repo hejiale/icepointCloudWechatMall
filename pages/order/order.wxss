@@ -1,0 +1,194 @@
+/* pages/order/order.wxss */
+
+/* pages/person/order/order.wxss */
+
+page {
+  background-color: #fbf9fe;
+}
+
+.topView {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  height: 100px;
+  z-index: 1000;
+  background-color: #fbf9fe;
+}
+
+.searchView {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 5%;
+  width: 90%;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.seachImage {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+.searchInput {
+  margin-left: 10px;
+  width: calc(100% - 25px);
+  height: 100%;
+  line-height: 30px;
+  font-size: 13px;
+}
+
+.searchMenuView {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+}
+
+.orderMenuView {
+  flex: 1;
+  height: 100%;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.scrollView {
+  margin-top: 100px;
+  width: 100%;
+}
+
+.contentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+.codeView {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+}
+
+.title {
+  margin-left: 10px;
+  font-size: 14px;
+  height: 100%;
+  line-height: 40px;
+  color: #999;
+}
+
+.statusTitle {
+  margin-right: 10px;
+  height: 100%;
+  line-height: 40px;
+  font-size: 14px;
+  color: #4d9fd8;
+}
+
+.line {
+  margin-left: 5px;
+  width: calc(100% - 10px);
+  height: 1px;
+  background-color: #e6e6e6;
+}
+
+.productListView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.productContentView {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+}
+
+.orderPriceView{
+  width: 100%;
+  height: 65px;
+}
+
+.productImage {
+  margin-left: 10px;
+  width: 54px;
+  height: 54px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-left: 10px;
+  width: calc(100% - 74px);
+}
+
+.productNameText {
+  font-size: 15px;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.priceView {
+  margin-top: 20px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.numText {
+  font-size: 14px;
+  height: 100%;
+  line-height: 20px;
+  text-align: right;
+  color: #666666;
+}
+
+.price {
+  font-size: 14px;
+  height: 100%;
+  line-height: 20px;
+  color: #666666;
+}
+
+.totalAmountView{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  width: 50%;
+  height: 100%;
+}
+
+.totalAmountTitle{
+  width: 55px;
+  height: 20px;
+  font-size: 14px;
+  color: #999999;
+}
+
+.totalAmountValue{
+  width: calc(100% - 55px);
+  height: 20px;
+  font-size: 14px;
+}
+

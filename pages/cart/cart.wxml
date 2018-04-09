@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="loginView {{showLogin}}">
+    <view class="textView">
+      <text class="loginText">您尚未登录,请先登录后查看个人信息</text>
+    </view>
+    <view class="clickView">
+      <button class="loginButton" bindtap="onLogin">登录</button>
+    </view>
+  </view>
+  <view class='topCoverView'></view>
+  <view class='topView'>
+    <view class='titleView'>
+      <text class='topText'>商品列表</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit}}">编辑</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit}}">保存</text>
+    </view>
+    <view class='topLine'>
+    </view>
+  </view>
+  <view class="contentView">
+    <scroll-view>
+      <block wx:for-items="{{allCartList}}">
+        <view class="openView" wx:if="{{canEdit}}" data-key="{{item}}">
+          <view class="onSelectView" bindtap="onSelected">
+            <image src="../images/icon_cartReduce@2x.png" class="iconSelectedImage" mode="aspectFit"></image>
+          </view>
+          <view class="cartView">
+            <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
+            <view class="productInfo">
+              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜</text>
+              <text class="price">￥ 268.88 </text>
+              <view class='editCartNumView'>
+                <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit"></image>
+                <text class='cartNumText'>1</text>
+                <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="unOpenView" wx:else data-key="{{item}}">
+          <view class="onSelectView" bindtap="onSelected">
+            <image src="../images/radio.png" class="iconSelectedImage" mode="aspectFit"></image>
+          </view>
+          <view class='cartView'>
+          <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
+            <view class="productInfo">
+              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜</text>
+              <view class="priceView">
+                <text class="price">￥ 268.88 </text>
+                <text class="numText">x1</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="footView" wx:if="{{allCartList.length > 0}}">
+    <view class='normalBottomView' wx:if="{{!canEdit}}" bindtap='onBook'>
+      <text class="totalOrderPriceText">￥ 344.64 结算</text>
+    </view>
+    <view class="chooseAllView" wx:if="{{canEdit}}">
+      <text class="totalOrderPriceText">全部删除</text>
+    </view>
+  </view>
+</view>
