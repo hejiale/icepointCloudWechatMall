@@ -1,4 +1,5 @@
 // pages/bookOrder/bookOrder.js
+var md5 = require('../../utils/md5.js')
 var app = getApp();
 
 Page({
@@ -21,8 +22,8 @@ Page({
     isShowOpmetory: 'hide',
     defaultOpmetory: null,
     isShowMemberRights: 'hide',
-    isExtractEmail:'show',
-    isExtractSelf:'hide'
+    isExtractEmail: 'show',
+    isExtractSelf: 'hide'
   },
   onLoad: function (options) {
     var that = this;
@@ -351,49 +352,59 @@ Page({
     })
   },
   offerOrder: function () {
+    wx.login({
+      success: function (res) {
+        console.log(res.code);
 
-    //   wx.request({
-    //     url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
-    //     method: 'POST',
-    //     data:{
-    //       appid: "wx59f8055b3b0422a4",
-    //       mch_id: "",
-    //       nonce_str: "",
-    //       sign:"",
-    //       body:"微商城支付",
-    //       out_trade_no:"20150806125346",
-    //       total_fee:"88",
-    //       spbill_create_ip:"",
-    //       notify_url:"http://www.weixin.qq.com/wxpay/pay.php",
-    //       trade_type:"",
-    //     },
-    //     success: function (res) {
+        wx.request({
+          url: app.HostURL + '/api/wechat/pay/unifiedOrder',
+          method: 'GET',
+          data: {
+            orderNo: "20150806125346",
+            price: 99,
+            jsCode: res.code,
+            isService: false
+          },
+          success: function (res) {
+            console.log(res)
 
-    //     }
-    // })
+            // var timestamp = Date.parse(new Date());
 
-
-
-
-    // wx.requestPayment({
-    //   timeStamp: '',
-    //   nonceStr: '',
-    //   package: '',
-    //   signType: '',
-    //   paySign: '',
-    // })
+            wx.requestPayment({
+              // 'timeStamp': timestamp.toString(),
+              'nonceStr': res.data.nonce_str,
+              'package': res.data.prepay_id,
+              'signType': 'MD5',
+              'paySign': res.data.sign,
+              'success': function (res) {
+                console.log(res)
+              },
+              'fail': function (res) {
+                console.log(res)
+              }, 
+              'complete': function (res) {
+                console.log(res)
+              }
+            })
+          }, fail: function (res) {
+            console.log(res)
+          }
+        })
+      }
+    })
   },
+
   onShowMemberRightsView: function () {
     this.setData({ isShowMemberRights: 'show' });
   },
   onCoverClicked: function (e) {
     this.setData({ isShowMemberRights: 'hide' });
   },
-  onExtractEmail: function(){
+  onExtractEmail: function () {
     this.setData({ isExtractEmail: 'hide' });
     this.setData({ isExtractSelf: 'show' });
   },
-  onExtractSelf: function(){
+  onExtractSelf: function () {
     this.setData({ isExtractSelf: 'hide' });
     this.setData({ isExtractEmail: 'show' });
   }
