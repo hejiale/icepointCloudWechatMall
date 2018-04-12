@@ -1,5 +1,6 @@
 // pages/bookOrder/bookOrder.js
-var md5 = require('../../utils/md5.js')
+var util = require('../../utils/md5.js')
+
 var app = getApp();
 
 Page({
@@ -352,44 +353,50 @@ Page({
     })
   },
   offerOrder: function () {
-    wx.login({
+    var ipcApp = app.globalData;
+
+    wx.request({
+      url: app.HostURL + '/api/wechat/pay/unifiedOrder',
+      method: 'GET',
+      data: {
+        orderNo: "201508334312121",
+        price: 1,
+        jsCode: ipcApp.loginCode,
+        isService: false
+      },
       success: function (res) {
-        console.log(res.code);
+        console.log(res)
 
-        wx.request({
-          url: app.HostURL + '/api/wechat/pay/unifiedOrder',
-          method: 'GET',
-          data: {
-            orderNo: "20150806125346",
-            price: 99,
-            jsCode: res.code,
-            isService: false
-          },
-          success: function (res) {
+        var date = String(new Date().getTime()).substr(0, 10);
+
+        var stringA = "appId=" + res.data.appid + "&nonceStr=" + res.data.nonce_str + "&package=prepay_id=" + res.data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
+
+        var stringSignTemp = stringA + "&key=5eef8283dc4c421484229a59449e11c2";
+
+        console.log(stringSignTemp);
+
+        var sign = util.hexMD5(stringSignTemp).toUpperCase();
+
+        console.log(sign);
+
+        wx.requestPayment({
+          timeStamp: date,
+          'nonceStr': res.data.nonce_str,
+          'package': "prepay_id=" + res.data.prepay_id,
+          'signType': 'MD5',
+          'paySign': sign,
+          'success': function (res) {
             console.log(res)
-
-            // var timestamp = Date.parse(new Date());
-
-            wx.requestPayment({
-              // 'timeStamp': timestamp.toString(),
-              'nonceStr': res.data.nonce_str,
-              'package': res.data.prepay_id,
-              'signType': 'MD5',
-              'paySign': res.data.sign,
-              'success': function (res) {
-                console.log(res)
-              },
-              'fail': function (res) {
-                console.log(res)
-              }, 
-              'complete': function (res) {
-                console.log(res)
-              }
-            })
-          }, fail: function (res) {
+          },
+          'fail': function (res) {
+            console.log(res)
+          },
+          'complete': function (res) {
             console.log(res)
           }
         })
+      }, fail: function (res) {
+        console.log(res)
       }
     })
   },

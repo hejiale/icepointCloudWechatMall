@@ -1,5 +1,8 @@
 <import src="../../wxParse/wxParse.wxml" />
 <view class="page">
+  <view class='tryGlassView'>
+    <image class="tryGlassImage" src='../images/detail_tryGlass@2x.png' mode="aspectFit"></image>
+  </view>
   <view class="contentView">
     <swiper class="swiper_box" indicator-dots="{{indicator}}">
       <block wx:for-items="{{images}}">
@@ -14,8 +17,13 @@ LHL001-C01</text>
       <text class="priceText">￥5980</text>
     </view>
     <view class="specificationView">
-      <image src="{{DetailObject.photos['缩略图'].photoLinkNormal}}" mode="aspectFit" class="specificationImage"></image>
-      <view class="specifications">
+      <view class='specificationTitleView'>
+        <text class='specificationDetailText'>图文详情</text>
+        <image class='columnLine' src='../images/icon_columnLine@2x.png'></image>
+        <text class='specificationParameterText'>商品参数</text>
+      </view>
+      <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <!-- <view class="specifications">
         <view class="FrameView">
           <block wx:for-items="{{specifications}}">
             <view class="specificationItem">
@@ -24,11 +32,11 @@ LHL001-C01</text>
             </view>
           </block>
         </view>
-      </view>
+      </view> -->
     </view>
-    <view class="webView">
+    <!-- <view class="webView">
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-    </view>
+    </view> -->
   </view>
   <view class="footView">
     <view class="glassTryView" wx:if="{{DetailObject.proTry}}" bindtap="onTryGlassAction">

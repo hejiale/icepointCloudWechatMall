@@ -33,8 +33,9 @@
     <view class="line"></view>
     <view class="contactTownView" bindtap='selectDistrict'>
       <text class="contacterText">省市区</text>
-      <input class="inputText" bindinput="bindContacterAddressInput" value="{{areaInfo.length > 0 ? areaInfo :currentAddressObject.detailAdress}}" />
+      <text class="provinceText" bindtap="bindContacterAddressInput">{{areaInfo.length > 0 ? areaInfo :currentAddressObject.detailAdress}}</text>
     </view>
+    <view class="line"></view>
     <view class="contactTownView">
       <text class="contacterText">详细地址</text>
       <input class="inputText" bindinput="bindContacterAddressInput"/>

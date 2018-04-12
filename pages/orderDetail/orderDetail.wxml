@@ -81,7 +81,10 @@
     <view class='storeInfoView'>
       <image class="storeIconImage" src='../images/address@2x.png'></image>
       <view class='storeContentView'>
-        <view class="storeTitleView">线下服务点</view>
+        <view class="storeTitleView">
+          <text class='storeInfoTitle'>线下服务点</text>
+          <text class='storeNumText'>共 32 家门店</text>
+        </view>
         <image class="storeLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
         <view class='storeAddressInfoView'>
           <view class='storeContactInfoView' bindtap='onSelectStore'>
