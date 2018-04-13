@@ -33,10 +33,10 @@ LHL001-C01</text>
           </block>
         </view>
       </view> -->
-    </view>
-    <!-- <view class="webView">
+      <!-- <view class="webView">
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view> -->
+    </view>
   </view>
   <view class="footView">
     <view class="glassTryView" wx:if="{{DetailObject.proTry}}" bindtap="onTryGlassAction">

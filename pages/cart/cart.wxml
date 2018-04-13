@@ -21,7 +21,7 @@
     <scroll-view>
       <block wx:for-items="{{allCartList}}">
         <view class="openView" wx:if="{{canEdit}}" data-key="{{item}}">
-          <view class="onSelectView" bindtap="onSelected">
+          <view class="onSelectView" bindtap="onDeleteCart">
             <image src="../images/icon_cartReduce@2x.png" class="iconSelectedImage" mode="aspectFit"></image>
           </view>
           <view class="cartView">
@@ -39,10 +39,10 @@
         </view>
         <view class="unOpenView" wx:else data-key="{{item}}">
           <view class="onSelectView" bindtap="onSelected">
-            <image src="../images/radio.png" class="iconSelectedImage" mode="aspectFit"></image>
+            <icon class='iconSelectedImage' type="{{item.cartSelected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
           </view>
           <view class='cartView'>
-          <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
               <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜</text>
               <view class="priceView">
