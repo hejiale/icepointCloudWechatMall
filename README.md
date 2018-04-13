@@ -1,2 +1,1 @@
-# icepointcloud
-# icepointCloudWechatMall
+#冰点云线上微商城小程序项目
