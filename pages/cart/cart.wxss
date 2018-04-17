@@ -230,15 +230,12 @@ page {
 } */
 
 .productNameText {
-  margin-left: 0px;
-  /* margin-top: 5px; */
   width: 100%;
   height: 25px;
   font-size: 14px;
-  line-height: 25px;
-  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .priceView {
@@ -251,23 +248,20 @@ page {
 
 .price {
   margin: 0px;
-  font-size: 12px;
-  line-height: 30px;
+  font-size: 13px;
 }
 
 .numText {
   font-size: 13px;
-  line-height: 20px;
   padding-right: 10px;
-  text-align: right;
 }
 
 .editCartNumView{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 30%;
-  width: 70%;
+  margin-left: 35%;
+  width: 65%;
   height: 30px;
 }
 

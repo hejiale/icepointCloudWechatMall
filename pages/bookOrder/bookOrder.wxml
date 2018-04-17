@@ -144,7 +144,7 @@
         </view>
       </view>
     </view>
-    <view class='storeInfoView'>
+    <view class='storeInfoView {{isShowStore}}'>
       <image class="storeIconImage" src='../images/address@2x.png'></image>
       <view class='storeContentView'>
         <view class="storeTitleView">

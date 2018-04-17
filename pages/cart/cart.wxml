@@ -27,7 +27,7 @@
           <view class="cartView">
             <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
-              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜</text>
+              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜属质感圆框太阳</text>
               <text class="price">￥ 268.88 </text>
               <view class='editCartNumView'>
                 <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit"></image>
@@ -44,7 +44,7 @@
           <view class='cartView'>
             <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
-              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜</text>
+              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜属质感圆框太阳</text>
               <view class="priceView">
                 <text class="price">￥ 268.88 </text>
                 <text class="numText">x1</text>

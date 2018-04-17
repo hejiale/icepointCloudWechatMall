@@ -272,6 +272,10 @@ Page({
   //     })
   // },
 
+  onInputFocus: function (e){
+    this.startAddressAnimation(false)
+  },
+
   bindContacterInput: function (e) {
     var that = this;
     that.setData({ contacter: e.detail.value })

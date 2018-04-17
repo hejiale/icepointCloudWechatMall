@@ -19,7 +19,8 @@
           <image class="cellLine" src='../images/icon_line@2x.png'></image>
           <view class='addressBottomView'>
             <view class='defaultAddressView'>
-              <image class='defaultAddressImage' src='../images/icon_defaultAddress@2x.png' mode="aspectFit"></image>
+              <icon class='defaultAddressImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+              <text class='defaultText'>{{item.selected ? '默认' : '设为默认'}}</text>
             </view>
             <view class='editAddressView' bindtap='editAddress'>
               <image class='editAddressImage' src='../images/icon_editAddress@2x.png' mode="aspectFit"></image>

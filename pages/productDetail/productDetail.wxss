@@ -11,11 +11,9 @@ page {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 5px;
   right: 0px;
   width: 70px;
   height: 70px;
-  z-index: 1000;
 }
 
 .tryGlassImage{
@@ -53,13 +51,11 @@ page {
 .productName {
   margin-top: 20px;
   margin-left: 20px;
-  width: calc(100% - 30px);
-  height: 50px;
+  width: calc(100% - 25px);
   font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .priceText {
@@ -75,8 +71,8 @@ page {
                  "Microsoft YaHei",
                  "WenQuanYi Micro Hei",
                  sans-serif;
-  font-weight: 900;
-  height: 50px;
+  font-weight: 500;
+   height: 50px; 
   line-height: 30px;
 }
 
@@ -196,13 +192,13 @@ page {
 
 .cartImage {
   flex: 1;
-  width: 22px;
+  width: 32px;
   height: 22px;
 }
 
 .phoneImage {
   flex: 1;
-  width: 22px;
+  width: 32px;
   height: 22px;
   border-right: 1px solid #dcdcdc;
 }
@@ -212,7 +208,7 @@ page {
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+   margin-left: 10px; 
   width: 108px;
   height: 100%;
 }

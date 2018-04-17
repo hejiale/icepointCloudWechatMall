@@ -755,6 +755,10 @@ page {
 .show {
   display: block;
 }
+/* .showflex {
+  display: flex;
+  
+} */
 
 .hide {
   display: none;

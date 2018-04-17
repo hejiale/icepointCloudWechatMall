@@ -32,13 +32,13 @@
       <text class='inputTitle'>成为会员后，即可享受积分、储值等更多会员福利。</text>
       <view class="userNameView">
         <view class="inputTextView">
-          <input placeholder="请输入您的手机号码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onPhoneTextFieldChange" maxlength='11' />
+          <input placeholder="请输入您的手机号码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onPhoneTextFieldChange" maxlength='11' type='number' />
         </view>
       </view>
       <view class="inputLine"></view>
       <view class="passwordView">
         <view class="inputTextView">
-          <input placeholder="请输入收到的验证码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onCodeTextFieldChange" maxlength="6" />
+          <input placeholder="请输入收到的验证码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onCodeTextFieldChange" maxlength="6" type='number' />
         </view>
         <image class='passwordSpaceLine' src='../images/icon_columnLine@2x.png'></image>
         <view class="codeButton" bindtap="onSendCode">

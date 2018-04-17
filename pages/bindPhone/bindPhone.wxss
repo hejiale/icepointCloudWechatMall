@@ -216,7 +216,7 @@ page {
   flex-direction: column;
   align-items: center;
   margin-left: 10%;
-  top: calc(50% - 110px);
+  top: 100px;
   width: 80%;
   height: 230px;
   background-color: white;

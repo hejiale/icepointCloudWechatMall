@@ -106,8 +106,14 @@ page {
 
 .defaultAddressImage {
   margin-left: 20px;
-  width: 84px;
-  height: 21px;
+  width: 23px;
+  height: 23px;
+}
+
+.defaultText{
+  margin-left: 10px;
+  font-size: 14px;
+  color: #63a0d4;
 }
 
 .editAddressView {
@@ -129,13 +135,13 @@ page {
 .editAddressImage {
   margin-left: 20px;
   width: 57px;
-  height: 20px;
+  height: 19px;
 }
 
 .deleteAddressImage {
   margin-left: 20px;
-  width: 57px;
-  height: 20px;
+  width: 53px;
+  height: 18px;
 }
 
 .line {
