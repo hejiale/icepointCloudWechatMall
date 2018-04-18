@@ -60,6 +60,14 @@ Page({
     })
   },
   onLoadMore: function(){
-    
+    var that = this;
+    var list = new Array();
+
+    for (var i = 0; i < 5; i++) {
+      var productObj = new Object()
+      list.push(productObj);
+    }
+
+    that.setData({ allProductList: that.data.allProductList.concat(list) });
   }
 })

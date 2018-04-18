@@ -34,44 +34,6 @@ function payOrder(options, callBack) {
     })
 }
 
-// onLogin: function (cb) {
-  //   var that = this;
-  //   wx.request({
-  //     url: that.HostURL + '/wechat/webapp/login',
-  //     data: { code: that.globalData.loginCode },
-  //     method: 'POST',
-  //     header: { 'content-type': 'application/json' },
-  //     success: function (res) {
-  //       if (res.data.result) {
-  //         that.globalData.ipcApp.setSessionID(res.data.result.sessionId)
-  //         that.globalData.ipcApp.setBindPhone(res.data.result.phone)
-  //       }
-  //       typeof cb == "function" && cb()
-  //     }
-  //   })
-  // },
-  // onBindLogin: function (cb) {
-  //   var that = this;
-  //   if (that.globalData.loginInfo) {
-  //     typeof cb == "function" && cb(that.globalData.loginInfo)
-  //   } else {
-  //     wx.login({
-  //       success: function (res) {
-  //         wx.request({
-  //           url: that.HostURL + '/wechat/webapp/login',
-  //           data: { code: res.code },
-  //           method: 'POST',
-  //           header: { 'content-type': 'application/json' },
-  //           success: function (res) {
-  //             that.globalData.loginInfo = res
-  //             typeof cb == "function" && cb(that.globalData.loginInfo)
-  //           }
-  //         })
-  //       }
-  //     })
-  //   }
-  // },
-
 module.exports = {
   payOrder: payOrder
 }

@@ -12,12 +12,11 @@
   <view class="contentView">
     <view class="search-input-view">
       <view class="search-input">
-        <image class="search-icon" src="../images/icon_search.png" mode="aspectFit" />
+        <image class="search-icon" src="../images/home_search@2x.png" mode="aspectFit" />
         <text class="inputSearch" bindtap='onSearchProduct'>请输入您要搜索的商品</text>
-        <!-- <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 13px;color:#999999" value="{{inputKeyWord}}" bindtap='onSearchProduct' /> -->
       </view>
       <view class="cartIcon" bindtap="onShoppingCart">
-        <image src="../images/icon_cart.png" class="cartIconImg" mode="aspectFit"></image>
+        <image src="../images/home_cart@2x.png" class="cartIconImg" mode="aspectFit"></image>
       </view>
     </view>
     <view class='classMenuView'>
@@ -33,132 +32,13 @@
     <view class='productListView {{isShowProductListView}}'>
       <block wx:for-items="{{productList}}">
         <view class="productView">
-            <image src="../images/临时商品图片@2x.png" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
-            <view class="productInfoView">
-              <text class="productText">饰水晶方形镜框太阳眼镜</text>
-              <text class="priceText">￥9980</text>
-            </view>
-          </view>
-      </block>
-    </view>
-    <!-- <view class="topView"> -->
-    <!-- <swiper class="swiper-box" indicator-dots="true" autoplay="true">
-        <block wx:for-items="{{template[0].imageTemplateDetails}}">
-          <swiper-item>
-            <image src="{{item.photoUrl}}" class="bannerImage"></image>
-          </swiper-item>
-        </block>
-      </swiper> -->
-    <!-- <view class="menuView"> -->
-    <!-- <view class="storeNameView">
-          <view class="glassesView">
-            <view class="glassBgView">
-              <text class="glassText">{{template[0].mainTitle}}</text>
-            </view>
-          </view>
-          <text class="storeText">{{template[0].subTitle}}</text>
-        </view> -->
-    <!-- <view class="menuItem">
-          <view class="spaceLine"></view>
-          <view class="scan" bindtap="onClassClicked">
-            <image class="widgets-img" src="../images/icon_class.png" mode="aspectFit" />
-            <text style="font-size: 11px;margin-top: 5px;color: lightgrey;">分类</text>
-          </view>
-          <view class="spaceLine"></view>
-          <view class="scan" bindtap="onStoreSelected">
-            <image class="widgets-img" src="../images/OrderListPOPShopImg@2x.png" mode="aspectFit" />
-            <text style="font-size: 11px;margin-top: 5px;color: lightgrey;">店铺</text>
-          </view>
-        </view>
-      </view>
-    </view> -->
-    <!-- <view class="specialView">
-      <view class="topSlash"></view>
-      <view class="textArea">
-        <text class="specialTitle">{{template[1].templateDetails[0].title}}</text>
-        <text class="specialSubTitle">{{template[1].templateDetails[0].subTitle}}</text>
-      </view>
-      <view class="bottomSlash"></view>
-    </view>
-    <view class="productInfoView">
-      <block wx:for-items="{{template[2].templateDetails}}">
-        <view class="productView" data-key="{{item.glassId}}" bindtap="onProductDetail">
-          <image src="{{item.photoURL}}" class="productImage" mode="aspectFit"></image>
-          <view class="productNameView">
-            <text class="productText">{{item.name}}</text>
-            <text class="priceText">RMB {{item.price}}</text>
+          <image src="../images/临时商品图片@2x.png" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
+          <view class="productInfoView">
+            <text class="productText">饰水晶方形镜框太阳眼镜</text>
+            <text class="priceText">￥9980</text>
           </view>
         </view>
       </block>
     </view>
-    <view class="specialView">
-      <view class="topSlash"></view>
-      <view class="textArea">
-        <text class="specialTitle">{{template[3].templateDetails[0].title}}</text>
-        <text class="specialSubTitle">{{template[3].templateDetails[0].subTitle}}</text>
-      </view>
-      <view class="bottomSlash"></view>
-    </view>
-    <view class="productShowView">
-      <view class="topShowView">
-        <view class="showView1" style="background-image:{{showFirstStyle.image}};background-size: cover;background-repeat: no-repeat;" data-key="{{showFirstStyle.product.prodId}}" bindtap="onProductDetail">
-          <text class="showText">{{showFirstStyle.product.prodDesc}}</text>
-          <text class="showNameText">{{showFirstStyle.title}}</text>
-          <view class="showDetailBorder">></view>
-        </view>
-        <view class="showView2" style="background-image:{{showSecondStyle.image}};background-size: contain;background-repeat: no-repeat;background-position: center;" data-key="{{showSecondStyle.product.prodId}}" bindtap="onProductDetail">
-          <view class="showSecondBorder">
-          </view>
-        </view>
-      </view>
-      <view class="bottomView">
-        <view class="showView3">
-          <view class="showView3Content" style="background-image:{{showThirdStyle.image}};background-size: cover;background-repeat: no-repeat;background-position: center;" data-key="{{showThirdStyle.product.prodId}}" bindtap="onProductDetail"></view>
-        </view>
-        <view class="showView4" style="background-image:{{showFourStyle.image}};background-size: contain;background-repeat: no-repeat;background-position: center;" data-key="{{showFourStyle.product.prodId}}" bindtap="onProductDetail">
-          <view class="showView4Border"></view>
-          <view class="showView4TextView">
-            <text class="showText">{{showFourStyle.product.prodDesc}}</text>
-            <text class="showNameText">{{showFourStyle.title}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="recommendView">
-      <view class="topRecommendView">
-        <image src="{{recommendProducts[0].photoURL}}" class="productImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{recommendProducts[0].glassId}}"></image>
-        <view class="productNameView">
-          <text class="productText">{{recommendProducts[0].name}}</text>
-          <text class="priceText">RMB {{recommendProducts[0].price}}</text>
-        </view>
-      </view>
-      <view class="bottomRecommendView">
-        <view class="bottomRecommendProductView">
-          <image src="{{recommendProducts[1].photoURL}}" class="productImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{recommendProducts[0].glassId}}"></image>
-          <view class="productNameView">
-            <text class="productText">{{recommendProducts[1].name}}</text>
-            <text class="priceText">RMB {{recommendProducts[1].price}}</text>
-          </view>
-        </view>
-        <view class="bottomRecommendProductView">
-          <image src="{{recommendProducts[2].photoURL}}" class="productImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{recommendProducts[0].glassId}}"></image>
-          <view class="productNameView">
-            <text class="productText">{{recommendProducts[2].name}}</text>
-            <text class="priceText">RMB {{recommendProducts[2].price}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="productInfoView">
-      <block wx:for-items="{{template[6].templateDetails}}">
-        <view class="productView" data-key="{{item.glassId}}" bindtap="onProductDetail">
-          <image src="{{item.photoURL}}" class="productImage" mode="aspectFit"></image>
-          <view class="productNameView">
-            <text class="productText">{{item.name}}</text>
-            <text class="priceText">RMB {{item.price}}</text>
-          </view>
-        </view>
-      </block>
-    </view> -->
   </view>
 </view>

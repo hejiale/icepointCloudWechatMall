@@ -35,78 +35,6 @@
       </view>
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
     </view>
-    <!-- <view class="selectOpmetoryInfo {{isShowOpmetory}}">
-      <view class="opmetoryInfoView">
-        <view class="rightView">
-          <view class="IconView">
-            <image src="../images/R.png" class="iconImage" mode="aspectFit"></image>
-          </view>
-          <view class="rightOpmetroy">
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">球镜/SPH</text>
-              <text class="opmetoryValue">{{defaultOpmetory.sphRight}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">柱镜/CYL</text>
-              <text class="opmetoryValue">{{defaultOpmetory.cylRight}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">轴位/AXLS</text>
-              <text class="opmetoryValue">{{defaultOpmetory.axisRight}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">下加光/ADD</text>
-              <text class="opmetoryValue">{{defaultOpmetory.addRight}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">矫正视力/VA</text>
-              <text class="opmetoryValue">{{defaultOpmetory.correctedVisionRight}}</text>
-            </view>
-            <view class="opmetorySpace"></view>
-          </view>
-        </view>
-        <view class="leftView">
-          <view class="IconView">
-            <image src="../images/L.png" class="iconImage" mode="aspectFit"></image>
-          </view>
-          <view class="leftOpmetroy">
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">球镜/SPH</text>
-              <text class="opmetoryValue">{{defaultOpmetory.sphLeft}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">柱镜/CYL</text>
-              <text class="opmetoryValue">{{defaultOpmetory.cylLeft}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">轴位/AXLS</text>
-              <text class="opmetoryValue">{{defaultOpmetory.axisLeft}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">下加光/ADD</text>
-              <text class="opmetoryValue">{{defaultOpmetory.addLeft}}</text>
-            </view>
-            <view class="opmetoryInfo">
-              <text class="opmetoryText">矫正视力/VA</text>
-              <text class="opmetoryValue">{{defaultOpmetory.correctedVisionLeft}}</text>
-            </view>
-            <view class="opmetorySpace"></view>
-          </view>
-        </view>
-        <view class="pdView">
-          <view class="opmetoryInfo">
-            <text class="opmetoryText">双眼瞳距/PD</text>
-            <text class="opmetoryValue">{{defaultOpmetory.distance}}</text>
-          </view>
-        </view>
-      </view>
-    </view> -->
-    <!-- <view class="storeAddressView">
-      <view class="addressView">
-        <text class="addressText">{{storeAddress}} {{storeName}}</text>
-        <text class="addressText">{{storePhone}}</text>
-      </view>
-    </view> -->
     <view class='productContentView'>
       <block wx:for-items="{{productList}}">
         <view class="productView">
@@ -162,13 +90,15 @@
           </view>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
           <view class='callPhoneView' bindtap="onCall">
-            <image class='callImage' src='../images/icon_phone.png'></image>
+            <image class='callImage' src='../images/store_phone@2x.png'></image>
           </view>
         </view>
       </view>
     </view>
   </view>
   <view class="footView" bindtap='offerOrder'>
-    <image class='offerOrderImage' src='../images/icon_offerOrder.png' mode="aspectFit"></image>
+    <view class='offerOrderView'>
+      <text class='offerOrderText'>提交订单</text>
+    </view>
   </view>
 </view>

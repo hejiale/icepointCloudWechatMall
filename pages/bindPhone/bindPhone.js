@@ -65,36 +65,7 @@ Page({
     })
   },
   onBindPhone: function (e) {
-    // var that = this;
-    // if (that.data.isCanBind) {
-    //   wx.request({
-    //     url: app.HostURL + '/wechat/webapp/bindPhone',
-    //     data: {
-    //       validateCode: that.data.bindCode,
-    //       phone: that.data.bindPhone,
-    //       sessionId: app.globalData.ipcApp.getSessionID()
-    //     },
-    //     method: 'POST',
-    //     header: { 'content-type': 'application/json' },
-    //     success: function (res) {
-    //       // success
-    //       console.log(res)
-    //       if (res.data.retCode == 0) {
-    //         wx.setStorage({
-    //           key: 'isBindPhone',
-    //           data: true
-    //         })
-    //         wx.navigateBack({
-    //           delta: 2
-    //         })
-    //       } else {
-    //         wx.showToast({
-    //           title: res.data.retMsg
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+    
   },
   onSendCode: function () {
     if (this.data.bindPhone.length == 0) {
@@ -105,33 +76,6 @@ Page({
       })
       return
     }
-    // var that = this;
-    // if (!that.data.isSendCode) {
-    //   wx.request({
-    //     url: app.HostURL + '/wechat/webapp/sendCode',
-    //     data: {
-    //       phone: that.data.bindPhone,
-    //       sessionId: app.globalData.ipcApp.getSessionID()
-    //     },
-    //     method: 'POST',
-    //     header: { 'content-type': 'application/json' },
-    //     success: function (res) {
-    //       console.log(res)
-    //       if (res.data.retCode == 0) {
-    //         count_down(that);
-    //         that.setData({ isSendCode: true })
-    //         wx.showModal({
-    //           showCancel: false,
-    //           content: '手机验证码发送成功，请注意查收短信!'
-    //         })
-    //       } else {
-    //         wx.showToast({
-    //           title: res.data.retMsg
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
   },
   onPhoneTextFieldChange: function (e) {
     var that = this;
@@ -150,17 +94,6 @@ Page({
     } else {
       that.setData({ isCanBind: false })
     }
-  },
-  onUnload: function () {
-    // 页面关闭
-    var that = this;
-    that.setData({
-      isCanBind: false,
-      isSendCode: false,
-      bindPhone: '',
-      bindCode: '',
-      clock: '获取验证码'
-    })
   },
   onLookMemberRightsMemo: function(){
     this.setData({ isShowMemberRightsMemo: 'show'})

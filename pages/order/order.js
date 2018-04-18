@@ -26,22 +26,5 @@ Page({
       list.push(productObj)
     }
     that.setData({ orderList: list })
-
-    // var that = this;
-
-    // wx.request({
-    //   url: app.HostURL + '/wechat/webapp/user/listHistoryOrders',
-    //   data: {
-    //     pageNo: '1',
-    //     maxPageSize: '1000000',
-    //     sessionId: app.globalData.ipcApp.getSessionID(),
-    //   },
-    //   method: 'POST',
-    //   header: { 'content-type': 'application/json' },
-    //   success: function (res) {
-    //     console.log(res)
-    //     that.setData({ orderList: res.data.result.resultList })
-    //   }
-    // })
   }
 })

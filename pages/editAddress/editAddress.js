@@ -30,29 +30,6 @@ Page({
     area: ''
   },
   onLoad: function (options) {
-    // var that = this;
-    // that.setData({
-    //   addressId: options.id
-    // })
-    // var dataC = utils.getData();
-    // currentProvince = dataC.p[0];
-
-    // if (this.data.addressId) {
-    //   wx.request({
-    //     url: app.HostURL + '/wechat/webapp/user/getAddress',
-    //     data: {
-    //       id: this.data.addressId,
-    //       sessionId: app.globalData.ipcApp.getSessionID(),
-    //     },
-    //     method: 'POST',
-    //     header: { 'content-type': 'application/json' },
-    //     success: function (res) {
-    //       console.log(res)
-    //       that.setData({ currentAddressObject: res.data.result })
-    //     },
-    //   })
-    // }
-
     var animation = wx.createAnimation({
       duration: 500,
       transformOrigin: "50% 50%",
@@ -232,46 +209,7 @@ Page({
       }
     }
   },
-  // onSetDefaultAddress: function (event) {
-  //   wx.request({
-  //     url: app.HostURL + '/wechat/webapp/user/setCurrentAddress',
-  //     data: {
-  //       sessionId: app.globalData.ipcApp.getSessionID(),
-  //       id: this.data.addressId
-  //     },
-  //     method: 'POST',
-  //     header: { 'content-type': 'application/json' },
-  //     success: function (res) {
-  //       console.log(res)
-  //       if (res.data.retCode == 0) {
-  //         wx.navigateBack({
-  //           delta: 1
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
-
-  // onDeleteAddress: function () {
-  //   wx.request({
-  //       url: app.HostURL + '/wechat/webapp/user/deleteAddress',
-  //       data: {
-  //         sessionId: app.globalData.ipcApp.getSessionID(),
-  //         id: this.data.addressId
-  //       },
-  //       method: 'POST',
-  //       header: { 'content-type': 'application/json' },
-  //       success: function (res) {
-  //         console.log(res)
-  //         if (res.data.retCode == 0) {
-  //           wx.navigateBack({
-  //             delta: 1
-  //           })
-  //         }
-  //       }
-  //     })
-  // },
-
+  
   onInputFocus: function (e){
     this.startAddressAnimation(false)
   },

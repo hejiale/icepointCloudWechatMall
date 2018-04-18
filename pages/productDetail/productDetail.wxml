@@ -38,20 +38,15 @@
     </view>
   </view>
   <view class="footView">
-    <view class="glassTryView" wx:if="{{DetailObject.proTry}}" bindtap="onTryGlassAction">
-      <image src="../images/icon_try_glass.png" class="tryImage"></image>
+    <view class="cartButton" bindtap='onToCart'>
+      <image class='phoneImage' src='../images/productDetail_phone@2x.png' mode="aspectFit"></image>
+      <image class="cartImage" src="../images/productDetail_cart@2x.png" mode="aspectFit"></image>
     </view>
-    <view class="rightTryFootView">
-      <view class="cartButton" bindtap='onToCart'>
-        <image class='phoneImage' src='../images/productDetail_phone@2x.png' mode="aspectFit"></image>
-        <image class="cartImage" src="../images/icon_cart.png" mode="aspectFit"></image>
-      </view>
-      <view class="addCartButton" bindtap='onCart'>
-        <image class="addCartImage" src="../images/icon_addToCart.png" mode="aspectFit"></image>
-      </view>
-      <view class="payOrderButton" bindtap='onBook'>
-        <image class="payOrderImage" src="../images/icon_payOrder.png" mode="aspectFit"></image>
-      </view>
+    <view class="addCartButton" bindtap='onCart'>
+      <text class='addCartText'>加入购物车</text>
+    </view>
+    <view class="payOrderButton" bindtap='onBook'>
+      <text class='bookText'>立即支付</text>
     </view>
   </view>
 </view>

@@ -27,66 +27,7 @@ Page({
       var productObj = new Object()
       list.push(productObj)
     }
-    that.setData({ allCartList : list })
-
-    // // 页面显示
-    // var that = this;
-    // var ipcApp = app.globalData.ipcApp
-
-    // var value = wx.getStorageSync('isBindPhone');
-    // if (!value) {
-    //   that.setData({
-    //     showContent: 'hide',
-    //     showLogin: 'show'
-    //   })
-    // }
-
-    // wx.getStorage({
-    //   key: 'isBindPhone',
-    //   success: function (res) {
-    //     if (res) {
-    //       that.setData({
-    //         showContent: 'show',
-    //         showLogin: 'hide'
-    //       })
-    //     }
-
-    //     if (res.data) {
-    //       if (app.globalData.ipcApp.getSessionID() == '' || !app.globalData.ipcApp.getSessionID()) {
-    //         app.onLogin(function () {
-    //         })
-    //       }
-    //     }
-    //   },
-    // })
-
-    // wx.getStorage({
-    //   key: 'allCart',
-    //   success: function (res) {
-    //     that.setData({ allCartList: res.data })
-    //     that.onTotalPrice();
-
-    //     if (res.data.length <= 0) {
-    //       that.setData({
-    //         canEdit: false,
-    //         isChooseAll: false
-    //       })
-    //     } else {
-    //       var selectCount = 0;
-    //       for (var i = 0; i < res.data.length; i++) {
-    //         var cart = res.data[i];
-    //         if (cart.isSelected) {
-    //           selectCount++;
-    //         }
-    //       }
-    //       if (selectCount == res.data.length) {
-    //         that.setData({ isChooseAll: true });
-    //       } else {
-    //         that.setData({ isChooseAll: false });
-    //       }
-    //     }
-    //   },
-    // })
+    that.setData({ allCartList: list })
   },
   onTapEdit: function () {
     this.setData({
@@ -215,27 +156,5 @@ Page({
     wx.navigateTo({
       url: '../bookOrder/bookOrder?hasDetail=0&isCart=1'
     })
-    
-    // var that = this;
-    // var selectedCount = 0;
-
-    // var allCart = wx.getStorageSync('allCart');
-    // if (allCart.length > 0) {
-    //   for (var index in allCart) {
-    //     var cart = allCart[index];
-    //     if (cart.isSelected) {
-    //       selectedCount++;
-    //     }
-    //   }
-    // }
-    // if (selectedCount > 0) {
-    //   wx.navigateTo({
-    //     url: '../bookOrder/bookOrder?hasDetail=0&isCart=1'
-    //   })
-    // } else {
-    //   wx.showToast({
-    //     title: '未选中任何商品!'
-    //   })
-    // }
   }
 })

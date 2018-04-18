@@ -96,7 +96,7 @@
           </view>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
           <view class='callPhoneView' bindtap="onCall">
-            <image class='callImage' src='../images/icon_phone.png'></image>
+            <image class='callImage' src='../images/store_phone@2x.png'></image>
           </view>
         </view>
       </view>
