@@ -40,82 +40,82 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    var that = this;
-    var list = new Array();
-    that.setData({ currentTypeName: "镜架", allProductList: list });
+    // var that = this;
+    // var list = new Array();
+    // that.setData({ currentTypeName: "镜架", allProductList: list });
 
-    var that = this;
-    wx.getStorage({
-      key: 'store',
-      success: function (res) {
-        var storeID = res.data.storeId;
-        that.setData({
-          currentStoreID: storeID
-        })
-        if (storeID > 0) {
-          that.queryCategorys();
-        }
-      }
-    })
+    // var that = this;
+    // wx.getStorage({
+    //   key: 'store',
+    //   success: function (res) {
+    //     var storeID = res.data.storeId;
+    //     that.setData({
+    //       currentStoreID: storeID
+    //     })
+    //     if (storeID > 0) {
+    //       that.queryCategorys();
+    //     }
+    //   }
+    // })
 
-    app.getSystemInfo(function (systemInfo) {
-      that.setData({ deviceWidth: systemInfo.windowWidth, deviceHeight: systemInfo.windowHeight })
-    })
+    // app.getSystemInfo(function (systemInfo) {
+    //   that.setData({ deviceWidth: systemInfo.windowWidth, deviceHeight: systemInfo.windowHeight })
+    // })
   },
   //----------跳转商品详情--------------//
-  onProductDetail: function (event) {
-    var value = event.currentTarget.dataset.key;
-    var proId = value.id.split("-")
-    wx.navigateTo({
-      url: '../productDetail/productDetail?id=' + proId[1]
-    })
-  },
+  // onProductDetail: function (event) {
+  //   var value = event.currentTarget.dataset.key;
+  //   var proId = value.id.split("-")
+  //   wx.navigateTo({
+  //     url: '../productDetail/productDetail?id=' + proId[1]
+  //   })
+  // },
   //--------------搜索商品-----------------//
-  onSearchAction: function () {
-    var that = this;
-    that.setData({ showSearchContent: 'show', inputKeyWord: this.data.keyWord })
-    that.onUpdateSearchHistoryView();
-  },
-  onSearchProduct: function () {
-    var that = this
-    that.setData({ keyWord: that.data.inputKeyWord, currentPage: 0, showSearchContent: 'hide' })
-    that.data.allProductList.splice(0, that.data.allProductList.length);
-    that.queryProducts();
-    that.onUpdateHistorySearchWords();
-  },
+  // onSearchAction: function () {
+  //   var that = this;
+  //   that.setData({ showSearchContent: 'show', inputKeyWord: this.data.keyWord })
+  //   that.onUpdateSearchHistoryView();
+  // },
+  // onSearchProduct: function () {
+  //   var that = this
+  //   that.setData({ keyWord: that.data.inputKeyWord, currentPage: 0, showSearchContent: 'hide' })
+  //   that.data.allProductList.splice(0, that.data.allProductList.length);
+  //   that.queryProducts();
+  //   that.onUpdateHistorySearchWords();
+  // },
   //---------------搜索输入框编辑-------------------//
-  onSearchEditFocus: function () {
-    this.setData({ isHideClear: 'show' })
-  },
-  onCancleEditFocus: function () {
-    this.setData({ isHideClear: 'hide' })
-  },
-  onSearchInput: function (event) {
-    this.setData({ inputKeyWord: event.detail.value });
-  },
-  onCancelAction: function () {
-    this.setData({ showSearchContent: 'hide', inputKeyWord: '' })
-  },
-  onClearSearchText: function () {
-    this.setData({ inputKeyWord: '' })
-  },
+  // onSearchEditFocus: function () {
+  //   this.setData({ isHideClear: 'show' })
+  // },
+  // onCancleEditFocus: function () {
+  //   this.setData({ isHideClear: 'hide' })
+  // },
+  // onSearchInput: function (event) {
+  //   this.setData({ inputKeyWord: event.detail.value });
+  // },
+  // onCancelAction: function () {
+  //   this.setData({ showSearchContent: 'hide', inputKeyWord: '' })
+  // },
+  // onClearSearchText: function () {
+  //   this.setData({ inputKeyWord: '' })
+  // },
   //-------------隐藏背景--------------//
-  onBgClicked: function () {
-    this.setData({ showOrHide: 'hide' });
-  },
-  //--------------筛选-------------//
-  onClassClicked: function (e) {
-    this.setData({ showOrHide: 'show' });
-  },
+  // onBgClicked: function () {
+  //   this.setData({ showOrHide: 'hide' });
+  // },
+  // //--------------筛选-------------//
+  // onClassClicked: function (e) {
+  //   this.setData({ showOrHide: 'show' });
+  // },
   //---------------选择类别----------------//
-  onSelectedClass: function (event) {
-    var value = event.currentTarget.dataset.key;
-    var that = this;
-    that.setData({ currentTypeName: value, startPrice: '', endPrice: '', currentPage: 0, scrollTop: 0, keyWord: '', showOrHide: 'hide' });
-    that.data.selectedPropertys.splice(0, that.data.selectedPropertys.length);
-    that.data.allProductList.splice(0, that.data.allProductList.length);
-    that.queryCategorys();
-  },
+  // onSelectedClass: function (event) {
+  //   var value = event.currentTarget.dataset.key;
+  //   var that = this;
+  //   that.setData({ currentTypeName: value, startPrice: '', endPrice: '', currentPage: 0, scrollTop: 0, keyWord: '', showOrHide: 'hide' });
+  //   that.data.selectedPropertys.splice(0, that.data.selectedPropertys.length);
+  //   that.data.allProductList.splice(0, that.data.allProductList.length);
+  //   that.queryCategorys();
+  // },
   //----------------选择属性参数-----------------//
   onSelectProperty: function (event) {
     var that = this;
@@ -159,44 +159,22 @@ Page({
     }
     that.setData({ allProperty: allProperty });
   },
-  //--------------输入价格操作----------------//
-  onStartPriceClicked: function (event) {
-    if (parseFloat(event.detail.value) > parseFloat(this.data.endPrice)) {
-      this.setData({ startPrice: '' });
-      return;
-    }
-    this.setData({ startPrice: event.detail.value });
-  },
-  onEndPriceClicked: function (event) {
-    this.setData({ endPrice: event.detail.value });
-  },
-  onSureFilterProducts: function () {
-    var that = this;
-    this.setData({ showOrHide: 'hide', currentPage: 0 });
-    that.data.allProductList.splice(0, that.data.allProductList.length);
-    that.queryCategorys();
-  },
-  onResetProperty: function () {
-    var that = this;
-    that.setData({ currentTypeName: "镜架", startPrice: '', endPrice: '', currentPage: 0, scrollTop: 0, keyWord: '' });
-    that.data.selectedPropertys.splice(0, that.data.selectedPropertys.length);
-    that.data.allProductList.splice(0, that.data.allProductList.length);
-    that.queryCategorys();
-  },
+  
+  
   //------------加载更多--------------//
-  onLoadMore: function () {
-    var that = this;
-    var page = that.data.currentPage;
-    page = page + 20;
-    that.setData({ currentPage: page });
-    that.queryProducts();
-  },
+  // onLoadMore: function () {
+  //   var that = this;
+  //   var page = that.data.currentPage;
+  //   page = page + 20;
+  //   that.setData({ currentPage: page });
+  //   that.queryProducts();
+  // },
   //-------------置顶操作--------------//
-  goTopScroll: function () {
-    this.setData({
-      scrollTop: 0
-    })
-  },
+  // goTopScroll: function () {
+  //   this.setData({
+  //     scrollTop: 0
+  //   })
+  // },
   //-------------------类型名称-----------------//
   getTypeName: function () {
     var typeName = '';
@@ -334,94 +312,94 @@ Page({
       filterObject.endPrice = parseFloat(that.data.endPrice);
     }
 
-    wx.request({
-      url: app.HostURL + '/wechat/webapp/mall/searchProduct',
-      data: JSON.stringify(filterObject),
-      method: 'POST',
-      header: { 'content-type': 'application/json' },
-      success: function (res) {
-        console.log(res)
-        var list = res.data.result.list;
-        if (res.data.result.total <= that.data.currentPage + 20) {
-          that.setData({ hasMore: false });
-        } else {
-          that.setData({ hasMore: true });
-        }
+    // wx.request({
+    //   url: app.HostURL + '/wechat/webapp/mall/searchProduct',
+    //   data: JSON.stringify(filterObject),
+    //   method: 'POST',
+    //   header: { 'content-type': 'application/json' },
+    //   success: function (res) {
+    //     console.log(res)
+    //     var list = res.data.result.list;
+    //     if (res.data.result.total <= that.data.currentPage + 20) {
+    //       that.setData({ hasMore: false });
+    //     } else {
+    //       that.setData({ hasMore: true });
+    //     }
 
-        if (list.length == 0) {
-          wx.showToast({
-            title: '未查询到商品!',
-            duration: 400
-          })
-        } else {
-          wx.hideToast();
-        }
-        var allList = that.data.allProductList;
-        for (var i = 0; i < list.length; i++) {
-          var object = list[i];
-          allList.push(object);
-        }
+    //     if (list.length == 0) {
+    //       wx.showToast({
+    //         title: '未查询到商品!',
+    //         duration: 400
+    //       })
+    //     } else {
+    //       wx.hideToast();
+    //     }
+    //     var allList = that.data.allProductList;
+    //     for (var i = 0; i < list.length; i++) {
+    //       var object = list[i];
+    //       allList.push(object);
+    //     }
 
-        that.setData({
-          allProductList: allList,
-          totalProducts: res.data.result.total,
-        })
-      }
-    })
+    //     that.setData({
+    //       allProductList: allList,
+    //       totalProducts: res.data.result.total,
+    //     })
+    //   }
+    // })
   },
   //---------------HistorySearch Word------------------//
-  onUpdateHistorySearchWords: function () {
-    var that = this;
-    if(that.data.historySearchWords.length > 0){
-      wx.getStorage({
-      key: 'historySearchWords',
-      success: function (res) {
-        if (res) {
-          var historyWords = res.data;
-          if (historyWords.indexOf(that.data.keyWord) == -1) {
-            historyWords.push(that.data.keyWord);
-            wx.setStorageSync('historySearchWords', historyWords);
-          }
-        }
-      }
-    })
-    }else{
-      var historyList = new Array();
-          historyList.push(that.data.keyWord);
-          wx.setStorage({
-            key: 'historySearchWords',
-            data: historyList,
-          })
-    }
-  },
-  onUpdateSearchHistoryView: function () {
-    var that = this;
-    wx.getStorage({
-      key: 'historySearchWords',
-      success: function (res) {
-        if(res){
-          that.setData({ historySearchWords: res.data });
-        }
-      }
-    })
-  },
-  onClearHistoryWords: function () {
-    var that = this;
-    wx.removeStorage({
-      key: 'historySearchWords',
-      success: function(res){
-        that.setData({historySearchWords: []});
-      }
-    })
-  },
+  // onUpdateHistorySearchWords: function () {
+  //   var that = this;
+  //   if(that.data.historySearchWords.length > 0){
+  //     wx.getStorage({
+  //     key: 'historySearchWords',
+  //     success: function (res) {
+  //       if (res) {
+  //         var historyWords = res.data;
+  //         if (historyWords.indexOf(that.data.keyWord) == -1) {
+  //           historyWords.push(that.data.keyWord);
+  //           wx.setStorageSync('historySearchWords', historyWords);
+  //         }
+  //       }
+  //     }
+  //   })
+  //   }else{
+  //     var historyList = new Array();
+  //         historyList.push(that.data.keyWord);
+  //         wx.setStorage({
+  //           key: 'historySearchWords',
+  //           data: historyList,
+  //         })
+  //   }
+  // },
+  // onUpdateSearchHistoryView: function () {
+  //   var that = this;
+  //   wx.getStorage({
+  //     key: 'historySearchWords',
+  //     success: function (res) {
+  //       if(res){
+  //         that.setData({ historySearchWords: res.data });
+  //       }
+  //     }
+  //   })
+  // },
+  // onClearHistoryWords: function () {
+  //   var that = this;
+  //   wx.removeStorage({
+  //     key: 'historySearchWords',
+  //     success: function(res){
+  //       that.setData({historySearchWords: []});
+  //     }
+  //   })
+  // },
   //-----------scrollView 滚动-------------//
-  scroll: function (event) {
-    console.log(event.detail.scrollTop)
-    var that = this;
-    if (event.detail.scrollTop > that.data.deviceHeight) {
-      that.setData({ isShowToTop: 'show' })
-    } else {
-      that.setData({ isShowToTop: 'hide' })
-    }
-  }
+  // scroll: function (event) {
+  //   console.log(event.detail.scrollTop)
+  //   var that = this;
+  //   if (event.detail.scrollTop > that.data.deviceHeight) {
+  //     that.setData({ isShowToTop: 'show' })
+  //   } else {
+  //     that.setData({ isShowToTop: 'hide' })
+  //   }
+  // }
 })

@@ -1,10 +1,14 @@
 function http(msg) {
-  var HostURL = 'https://dev.icepointcloud.com';
+  // var HostURL = 'https://dev.icepointcloud.com';
+  var HostURL = 'http://guirong.private.icepointcloud.com';
 
   return new Promise((resolve, reject) => {
     wx.request({
       url: HostURL + msg.url,
       data: msg.data,
+      header: {
+        'content-type': 'application/json'
+      },
       method: msg.method,
       success: function (res) {
         resolve(res.data);
@@ -34,8 +38,26 @@ function payOrder(options, callBack) {
     })
 }
 
+function queryProductList(options, callBack){
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: '/wechat/mall/getGoodsList',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+      console.log(e)
+    })
+}
+
 module.exports = {
-  payOrder: payOrder
+  payOrder: payOrder,
+  queryProductList: queryProductList
 }
 
 

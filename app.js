@@ -1,5 +1,7 @@
 //app.js
 var ipcApp = require('utils/icepointcloud.js')
+var request = require('utils/Request.js')
+var MD5 = require('utils/md5.js')
 
 App({
   onLaunch: function () {
@@ -45,6 +47,9 @@ App({
     userInfo: null,
     systemInfo: null,
     ipcApp: ipcApp,
-    loginCode: null
+    loginCode: null,
+    request:request,
+    MD5:MD5,
+    companyId: "60"
   }
 })

@@ -1,7 +1,3 @@
-// pages/bookOrder/bookOrder.js
-var util = require('../../utils/md5.js')
-var request = require('../../utils/Request.js')
-
 var app = getApp();
 
 Page({
@@ -10,7 +6,7 @@ Page({
     isShowMemberRights: 'hide',
     isExtractEmail: 'show',
     isExtractSelf: 'hide',
-    isShowStore:'hide'
+    isShowStore: 'hide'
   },
   onLoad: function (options) {
     var that = this;
@@ -23,10 +19,11 @@ Page({
     }
     that.setData({ productList: list })
   },
+
   onShow: function () {
-    
+
   },
-  
+
   onSelectAddress: function () {
     wx.navigateTo({
       url: '../address/address',
@@ -43,64 +40,50 @@ Page({
     })
   },
   offerOrder: function () {
-    var ipcApp = app.globalData;
+    var that = this;
 
     let options = {
-      orderNo: "201508334312121",
+      orderNo: "20150834343434421",
       price: 1,
-      jsCode: ipcApp.loginCode,
+      jsCode: app.globalData.loginCode,
       isService: false
     }
 
-    request.payOrder(options, function (data) {
+    app.globalData.request.payOrder(options, function (data) {
       console.log(data);
+      var date = String(new Date().getTime()).substr(0, 10);
+
+      wx.requestPayment({
+        timeStamp: date,
+        'nonceStr': data.nonce_str,
+        'package': "prepay_id=" + data.prepay_id,
+        'signType': 'MD5',
+        'paySign': that.paySignData(data,date),
+        'success': function (res) {
+          console.log(res)
+        },
+        'fail': function (res) {
+          console.log(res)
+        },
+        'complete': function (res) {
+          console.log(res)
+        }
+      })
     })
+  },
 
+  paySignData: function(data,date){
+    var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
 
-    // wx.request({
-    //   url: app.HostURL + '/api/wechat/pay/unifiedOrder',
-    //   method: 'GET',
-    //   data: {
-    //     orderNo: "201508334312121",
-    //     price: 1,
-    //     jsCode: ipcApp.loginCode,
-    //     isService: false
-    //   },
-    //   success: function (res) {
-    //     console.log(res)
+    var stringSignTemp = stringA + "&key=5eef8283dc4c421484229a59449e11c2";
 
-    //     var date = String(new Date().getTime()).substr(0, 10);
+    console.log(stringSignTemp);
 
-    //     var stringA = "appId=" + res.data.appid + "&nonceStr=" + res.data.nonce_str + "&package=prepay_id=" + res.data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
+    var sign = app.globalData.MD5.hexMD5(stringSignTemp).toUpperCase();
 
-    //     var stringSignTemp = stringA + "&key=5eef8283dc4c421484229a59449e11c2";
+    console.log(sign);
 
-    //     console.log(stringSignTemp);
-
-    //     var sign = util.hexMD5(stringSignTemp).toUpperCase();
-
-    //     console.log(sign);
-
-    //     wx.requestPayment({
-    //       timeStamp: date,
-    //       'nonceStr': res.data.nonce_str,
-    //       'package': "prepay_id=" + res.data.prepay_id,
-    //       'signType': 'MD5',
-    //       'paySign': sign,
-    //       'success': function (res) {
-    //         console.log(res)
-    //       },
-    //       'fail': function (res) {
-    //         console.log(res)
-    //       },
-    //       'complete': function (res) {
-    //         console.log(res)
-    //       }
-    //     })
-    //   }, fail: function (res) {
-    //     console.log(res)
-    //   }
-    // })
+    return sign;
   },
 
   onShowMemberRightsView: function () {
@@ -113,7 +96,7 @@ Page({
         that.setData({ isShowMemberRights: 'show' });
       },
       fail: function (res) {
-    
+
       }
     })
   },

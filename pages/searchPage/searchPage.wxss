@@ -198,10 +198,22 @@ page {
 }
 
 .productListView {
-  position: absolute;
-  top: 45px;
+  margin-top: 45px;
   width: calc(100% - 5px);
-  height: calc(100% - 45px);
+  padding-bottom: 30px;
+}
+
+.loadingTitleView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+}
+
+.loadingTitle {
+  font-size: 14px;
+  color: #999999;
 }
 
 .productContentView {
@@ -316,8 +328,8 @@ page {
   height: 30px;
   line-height: 40px;
   text-align: center;
-  color: #4D9FD8;
-  border: 1px solid #4D9FD8;
+  color: #4d9fd8;
+  border: 1px solid #4d9fd8;
   font-size: 15px;
   border-radius: 3px;
 }
@@ -333,7 +345,7 @@ page {
   text-align: center;
   color: white;
   font-size: 15px;
-  background-color: #4D9FD8;
+  background-color: #4d9fd8;
   border-radius: 3px;
 }
 
