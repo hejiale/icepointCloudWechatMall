@@ -7,10 +7,23 @@ Page({
   data: {
     DetailObject: null,
     images: [],
-    indicator: false,
-    specifications: []
+    indicator: true,
+    specifications: [],
+    isSelectDetail:true
   },
   onLoad: function (options) {
+    console.log(options);
+
+    var that = this;
+
+    app.globalData.request.queryProductDetail(options.id, function (data) {
+      console.log(data);
+      WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 5);
+      that.setData({ DetailObject:data});
+    })
+
+
+
     // var that = this;
     // wx.getStorage({
     //   key: 'store',
@@ -136,81 +149,80 @@ Page({
     // })
   },
   onBook: function (event) {
-    wx.setStorage({
-      key: 'product',
-      data: this.data.DetailObject
-    })
     wx.navigateTo({
-      url: '../bookOrder/bookOrder?hasDetail=0&isCart=0'
+      url: '../bookOrder/bookOrder'
     })
   },
   onCart: function () {
-    var that = this;
-    //创建购物车商品类
-    var cartObject = new Object();
-    cartObject.productId = that.data.DetailObject.id;
-    cartObject.price = that.data.DetailObject.suggestPrice;
-    cartObject.image = that.data.DetailObject.photos['缩略图'].photoLinkNormal;
-    cartObject.name = that.data.DetailObject.name;
-    cartObject.count = 1;
-    cartObject.isSelected = false;
-    cartObject.productId = that.data.DetailObject.id;
-    if (that.data.DetailObject.glassesType == 'LENS' || that.data.DetailObject.glassesType == 'CONTACT_LENSES') {
-      cartObject.type = 'lens'
-    }
-    else if (that.data.DetailObject.glassesType == 'ACCESSORY') {
-      cartObject.type = 'accessory'
-    } else {
-      cartObject.type = 'glasses'
-    }
+    // var that = this;
+    // //创建购物车商品类
+    // var cartObject = new Object();
+    // cartObject.productId = that.data.DetailObject.id;
+    // cartObject.price = that.data.DetailObject.suggestPrice;
+    // cartObject.image = that.data.DetailObject.photos['缩略图'].photoLinkNormal;
+    // cartObject.name = that.data.DetailObject.name;
+    // cartObject.count = 1;
+    // cartObject.isSelected = false;
+    // cartObject.productId = that.data.DetailObject.id;
+    // if (that.data.DetailObject.glassesType == 'LENS' || that.data.DetailObject.glassesType == 'CONTACT_LENSES') {
+    //   cartObject.type = 'lens'
+    // }
+    // else if (that.data.DetailObject.glassesType == 'ACCESSORY') {
+    //   cartObject.type = 'accessory'
+    // } else {
+    //   cartObject.type = 'glasses'
+    // }
 
-    //判断本地购物车
-    var value = wx.getStorageSync('allCart')
-    console.log(value)
+    // //判断本地购物车
+    // var value = wx.getStorageSync('allCart')
+    // console.log(value)
 
-    if (value && value.length > 0) {
-      var exitIndex = 0;
-      var cartList = value;
-      var isExit = false;
-      for (var i = 0; i < cartList.length; i++) {
-        var cart = cartList[i];
-        if (cart.productId != that.data.DetailObject.id) {
-          isExit = false;
-        } else {
-          isExit = true;
-          exitIndex = i;
-        }
-      }
+    // if (value && value.length > 0) {
+    //   var exitIndex = 0;
+    //   var cartList = value;
+    //   var isExit = false;
+    //   for (var i = 0; i < cartList.length; i++) {
+    //     var cart = cartList[i];
+    //     if (cart.productId != that.data.DetailObject.id) {
+    //       isExit = false;
+    //     } else {
+    //       isExit = true;
+    //       exitIndex = i;
+    //     }
+    //   }
 
-      if (isExit) {
-        var exitCart = cartList[exitIndex];
-        exitCart.count++;
-      } else {
-        cartList.push(cartObject);
-      }
-      wx.setStorageSync('allCart', cartList);
-    }
-    else {
-      var cartList = new Array();
-      cartList.push(cartObject);
-      wx.setStorage({
-        key: 'allCart',
-        data: cartList
-      })
-    }
+    //   if (isExit) {
+    //     var exitCart = cartList[exitIndex];
+    //     exitCart.count++;
+    //   } else {
+    //     cartList.push(cartObject);
+    //   }
+    //   wx.setStorageSync('allCart', cartList);
+    // }
+    // else {
+    //   var cartList = new Array();
+    //   cartList.push(cartObject);
+    //   wx.setStorage({
+    //     key: 'allCart',
+    //     data: cartList
+    //   })
+    // }
 
-    wx.showToast({
-      title: '加入购物车成功',
-      icon: 'success',
-      duration: 2000
-    })
+    // wx.showToast({
+    //   title: '加入购物车成功',
+    //   icon: 'success',
+    //   duration: 2000
+    // })
   },
   onToCart: function (){
     wx.navigateTo({
       url: '../cart/cart',
     })
   },
-  onTryGlassAction: function(){
-    wx.navigateTo({ url: '../tryGlass/tryGlass'})
+  onDetail: function(){
+    this.setData({ isSelectDetail: true});
+  },
+  onParameter: function(){
+    this.setData({ isSelectDetail: false });
   }
 })

@@ -7,11 +7,6 @@ Page({
     showPerson: 'hide',
     bindPhone: ''
   },
-  onLogin: function () {
-    wx.navigateTo({
-      url: '../login/login'
-    })
-  },
   onShow: function () {
     // 页面显示
     var that = this;

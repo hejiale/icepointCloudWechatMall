@@ -50,6 +50,8 @@ App({
     loginCode: null,
     request:request,
     MD5:MD5,
-    companyId: "60"
+    companyId: 60,
+    //本地保存商品搜索记录key
+    historySearchWords: 'historySearchWords'
   }
 })

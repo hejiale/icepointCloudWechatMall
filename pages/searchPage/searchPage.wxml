@@ -16,36 +16,32 @@
           <text class="TitleText">类别</text>
           <view class="classesView">
             <block wx:for-items="{{classList}}">
-              <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{currentTypeName != item}}" data-key="{{item}}" bindtap="onSelectedClass">
-                <label class="classItemText" style="color:#222222">{{item}}</label>
+              <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass'>
+                <label class="classItemText" style="color:#222222">{{item.type.typeName}}</label>
               </view>
-              <view class="classItem" style="background-color: #63a0d4;" wx:else bindtap="onSelectedClass" data-key="{{item}}">
-                <label class="classItemText" style="color: white;">{{item}}</label>
+              <view class="classItem" style="background-color: #63a0d4;" wx:else data-key="{{item}}" bindtap='onChooseClass'>
+                <label class="classItemText" style="color: white;">{{item.type.typeName}}</label>
               </view>
             </block>
           </view>
         </view>
-        <!-- <block wx:for-items="{{allProperty}}">
+        <block wx:for-items="{{parameterList}}">
           <view class="popPropertyView">
             <view class="popPropertyTitleView">
-              <text class="TitleText">{{item.title}}</text>
-              <view class="propertyOpenView {{item.isShowOpen}}" bindtap="onFilterOpen" data-key="{{item}}">
-                <image src="../images/filter_open.png" class="openImage" wx:if="{{!item.isOpen}}"></image>
-                <image src="../images/filter_closed.png" class="openImage" wx:else></image>
-              </view>
+              <text class="TitleText">{{item.parameter.parameterName}}</text>
             </view>
-            <view class="{{item.isOpen ? 'openBar':'propertysView'}}">
-              <block wx:for-items="{{item.value}}">
-                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #fbf9fe;" wx:if="{{!item.isSelected}}">
-                  <text class="classItemText" style="color:gray">{{item.title}}</text>
+            <view class='propertysView'>
+              <block wx:for-items="{{item.goodsParameters}}">
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}">
+                  <text class="classItemText" style="color:#222222">{{item.parameterValue}}</text>
                 </view>
                 <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #63a0d4;" wx:else>
-                  <text class="classItemText" style="color:white">{{item.title}}</text>
+                  <text class="classItemText" style="color:white">{{item.parameterValue}}</text>
                 </view>
               </block>
             </view>
           </view>
-        </block> -->
+        </block>
       </scroll-view>
     </view>
     <view class="footView">
@@ -62,7 +58,7 @@
   <view class="topMenuView">
     <view class="search-input">
       <image class="search-icon" src="../images/icon_seach@2x.png" mode="aspectFit" />
-      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 13px;color:#999999;" bindfocus="onSearchEditFocus" bindblur="onCancleEditFocus" bindinput="onSearchInput" value="{{inputKeyWord}}" />
+      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 13px;color:#999999;" bindconfirm="onSearchInput" value="{{keyWord}}" confirm-type='search'/>
     </view>
     <view class="searchRightView" bindtap='onClassClicked'>
       <image class='filter-icon' src='../images/icon_filterClass@2x.png' mode="aspectFit"></image>
@@ -76,16 +72,16 @@
     <view class="hotItemView">
       <block wx:for-items="{{historySearchWords}}">
         <view class="searchClassItem" style="background-color: #FFFFFF;" data-key="{{item}}" bindtap='onLastesItem'>
-          <label class="searchClassItemText" style="color:gray">雷朋眼镜</label>
+          <label class="searchClassItemText" style="color:gray">{{item}}</label>
         </view>
       </block>
     </view>
   </view>
-  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore">
+  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore" lower-threshold='200' scroll-top="{{scrollTop}}">
     <block wx:for-items="{{allProductList}}">
-      <view class='productContentView' bindtap="onProductDetail">
+      <view class='productContentView' bindtap="onProductDetail" data-key="{{item}}">
         <view class="productView">
-          <image src="{{item.photoUrl}}" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
+          <image src="{{item.photoUrl}}" class="productImage" mode="aspectFit"></image>
           <view class="productInfoView">
             <text class="productText">{{item.goodsName}}</text>
             <text class="priceText">￥{{item.price}}</text>
