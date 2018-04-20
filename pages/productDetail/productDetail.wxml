@@ -4,7 +4,7 @@
     <image class="tryGlassImage" src='../images/detail_tryGlass@2x.png' mode="aspectFit"></image>
   </view> -->
   <view class="contentView">
-    <swiper class="swiper_box" indicator-dots="{{indicator}}" indicator-color="#F0F0F0" indicator-active-color="#222222">
+    <swiper class="swiper_box" indicator-dots="true" indicator-color="#F0F0F0" indicator-active-color="#222222">
       <block wx:for-items="{{DetailObject.photos}}">
         <swiper-item>
           <image src="{{item}}" class="bannerImage" mode="aspectFit" />

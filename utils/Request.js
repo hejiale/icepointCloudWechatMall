@@ -11,6 +11,7 @@ function http(msg) {
       },
       method: msg.method,
       success: function (res) {
+        console.log(res);
         resolve(res.data);
       },
       fail: function (res) {
@@ -34,7 +35,7 @@ function payOrder(options, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      console.log(e)
+    
     })
 }
 
@@ -52,7 +53,7 @@ function queryProductList(options, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      console.log(e)
+      
     })
 }
 
@@ -69,7 +70,7 @@ function queryProductCategory(callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      console.log(e)
+
     })
 }
 
@@ -86,7 +87,7 @@ function queryProductDetail(id, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      console.log(e)
+      
     })
 }
 

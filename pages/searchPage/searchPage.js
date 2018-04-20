@@ -15,7 +15,6 @@ Page({
     startPrice: '',
     endPrice: '',
     isEndLoading: false,
-    showFooterLoading: 'hide',
     pageSize: 20,
     isFilter: false,
     scrollTop: 0
@@ -226,8 +225,8 @@ Page({
   onUpdateHistorySearchWords: function () {
     var that = this;
 
-    if (that.data.keyWord.length == 0)return;
-    
+    if (that.data.keyWord.length == 0) return;
+
     if (that.data.historySearchWords.length > 0) {
       if (that.data.historySearchWords.indexOf(that.data.keyWord) == -1) {
         that.data.historySearchWords.push(that.data.keyWord);

@@ -3,22 +3,9 @@ var app = getApp();
 
 Page({
   data: {
-    currentOrderNum: '',
     orderDetail: null,
-    hasDetail: false,
-    bookDetail: null,
     showFoot: 'hide',
     productList: [],
-    bindPhone: '',
-    storeId: '',
-    storeName: '',
-    storeAddress: '',
-    storePhone: '',
-    isBookOpmetory: true,
-    isFromCart: false,
-    customerGenger: '',
-    customerName: '',
-    customerPhoto: '',
     isShowOpmetory: 'hide',
     defaultOpmetory: null,
     isShowMemberRights: 'hide'
