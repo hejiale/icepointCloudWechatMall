@@ -1,7 +1,8 @@
-function http(msg) {
-  // var HostURL = 'https://dev.icepointcloud.com';
-  var HostURL = 'http://guirong.private.icepointcloud.com/wechat/api/mall';
+// var HostURL = 'https://dev.icepointcloud.com';
+var HostURL = 'http://guirong.private.icepointcloud.com';
+var port = '/wechat/api/mall';
 
+function http(msg) {
   return new Promise((resolve, reject) => {
     wx.request({
       url: HostURL + msg.url,
@@ -27,7 +28,7 @@ function payOrder(options, callBack) {
 
   let msg = {
     data: options,
-    url: '/api/wechat/pay/unifiedOrder',
+    url: port + '/api/wechat/pay/unifiedOrder',
     method: 'GET'
   }
 
@@ -35,7 +36,7 @@ function payOrder(options, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-    
+
     })
 }
 
@@ -45,7 +46,7 @@ function queryProductList(options, callBack) {
 
   let msg = {
     data: options,
-    url: '/goods',
+    url: port + '/goods',
     method: 'GET'
   }
 
@@ -53,7 +54,7 @@ function queryProductList(options, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      
+
     })
 }
 
@@ -62,7 +63,7 @@ function queryProductCategory(callBack) {
   var that = this;
 
   let msg = {
-    url: '/companys/60/searchInfos',
+    url: port + "/companys/60/searchInfos",
     method: 'GET'
   }
 
@@ -79,7 +80,7 @@ function queryProductDetail(id, callBack) {
   var that = this;
 
   let msg = {
-    url: '/goods/' + id,
+    url: port + '/goods/' + id,
     method: 'GET'
   }
 
@@ -87,16 +88,34 @@ function queryProductDetail(id, callBack) {
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-      
+
     })
 }
 
+//查询商品详情规格
+function queryProductDetailParameter(parameterJson, callBack) {
+  var that = this;
+
+  let msg = {
+    data:parameterJson,
+    url: port + '/goods/specifications',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
 
 module.exports = {
   payOrder: payOrder,
   queryProductList: queryProductList,
   queryProductCategory: queryProductCategory,
-  queryProductDetail: queryProductDetail
+  queryProductDetail: queryProductDetail,
+  queryProductDetailParameter: queryProductDetailParameter
 }
 
 

@@ -1,4 +1,51 @@
 <import src="../../wxParse/wxParse.wxml" />
+<view class='parameterMainView {{showParameterView}}'>
+  <view id="classViewCover" bindtap='onCoverClick'></view>
+  <view class='parameterContentView'>
+    <view class='parameterInfoView'>
+      <view class='parameterImageView'>
+        <image src="{{DetailObject.photos[0]}}" class="parameterImage" mode="aspectFit" />
+      </view>
+      <view class='parameterRightView'>
+        <text class="productName">{{DetailObject.goods.goodsName}}</text>
+        <text class="priceText">￥{{parameterPrice}}</text>
+      </view>
+    </view>
+    <scroll-view class='specificationsView' scroll-y="true" style='height: {{parameterObject.specifications.length > 0 ? deviceHeight/4 : 0}}px;'>
+      <block wx:for-items="{{parameterObject.specifications}}">
+        <view class="popPropertyView">
+          <view class="popPropertyTitleView">
+            <text class="TitleText">{{item.name}}</text>
+          </view>
+          <view class='propertysView'>
+            <block wx:for-items="{{item.values}}">
+              <view class="classItem" data-key="{{item}}" style="background-color: #E6E6E6;" wx:if="{{item.enableSelect && !item.selected}}" bindtap="onSelectParameter">
+                <text class="classItemText" style="color:#222222">{{item.value}}</text>
+              </view>
+              <view class="classItem" data-key="{{item}}" style="background-color: #63a0d4;" wx:elif="{{item.enableSelect && item.selected}}" bindtap="onSelectParameter">
+                <text class="classItemText" style="color:white">{{item.value}}</text>
+              </view>
+              <view class="classItem" data-key="{{item}}" bindtap="onSelectParameter" style="background-color: #F0F0F0;" wx:else>
+                <text class="classItemText" style="color:#dcdcdc">{{item.value}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class='parameterNumView'>
+      <text class='parameterNumTitle'>数量</text>
+      <view class='editCartNumView'>
+        <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit"></image>
+        <text class='cartNumText'>1</text>
+        <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit"></image>
+      </view>
+    </view>
+    <view class='parameterFootView'>
+      <text class='parameterFootText'>选择</text>
+    </view>
+  </view>
+</view>
 <view class="page">
   <!-- <view class='tryGlassView'>
     <image class="tryGlassImage" src='../images/detail_tryGlass@2x.png' mode="aspectFit"></image>
@@ -27,12 +74,12 @@
       </view>
       <view class="specifications" wx:else>
         <view class="FrameView">
-           <block wx:for-items="{{DetailObject.details}}">
+          <block wx:for-items="{{DetailObject.details}}">
             <view class="specificationItem">
               <text class="keyText">{{item.parameterName.parameterName}}</text>
               <text class="valueText">{{item.valueDetail.parameterValue}}</text>
             </view>
-          </block> 
+          </block>
         </view>
       </view>
     </view>
