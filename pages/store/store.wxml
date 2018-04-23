@@ -1,28 +1,30 @@
 <view class="page">
   <view class='topView'>
     <view class='searchView'>
-    <image class='seachImage' src='../images/icon_seach@2x.png'></image>
-    <input class='searchInput' placeholder='请输入您要搜索的商品' placeholder-style='color: #999999;'></input>
+      <image class='seachImage' src='../images/icon_seach@2x.png' mode="aspectFit"></image>
+      <input class='searchInput' placeholder='请输入您要搜索的商品' placeholder-style='color: #999999;'></input>
     </view>
   </view>
   <view class="storeListView">
     <block wx:for-items="{{storeList}}">
       <view class="contentView" bindtap="onSelectStore" data-key="{{item}}">
-        <view class="storeLeftView">
-          <view class='storeNameView'>
-            <text class="contentText">上海中山北路自营店</text>
-            <view class='distanceView'>
-              <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
-              <text class='distanceText'>0.5km</text>
-            </view>
+        <view class='storeNameView'>
+          <text class="contentText">上海中山北路自营店</text>
+          <view class='distanceView'>
+            <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
+            <text class='distanceText'>0.5km</text>
           </view>
-          <view class='storeAddressView'>
-            <text class="addressText">上海市静安区中山北路2965号
+        </view>
+        <!-- <image class='storeImage' mode="aspectFit"></image> -->
+        <!-- <view class='storeImageView'>
+            
+          </view> -->
+        <view class='storeAddressView'>
+          <text class="addressText">上海市静安区中山北路2965号
 恒生广场A座102</text>
-            <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
-            <view class='callPhoneView' bindtap="onCall">
-              <image class='callImage' src='../images/store_phone@2x.png'></image>
-            </view>
+          <image class='storeContacterLine' src='../images/icon_columnLine@2x.png' mode="aspectFit"></image>
+          <view class='callPhoneView' bindtap="onCall">
+            <image class='callImage' src='../images/store_phone@2x.png' mode="aspectFit"></image>
           </view>
         </view>
       </view>

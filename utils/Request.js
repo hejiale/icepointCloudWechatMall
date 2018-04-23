@@ -2,24 +2,22 @@
 var HostURL = 'http://guirong.private.icepointcloud.com';
 var port = '/wechat/api/mall';
 
-function http(msg) {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: HostURL + msg.url,
-      data: msg.data,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: msg.method,
-      success: function (res) {
-        console.log(res);
-        resolve(res.data);
-      },
-      fail: function (res) {
-        reject(res);
-      }
+//登录
+function login(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+    
     })
-  })
 }
 
 //微信支付预付款
@@ -28,7 +26,7 @@ function payOrder(options, callBack) {
 
   let msg = {
     data: options,
-    url: port + '/api/wechat/pay/unifiedOrder',
+    url: '/api/wechat/pay/unifiedOrder',
     method: 'GET'
   }
 
@@ -110,7 +108,34 @@ function queryProductDetailParameter(parameterJson, callBack) {
     })
 }
 
+//获取门店列表信息
+
+
+//后台请求
+function http(msg) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: HostURL + msg.url,
+      data: msg.data,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: msg.method,
+      success: function (res) {
+        console.log(res);
+        resolve(res.data);
+      },
+      fail: function (res) {
+        console.log(res);
+        reject(res);
+      }
+    })
+  })
+}
+
+
 module.exports = {
+  login:login,
   payOrder: payOrder,
   queryProductList: queryProductList,
   queryProductCategory: queryProductCategory,

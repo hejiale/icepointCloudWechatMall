@@ -5,7 +5,7 @@ Page({
   data: {
     deviceWidth: 0,
     deviceHeight: 0,
-    classItemList:[],
+    classItemList: [],
     classList: [
       '精选',
       '送女票',
@@ -16,14 +16,11 @@ Page({
       '设计感',
       '文艺风',
     ],
-    isShowClassView : 'hide',
-    isShowProductListView:'hide',
-    productList:[]
+    isShowClassView: 'hide',
+    isShowProductListView: 'hide',
+    productList: []
   },
   onLoad: function (options) {
-    var ipcApp = app.globalData.ipcApp;
-    ipcApp.setSessionID('');
-
     var that = this;
     app.getSystemInfo(function (systemInfo) {
       var winWidth = systemInfo.windowWidth;
@@ -45,23 +42,31 @@ Page({
     that.setData({ classItemList: list })
     that.setData({ productList: list })
   },
-  onShoppingCart:function(){
-    wx.navigateTo({
-      url: '../bindPhone/bindPhone',
+  onShoppingCart: function () {
+    app.getUserBindPhone(function (bindPhone) {
+      if(bindPhone.length){
+        wx.navigateTo({
+          url: '../cart/cart',
+        })
+      }else{
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
+      }
     })
   },
-  onSearchProduct:function(){
+  onSearchProduct: function () {
     wx.navigateTo({
       url: '../searchPage/searchPage',
     })
   },
-  onShowClassView: function(){
-    this.setData({ isShowClassView : 'show'});
+  onShowClassView: function () {
+    this.setData({ isShowClassView: 'show' });
   },
-  onCloseClassCover: function(){
+  onCloseClassCover: function () {
     this.setData({ isShowClassView: 'hide' });
   },
-  onClassItemClicked: function(){
+  onClassItemClicked: function () {
     this.setData({ isShowProductListView: 'show' });
   }
 })

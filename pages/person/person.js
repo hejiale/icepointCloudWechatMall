@@ -10,7 +10,6 @@ Page({
   onShow: function () {
     // 页面显示
     var that = this;
-    var ipcApp = app.globalData.ipcApp
 
     app.getUserInfo(function (userInfo) {
       that.setData({

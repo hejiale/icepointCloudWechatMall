@@ -7,9 +7,9 @@
           <text class="TitleText">价格</text>
           <view class="priceSpaceView">
             <text class="priceSpaceText">价格区间(元)</text>
-            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{startPrice}}" />
+            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{lowPriceStr}}" />
             <view class="priceSpace"></view>
-            <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{endPrice}}" />
+            <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{heighPriceStr}}" />
           </view>
         </view>
         <view class="popClassView">

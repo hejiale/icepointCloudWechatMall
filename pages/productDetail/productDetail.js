@@ -31,17 +31,45 @@ Page({
   },
   onBook: function (event) {
     wx.navigateTo({
-      url: '../bookOrder/bookOrder'
+      url: '../bookOrder/bookOrder',
     })
+    // app.getUserBindPhone(function (bindPhone) {
+    //   if (bindPhone.length) {
+    //     wx.navigateTo({
+    //       url: '../bookOrder/bookOrder',
+    //     })
+    //   } else {
+    //     wx.navigateTo({
+    //       url: '../bindPhone/bindPhone',
+    //     })
+    //   }
+    // })
   },
   onCart: function () {
     var that = this;
-    that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
-    that.queryParameterRequest();
+
+    app.getUserBindPhone(function (bindPhone) {
+      if (bindPhone.length) {
+        that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
+        that.queryParameterRequest();
+      } else {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
+      }
+    })
   },
   onToCart: function () {
-    wx.navigateTo({
-      url: '../cart/cart',
+    app.getUserBindPhone(function (bindPhone) {
+      if (bindPhone.length) {
+        wx.navigateTo({
+          url: '../cart/cart',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
+      }
     })
   },
   onDetail: function () {

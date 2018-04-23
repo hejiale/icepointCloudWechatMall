@@ -20,7 +20,7 @@ page {
   margin-top: 5px;
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 60px;
 }
 
 .deliveryModeTitle {
@@ -31,19 +31,10 @@ page {
   line-height: 80px;
 }
 
-.deliveryModeImage{
+.deliveryModeImage {
   margin-right: 20px;
   width: 94px;
   height: 35px;
-}
-
-.shouldPayAmountTitle{
-  margin-left: 5px;
-  width: 50%;
-  height: 100%;
-  font-size: 18px;
-  color: #222;
-  line-height: 80px;
 }
 
 .addressInfoView {
@@ -116,7 +107,7 @@ page {
 .productView {
   display: flex;
   margin-left: 0px;
-  margin-top: 0px;
+  margin-top: 1px;
   width: 100%;
   height: 100px;
   align-items: center;
@@ -174,18 +165,23 @@ page {
   align-items: center;
   margin-top: 5px;
   width: 100%;
-  height: 80px;
+  height: 60px;
   background-color: white;
 }
 
 .shouldPayAmountText {
   margin-left: 0px;
   margin-right: 10px;
-  width: 50%;
-  height: 100%;
+  width: calc(50% - 10px);
   text-align: right;
-  line-height: 80px;
   font-size: 15px;
+}
+
+.shouldPayAmountTitle {
+  margin-left: 5px;
+  width: 50%;
+  font-size: 18px;
+  color: #222;
 }
 
 .memberRightsView {
@@ -258,7 +254,7 @@ page {
   display: flex;
   margin-top: 5px;
   width: 100%;
-  height: 150px;
+  height: 120px;
   background-color: white;
 }
 
@@ -289,14 +285,14 @@ page {
   font-size: 16px;
 }
 
-.storeInfoTitle{
+.storeInfoTitle {
   width: 50%;
   font-size: 18px;
   color: #222;
   line-height: 80px;
 }
 
-.storeNumText{
+.storeNumText {
   margin-right: 10px;
   font-size: 14px;
   text-align: center;
@@ -311,33 +307,34 @@ page {
 .storeAddressInfoView {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0px;
+  /* align-items: center; */
+  /* margin: 0px; */
   width: 100%;
-  height: 98px;
+  /* height: 98px; */
 }
 
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
-  margin: 0px;
+  /* margin: 0px; */
   width: 70%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .storeContacterLine {
-  margin-left: 1px;
+  margin-top: 10px;
+   margin-left: 10px; 
   width: 1px;
-  height: 70%;
+   height: 92rpx; 
 }
 
 .callPhoneView {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
   margin-left: 1px;
-  width: calc(30% - 3px);
-  height: 100%;
+  width: calc(30% - 12px);
 }
 
 .callImage {
@@ -355,7 +352,7 @@ page {
 }
 
 .storeAddressView {
-  margin-top: 0px;
+  margin-top: 5px;
   width: 100%;
   height: 50%;
   font-size: 13px;
@@ -373,10 +370,10 @@ page {
 .storeDistanceView {
   align-items: center;
   width: 30%;
-  height: 100%;
+  /* height: 100%; */
   font-size: 12px;
-  line-height: 44px;
-  text-align: center;
+  /* line-height: 44px; */
+  text-align: right;
 }
 
 .footView {
@@ -396,11 +393,11 @@ page {
   justify-content: center;
   width: 90%;
   height: 36px;
-  background-color: #4D9FD8;
+  background-color: #4d9fd8;
   border-radius: 3px;
 }
 
-.offerOrderText{
+.offerOrderText {
   color: white;
   font-size: 15px;
 }
@@ -423,7 +420,7 @@ page {
   opacity: 0.7;
 }
 
- .memberRightsBgView {
+.memberRightsBgView {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -434,16 +431,16 @@ page {
   height: 260px;
   background-color: white;
   border-radius: 8px;
-} 
+}
 
-.memberBgTitleView{
+.memberBgTitleView {
   display: flex;
   align-items: center;
   width: 100%;
   height: 60px;
 }
 
-.memberBgTitle{
+.memberBgTitle {
   width: 100%;
   height: 20px;
   line-height: 20px;
@@ -451,25 +448,25 @@ page {
   font-size: 16px;
 }
 
-.memberCancleButton{
+.memberCancleButton {
   position: absolute;
   font-size: 15px;
   right: 0px;
   width: 60px;
   height: 20px;
   line-height: 20px;
-  color: #4D9FD8;
+  color: #4d9fd8;
   text-align: center;
 }
 
-.memberRightsBgLine{
+.memberRightsBgLine {
   margin: 0px;
   width: 100%;
   height: 1px;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 }
 
-.offsetAmountView{
+.offsetAmountView {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -478,7 +475,7 @@ page {
   height: 50px;
 }
 
-.offsetAmountTitle{
+.offsetAmountTitle {
   margin-left: 10px;
   width: 100px;
   height: 25px;
@@ -486,7 +483,7 @@ page {
   font-size: 14px;
 }
 
-.offsetAmountValue{
+.offsetAmountValue {
   margin-right: 10px;
   width: 150px;
   height: 25px;
@@ -495,23 +492,23 @@ page {
   text-align: right;
 }
 
-.offsetAmountInput{
+.offsetAmountInput {
   margin-top: 15px;
   width: 90%;
   height: 30px;
   font-size: 14px;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   border-radius: 3px;
 }
 
-.memberRightsBgBottomLine{
+.memberRightsBgBottomLine {
   margin-top: 30px;
   width: 100%;
   height: 1px;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
 }
 
-.memberRightsSureButton{
+.memberRightsSureButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -520,7 +517,7 @@ page {
   height: 36px;
   line-height: 36px;
   color: white;
-  background-color: #4D9FD8;
+  background-color: #4d9fd8;
   font-size: 14px;
   border-radius: 5px;
 }

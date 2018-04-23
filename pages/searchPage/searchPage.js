@@ -14,17 +14,18 @@ Page({
     keyWord: '',
     startPrice: '',
     endPrice: '',
+    lowPriceStr: '',
+    heighPriceStr: '',
     isEndLoading: false,
     pageSize: 20,
     isFilter: false,
-    scrollTop: 0
+    scrollTop: 0,
+    selectAllClass: [],
+    selectAllParameter: []
   },
   //--------------页面初始化 加载分类商品参数----------------//
   onLoad: function () {
     var that = this;
-    app.globalData.request.queryProductCategory(function (data) {
-      that.setData({ classList: data.types, parameterList: data.parameters });
-    })
 
     var historyKeywords = wx.getStorageSync(app.globalData.historySearchWords);
     if (historyKeywords.length > 0) {
@@ -52,9 +53,41 @@ Page({
   onClassClicked: function () {
     var that = this;
     that.setData({ showOrHide: 'show' });
+    wx.showLoading({});
+
+    app.globalData.request.queryProductCategory(function (data) {
+      var classTypes = data.types;
+      var parameters = data.parameters;
+
+      for (var i = 0; i < that.data.selectAllClass.length; i++) {
+        var item = that.data.selectAllClass[i];
+        for (var j = 0; j < classTypes.length; j++) {
+          var object = classTypes[j];
+          if (object.type.typeId == item.type.typeId) {
+            object.selected = true;
+          }
+        }
+      }
+
+      for (var i = 0; i < that.data.selectAllParameter.length; i++) {
+        var item = that.data.selectAllParameter[i];
+        for (var z = 0; z < parameters.length; z++) {
+          var object = parameters[z];
+          for (var j = 0; j < object.goodsParameters.length; j++) {
+            var parameter = object.goodsParameters[j];
+            if (parameter.id == item.id) {
+              parameter.selected = true;
+            }
+          }
+        }
+      }
+      that.setData({ classList: classTypes, parameterList: parameters, lowPriceStr: that.data.startPrice, heighPriceStr: that.data.endPrice });
+
+      wx.hideLoading();
+    })
   },
   onBgClicked: function () {
-    this.setData({ showOrHide: 'hide' });
+    this.setData({ showOrHide: 'hide', classList: null, parameterList: null });
   },
   onProductDetail: function (event) {
     var value = event.currentTarget.dataset.key;
@@ -129,11 +162,40 @@ Page({
   //--------------确认操作----------------//
   onSureFilterProducts: function () {
     var that = this;
+    that.addFilterParameter();
     that.setData({ showOrHide: 'hide', keyWord: '', isFilter: true });
     that.filterProductsRequest();
   },
+  addFilterParameter: function () {
+    var that = this;
+    that.data.selectAllClass.splice(0, 1);
+    that.data.selectAllParameter.splice(0, that.data.selectAllParameter.length);
+
+    for (var i = 0; i < that.data.classList.length; i++) {
+      var object = that.data.classList[i];
+      if (object.selected) {
+        that.data.selectAllClass.push(object);
+      }
+    }
+
+    for (var i = 0; i < that.data.parameterList.length; i++) {
+      var object = that.data.parameterList[i];
+      for (var j = 0; j < object.goodsParameters.length; j++) {
+        var parameter = object.goodsParameters[j];
+        if (parameter.selected) {
+          that.data.selectAllParameter.push(parameter);
+        }
+      }
+    }
+    that.setData({ startPrice: that.data.lowPriceStr, endPrice: that.data.heighPriceStr });
+  },
   //--------------重置操作----------------//
   onResetProperty: function () {
+    var that = this;
+    that.clearFilterData();
+  },
+  //--------------清除筛选数据----------------//
+  clearFilterData: function () {
     var that = this;
 
     for (var i = 0; i < that.data.classList.length; i++) {
@@ -148,22 +210,23 @@ Page({
         parameter.selected = false;
       }
     }
-    that.setData({ startPrice: '', endPrice: '', currentPage: 1, parameterList: that.data.parameterList, classList: that.data.classList, isEndLoading: false });
+    that.setData({ parameterList: that.data.parameterList, classList: that.data.classList, lowPriceStr: '', heighPriceStr: '' });
   },
   //--------------输入价格操作----------------//
   onStartPriceClicked: function (event) {
-    if (parseFloat(event.detail.value) > parseFloat(this.data.endPrice)) {
-      this.setData({ startPrice: '' });
+    var that = this;
+    if (parseFloat(event.detail.value) > parseFloat(that.data.heighPriceStr)) {
+      that.setData({ lowPriceStr: '' });
       return;
     }
-    this.setData({ startPrice: event.detail.value });
+    that.setData({ lowPriceStr: event.detail.value });
   },
   onEndPriceClicked: function (event) {
-    this.setData({ endPrice: event.detail.value });
+    var that = this;
+    that.setData({ heighPriceStr: event.detail.value });
   },
   //--------------输入框搜索商品----------------//
   onSearchInput: function (e) {
-    console.log(e);
     var that = this;
     that.setData({ keyWord: e.detail.value, isFilter: false });
     that.onUpdateHistorySearchWords();

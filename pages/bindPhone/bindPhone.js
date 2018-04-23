@@ -56,7 +56,6 @@ Page({
   onShow: function(){
     // 页面显示
     var that = this;
-    var ipcApp = app.globalData.ipcApp
 
     app.getUserInfo(function (userInfo) {
       that.setData({
@@ -71,8 +70,7 @@ Page({
     if (this.data.bindPhone.length == 0) {
       wx.showToast({
         title: '请输入有效手机号',
-        icon: 'none',
-        duration: 2000
+        icon: 'none'
       })
       return
     }
