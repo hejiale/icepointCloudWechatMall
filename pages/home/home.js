@@ -43,17 +43,18 @@ Page({
     that.setData({ productList: list })
   },
   onShoppingCart: function () {
-    app.getUserBindPhone(function (bindPhone) {
-      if(bindPhone.length){
-        wx.navigateTo({
-          url: '../cart/cart',
-        })
-      }else{
-        wx.navigateTo({
-          url: '../bindPhone/bindPhone',
-        })
-      }
+    wx.navigateTo({
+      url: '../store/store',
     })
+    // if (app.globalData.customer) {
+    //   wx.navigateTo({
+    //     url: '../cart/cart',
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: '../bindPhone/bindPhone',
+    //   })
+    // }
   },
   onSearchProduct: function () {
     wx.navigateTo({

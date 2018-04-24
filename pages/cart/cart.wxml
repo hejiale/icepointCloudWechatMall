@@ -10,35 +10,38 @@
   </view>
   <view class="contentView">
     <scroll-view>
-      <block wx:for-items="{{allCartList}}">
-        <view class="openView" wx:if="{{canEdit}}" data-key="{{item}}">
-          <view class="onSelectView" bindtap="onDeleteCart">
+      <block wx:for-items="{{cartList}}">
+        <view class="openView" wx:if="{{canEdit}}">
+          <view class="onSelectView" bindtap="onDeleteCart" data-key="{{item}}">
             <image src="../images/icon_cartReduce@2x.png" class="iconSelectedImage" mode="aspectFit"></image>
           </view>
           <view class="cartView">
-            <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.photos[0].photoUrl}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
-              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜属质感圆框太阳</text>
-              <text class="price">￥ 268.88 </text>
+              <text class="productNameText">{{item.goods.goodsName}}</text>
+              <text class="price">￥ {{item.specifications ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
               <view class='editCartNumView'>
-                <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit"></image>
-                <text class='cartNumText'>1</text>
-                <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit"></image>
+                <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
+                <text class='cartNumText'>{{item.shoppingCart.count}}</text>
+                <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit" bindtap='onCrease' data-key="{{item}}"></image>
               </view>
             </view>
           </view>
         </view>
         <view class="unOpenView" wx:else data-key="{{item}}">
-          <view class="onSelectView" bindtap="onSelected">
-            <icon class='iconSelectedImage' type="{{item.cartSelected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+          <view class="onSelectView" bindtap='onSelectCart' data-key='{{item}}'>
+            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
           </view>
           <view class='cartView'>
-            <image src="{{item.image}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.photos[0].photoUrl}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
-              <text class="productNameText">防辐射太阳镜 金属质感圆框太阳镜属质感圆框太阳</text>
+              <text class="productNameText">{{item.goods.goodsName}}</text>
+              <view class='specificationsView'>
+                <text class='specificationsText'>{{item.specification}}</text>
+              </view>
               <view class="priceView">
-                <text class="price">￥ 268.88 </text>
-                <text class="numText">x1</text>
+                <text class="price">￥ {{item.specifications ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
+                <text class="numText">x {{item.shoppingCart.count}}</text>
               </view>
             </view>
           </view>
@@ -46,11 +49,11 @@
       </block>
     </scroll-view>
   </view>
-  <view class="footView" wx:if="{{allCartList.length > 0}}">
+  <view class="footView" wx:if="{{cartList.length > 0}}">
     <view class='normalBottomView' wx:if="{{!canEdit}}" bindtap='onBook'>
-      <text class="totalOrderPriceText">￥ 344.64 结算</text>
+      <text class="totalOrderPriceText">￥ {{totalPrice}} 结算</text>
     </view>
-    <view class="chooseAllView" wx:if="{{canEdit}}">
+    <view class="chooseAllView" wx:if="{{canEdit}}" bindtap='onCleanCart'>
       <text class="totalOrderPriceText">全部删除</text>
     </view>
   </view>

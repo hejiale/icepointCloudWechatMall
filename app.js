@@ -9,7 +9,22 @@ App({
     wx.login({
       success: function (res) {
         that.globalData.loginCode = res.code;
+
+        let options = { jsCode: res.code };
+
+        that.globalData.request.login(options, function (data) {
+          that.globalData.customer = data.customer;
+          that.globalData.weChatUser = data.weChatUserKey;
+        });
       }
+    });
+
+    wx.getLocation({
+      success: function(res) {
+        console.log(res);
+        that.globalData.userLocation = { latitude: res.latitude, 
+                                        longitude: res.longitude };
+      },
     })
   },
 
@@ -42,12 +57,6 @@ App({
       })
     }
   },
-  getUserBindPhone: function (cb) {
-    var that = this;
-    var value = wx.getStorageSync(that.globalData.userBindPhoneKey);
-    typeof cb == "function" && cb(value)
-  },
-
   globalData: {
     userInfo: null,
     systemInfo: null,
@@ -55,9 +64,10 @@ App({
     request: request,
     MD5: MD5,
     companyId: 60,
+    customer: null,
+    weChatUser: null,
+    userLocation: null,
     //本地保存商品搜索记录key
     historySearchWords: 'historySearchWordsKey',
-    //本地保存用户绑定手机号
-    userBindPhoneKey: 'userBindPhoneKey'
   }
 })

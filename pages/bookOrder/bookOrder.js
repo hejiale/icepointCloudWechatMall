@@ -6,6 +6,7 @@ Page({
     isShowMemberRights: 'hide',
     isExtractEmail: 'show',
     isExtractSelf: 'hide',
+    //自提或邮寄标签判定是否选择地址选项
     isShowStore: 'hide'
   },
   onLoad: function (options) {
@@ -36,55 +37,55 @@ Page({
   },
   onCall: function () {
     wx.makePhoneCall({
-      phoneNumber: '15216695605',
+      phoneNumber: '',
     })
   },
   offerOrder: function () {
     var that = this;
 
-    let options = {
-      orderNo: "20150834343434421",
-      price: 1,
-      jsCode: app.globalData.loginCode,
-      isService: false
-    }
+    // let options = {
+    //   orderNo: "20150834343434421",
+    //   price: 1,
+    //   jsCode: app.globalData.loginCode,
+    //   isService: false
+    // }
 
-    app.globalData.request.payOrder(options, function (data) {
-      console.log(data);
-      var date = String(new Date().getTime()).substr(0, 10);
+    // app.globalData.request.payOrder(options, function (data) {
+    //   console.log(data);
+    //   var date = String(new Date().getTime()).substr(0, 10);
 
-      wx.requestPayment({
-        timeStamp: date,
-        'nonceStr': data.nonce_str,
-        'package': "prepay_id=" + data.prepay_id,
-        'signType': 'MD5',
-        'paySign': that.paySignData(data,date),
-        'success': function (res) {
-          console.log(res)
-        },
-        'fail': function (res) {
-          console.log(res)
-        },
-        'complete': function (res) {
-          console.log(res)
-        }
-      })
-    })
+    //   wx.requestPayment({
+    //     timeStamp: date,
+    //     'nonceStr': data.nonce_str,
+    //     'package': "prepay_id=" + data.prepay_id,
+    //     'signType': 'MD5',
+    //     'paySign': that.paySignData(data,date),
+    //     'success': function (res) {
+    //       console.log(res)
+    //     },
+    //     'fail': function (res) {
+    //       console.log(res)
+    //     },
+    //     'complete': function (res) {
+    //       console.log(res)
+    //     }
+    //   })
+    // })
   },
 
-  paySignData: function(data,date){
-    var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
+  // paySignData: function(data,date){
+  //   var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
 
-    var stringSignTemp = stringA + "&key=5eef8283dc4c421484229a59449e11c2";
+  //   var stringSignTemp = stringA + "&key=5eef8283dc4c421484229a59449e11c2";
 
-    console.log(stringSignTemp);
+  //   console.log(stringSignTemp);
 
-    var sign = app.globalData.MD5.hexMD5(stringSignTemp).toUpperCase();
+  //   var sign = app.globalData.MD5.hexMD5(stringSignTemp).toUpperCase();
 
-    console.log(sign);
+  //   console.log(sign);
 
-    return sign;
-  },
+  //   return sign;
+  // },
 
   onShowMemberRightsView: function () {
     var that = this;

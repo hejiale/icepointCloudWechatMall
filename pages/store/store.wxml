@@ -9,20 +9,16 @@
     <block wx:for-items="{{storeList}}">
       <view class="contentView" bindtap="onSelectStore" data-key="{{item}}">
         <view class='storeNameView'>
-          <text class="contentText">上海中山北路自营店</text>
+          <text class="contentText">{{item.name}}</text>
           <view class='distanceView'>
             <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
-            <text class='distanceText'>0.5km</text>
+            <text class='distanceText'>{{item.distance}}公里</text>
           </view>
         </view>
-        <!-- <image class='storeImage' mode="aspectFit"></image> -->
-        <!-- <view class='storeImageView'>
-            
-          </view> -->
+         <!-- <image class='storeImage' mode="aspectFit"></image>  -->
         <view class='storeAddressView'>
-          <text class="addressText">上海市静安区中山北路2965号
-恒生广场A座102</text>
-          <image class='storeContacterLine' src='../images/icon_columnLine@2x.png' mode="aspectFit"></image>
+          <text class="addressText">{{item.region + item.address}}</text>
+          <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
           <view class='callPhoneView' bindtap="onCall">
             <image class='callImage' src='../images/store_phone@2x.png' mode="aspectFit"></image>
           </view>

@@ -57,60 +57,14 @@ page {
   background-color: white;
 }
 
-/* .cartView {
-  display: flex;
-  margin-left: 0px;
-  margin-top: 0px;
-  width: 100%;
-  height: 100px;
-  align-items: center;
-  background-color: white;
-} */
-
-/* .cartNumView {
-  display: flex;
-  margin-left: 5px;
-  width: calc(100% - 160px);
-  height: 100%;
-}
-
-.reduceView {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(100%/3);
-  height: 100%;
-}
-
-.cartNumText {
-  width: calc(100%/3);
-  line-height: 100px;
-  font-size: 12px;
-  color: gray;
-  text-align: center;
-} */
-
-/* .increaseView {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(100%/3);
-  height: 100%;
-}
-
-.iconCartImage {
-  width: 20px;
-  height: 20px;
-} */
-
-.unOpenView{
+.unOpenView {
   display: flex;
   align-items: center;
   width: 100%;
   height: 100px;
 }
 
-.openView{
+.openView {
   display: flex;
   align-items: center;
   width: 100%;
@@ -130,11 +84,12 @@ page {
   height: 23px;
 }
 
-.cartView{
+.cartView {
   display: flex;
   align-items: center;
   width: calc(100% - 60px);
   height: 100%;
+  border-bottom: 1px solid #E6E6E6;
 }
 
 .productInfo {
@@ -146,50 +101,33 @@ page {
   height: 80%;
 }
 
-/* .openProductInfo{
-  display: flex;
-  flex-direction: column;
-  margin-left: 5px;
-  margin-top: 0px;
-  width: calc(100% - 85px);
-  height: 100%;
-} */
-
 .productImage {
   margin-left: 0px;
   width: 80px;
   height: 80px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
 }
-
-/* .openProductImage{
-  margin-left: 0px;
-  width: 80px;
-  height: 80px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-} */
-
-/* .productName {
-  margin-left: 0px;
-  margin-top: 5px;
-  width: 100%;
-  height: 25px;
-  line-height: 25px;
-} */
 
 .productNameText {
   width: 100%;
   height: 25px;
-  font-size: 14px;
+  font-size: 15px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
+.specificationsView{
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.specificationsText{
+  font-size: 13px;
+  color: #999999;
+}
+
 .priceView {
-  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -197,16 +135,17 @@ page {
 }
 
 .price {
-  margin: 0px;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .numText {
-  font-size: 13px;
+  font-size: 15px;
   padding-right: 10px;
+  font-weight: 300;
 }
 
-.editCartNumView{
+.editCartNumView {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,12 +154,12 @@ page {
   height: 30px;
 }
 
-.reduceCartImage{
+.reduceCartImage {
   width: 46px;
   height: 26px;
 }
 
-.cartNumText{
+.cartNumText {
   width: 30px;
   height: 26px;
   line-height: 26px;
@@ -251,45 +190,12 @@ page {
 
 .totalOrderPriceText {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   line-height: 36px;
   color: white;
   font-size: 16px;
   text-align: center;
 }
-
-/* .iconImage {
-  margin-left: 20px;
-  width: 20px;
-  height: 20px;
-}
-
-.editText {
-  width: 25%;
-  font-size: 12px;
-  color: gray;
-  line-height: 50px;
-  text-align: center;
-}
-
-.cancleText {
-  margin-left: 25%;
-  width: 25%;
-  font-size: 12px;
-  color: white;
-  line-height: 50px;
-  text-align: center;
-  background-color: gold;
-}
-
-.deleteText {
-  width: 25%;
-  font-size: 12px;
-  color: white;
-  line-height: 50px;
-  text-align: center;
-  background-color: #63a0d4;
-} */
 
 .chooseAllView {
   display: flex;
@@ -299,39 +205,6 @@ page {
   background-color: #63a0d4;
   border-radius: 5px;
 }
-
-/* .chooseAllText {
-  width: 40px;
-  font-size: 12px;
-  color: gray;
-  line-height: 50px;
-  text-align: center;
-}
-
-.bookView {
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  height: 100%;
-  margin-left: 25%;
-}
-
-.priceText {
-  width: 50%;
-  font-size: 13px;
-  color: gray;
-  line-height: 50px;
-  text-align: center;
-}
-
-.bookText {
-  width: 50%;
-  font-size: 14px;
-  color: white;
-  line-height: 50px;
-  text-align: center;
-  background-color: #63a0d4;
-} */
 
 .show {
   display: block;

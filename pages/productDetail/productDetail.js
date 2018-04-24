@@ -12,7 +12,8 @@ Page({
     deviceHeight: 0,
     parameterObject: null,
     selectParameters: [],
-    parameterPrice: null
+    parameterPrice: null,
+    cartNum: 1
   },
   onLoad: function (options) {
     var that = this;
@@ -30,47 +31,84 @@ Page({
     })
   },
   onBook: function (event) {
-    wx.navigateTo({
-      url: '../bookOrder/bookOrder',
-    })
-    // app.getUserBindPhone(function (bindPhone) {
-    //   if (bindPhone.length) {
-    //     wx.navigateTo({
-    //       url: '../bookOrder/bookOrder',
-    //     })
-    //   } else {
-    //     wx.navigateTo({
-    //       url: '../bindPhone/bindPhone',
-    //     })
-    //   }
-    // })
+    if (app.globalData.customer) {
+      wx.navigateTo({
+        url: '../bookOrder/bookOrder?isCart=0',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
   },
   onCart: function () {
     var that = this;
 
-    app.getUserBindPhone(function (bindPhone) {
-      if (bindPhone.length) {
-        that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
-        that.queryParameterRequest();
-      } else {
-        wx.navigateTo({
-          url: '../bindPhone/bindPhone',
-        })
-      }
-    })
+    if (app.globalData.customer) {
+      that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
+      that.queryParameterRequest();
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
   },
   onToCart: function () {
-    app.getUserBindPhone(function (bindPhone) {
-      if (bindPhone.length) {
-        wx.navigateTo({
-          url: '../cart/cart',
+    if (app.globalData.customer) {
+      wx.navigateTo({
+        url: '../cart/cart',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
+  },
+  onSelectParameterToCart: function () {
+    var that = this;
+
+    if (that.data.parameterObject.specifications.length > 0) {
+      if (that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
+        wx.showToast({
+          title: '请先选择商品规格',
+          icon: 'none'
         })
-      } else {
-        wx.navigateTo({
-          url: '../bindPhone/bindPhone',
-        })
+        return;
       }
-    })
+    }
+
+    var options = {
+      count: that.data.cartNum,
+      phoneNumber: app.globalData.customer.memberPhone,
+      wechatAccount: app.globalData.weChatUser.weChatAccountId
+    };
+
+    if (that.data.parameterObject.specificationsId) {
+      options.specificationsId = that.data.parameterObject.specificationsId;
+    } else {
+      options.goodsId = that.data.goodsId;
+    }
+
+    app.globalData.request.addShoppingCart(options, function (data) {
+      that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1 });
+      that.data.selectParameters.splice(0, that.data.selectParameters.length);
+      wx.showToast({
+        title: '商品加入购物车成功!',
+      })
+    });
+  },
+  onReduceCart: function () {
+    var that = this;
+    that.data.cartNum -= 1;
+    if (that.data.cartNum == 0) {
+      that.data.cartNum = 1;
+    }
+    that.setData({ cartNum: that.data.cartNum });
+  },
+  onAddCart: function () {
+    var that = this;
+    that.data.cartNum += 1;
+    that.setData({ cartNum: that.data.cartNum });
   },
   onDetail: function () {
     this.setData({ isSelectDetail: true });
@@ -80,9 +118,10 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null });
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum :1});
     that.data.selectParameters.splice(0, that.data.selectParameters.length);
   },
+  //点击商品规格参数method
   onSelectParameter: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
@@ -110,6 +149,7 @@ Page({
       that.queryParameterRequest();
     }
   },
+  //查询商品规格参数请求
   queryParameterRequest: function () {
     var that = this;
 

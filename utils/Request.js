@@ -8,15 +8,15 @@ function login(options, callBack) {
 
   let msg = {
     data: options,
-    url: port + '',
-    method: 'POST'
+    url: port + '/login',
+    method: 'GET'
   }
 
   http(msg).then(
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
-    
+
     })
 }
 
@@ -95,7 +95,7 @@ function queryProductDetailParameter(parameterJson, callBack) {
   var that = this;
 
   let msg = {
-    data:parameterJson,
+    data: parameterJson,
     url: port + '/goods/specifications',
     method: 'POST'
   }
@@ -108,7 +108,95 @@ function queryProductDetailParameter(parameterJson, callBack) {
     })
 }
 
-//获取门店列表信息
+//添加购物车
+function addShoppingCart(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/addShopping',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//查询购物车列表
+function queryCartList(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/listShoppingCart',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//修改购物车数量
+function updateCart(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/updateShoppingCart',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//清空购物车
+function clearCart(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/cleanShoppingCart',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//门店列表
+function queryStoreList(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: '/api/wechat/store',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
 
 
 //后台请求
@@ -135,12 +223,17 @@ function http(msg) {
 
 
 module.exports = {
-  login:login,
+  login: login,
   payOrder: payOrder,
   queryProductList: queryProductList,
   queryProductCategory: queryProductCategory,
   queryProductDetail: queryProductDetail,
-  queryProductDetailParameter: queryProductDetailParameter
+  queryProductDetailParameter: queryProductDetailParameter,
+  addShoppingCart: addShoppingCart,
+  queryCartList: queryCartList,
+  updateCart: updateCart,
+  clearCart: clearCart,
+  queryStoreList: queryStoreList
 }
 
 
