@@ -2,7 +2,7 @@
   <view class='topView'>
     <view class='searchView'>
       <image class='seachImage' src='../images/icon_seach@2x.png' mode="aspectFit"></image>
-      <input class='searchInput' placeholder='请输入您要搜索的商品' placeholder-style='color: #999999;'></input>
+      <input class='searchInput' placeholder='请输入你想要搜索的门店' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
     </view>
   </view>
   <view class="storeListView">
@@ -12,10 +12,10 @@
           <text class="contentText">{{item.name}}</text>
           <view class='distanceView'>
             <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
-            <text class='distanceText'>{{item.distance}}公里</text>
+            <text class='distanceText'>{{item.distance}}</text>
           </view>
         </view>
-         <!-- <image class='storeImage' mode="aspectFit"></image>  -->
+        <image class='storeImage' src='{{item.pictures[0]}}' mode="aspectFit" wx:if="{{item.pictures[0].length > 0}}"></image>
         <view class='storeAddressView'>
           <text class="addressText">{{item.region + item.address}}</text>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>

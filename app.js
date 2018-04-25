@@ -13,19 +13,12 @@ App({
         let options = { jsCode: res.code };
 
         that.globalData.request.login(options, function (data) {
-          that.globalData.customer = data.customer;
-          that.globalData.weChatUser = data.weChatUserKey;
+          that.globalData.customer = data.weChatUserInfo.customer;
+          that.globalData.weChatUser = data.weChatUserInfo.weChatUserKey;
+          that.globalData.sessionId = data.sessionId;
         });
       }
     });
-
-    wx.getLocation({
-      success: function(res) {
-        console.log(res);
-        that.globalData.userLocation = { latitude: res.latitude, 
-                                        longitude: res.longitude };
-      },
-    })
   },
 
   getUserInfo: function (cb) {
@@ -66,7 +59,7 @@ App({
     companyId: 60,
     customer: null,
     weChatUser: null,
-    userLocation: null,
+    sessionId: null,
     //本地保存商品搜索记录key
     historySearchWords: 'historySearchWordsKey',
   }

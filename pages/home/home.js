@@ -43,18 +43,15 @@ Page({
     that.setData({ productList: list })
   },
   onShoppingCart: function () {
-    wx.navigateTo({
-      url: '../store/store',
-    })
-    // if (app.globalData.customer) {
-    //   wx.navigateTo({
-    //     url: '../cart/cart',
-    //   })
-    // } else {
-    //   wx.navigateTo({
-    //     url: '../bindPhone/bindPhone',
-    //   })
-    // }
+    if (app.globalData.customer) {
+      wx.navigateTo({
+        url: '../cart/cart',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
   },
   onSearchProduct: function () {
     wx.navigateTo({
@@ -69,5 +66,8 @@ Page({
   },
   onClassItemClicked: function () {
     this.setData({ isShowProductListView: 'show' });
+  },
+  onGetUserInfo: function(e){
+    console.log(e);
   }
 })

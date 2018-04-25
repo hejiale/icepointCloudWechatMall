@@ -19,6 +19,13 @@ Page({
       list.push(productObj)
     }
     that.setData({ productList: list })
+
+    app.globalData.request.getMemberInfo({
+      sessionId: app.globalData.sessionId,
+    }, function (data) {
+
+    });
+    
   },
 
   onShow: function () {

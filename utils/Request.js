@@ -20,6 +20,24 @@ function login(options, callBack) {
     })
 }
 
+//客户会员信息
+function getMemberInfo(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/customerInfo',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 //微信支付预付款
 function payOrder(options, callBack) {
   var that = this;
@@ -133,7 +151,7 @@ function queryCartList(options, callBack) {
   let msg = {
     data: options,
     url: port + '/listShoppingCart',
-    method: 'POST'
+    method: 'GET'
   }
 
   http(msg).then(
@@ -169,7 +187,7 @@ function clearCart(options, callBack) {
   let msg = {
     data: options,
     url: port + '/cleanShoppingCart',
-    method: 'POST'
+    method: 'GET'
   }
 
   http(msg).then(
@@ -198,6 +216,77 @@ function queryStoreList(options, callBack) {
     })
 }
 
+//查询地址列表
+function queryAddressList(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/listUserAddress',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//新增地址
+function saveAddress(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/saveUserAddress',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//删除地址
+function deleteAddress(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//设置默认地址
+function setDefaultAddress(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
 
 //后台请求
 function http(msg) {
@@ -210,8 +299,10 @@ function http(msg) {
       },
       method: msg.method,
       success: function (res) {
-        console.log(res);
-        resolve(res.data);
+        if (res.statusCode == 200) {
+          console.log(res);
+          resolve(res.data);
+        }
       },
       fail: function (res) {
         console.log(res);
@@ -224,6 +315,7 @@ function http(msg) {
 
 module.exports = {
   login: login,
+  getMemberInfo: getMemberInfo,
   payOrder: payOrder,
   queryProductList: queryProductList,
   queryProductCategory: queryProductCategory,
@@ -233,7 +325,11 @@ module.exports = {
   queryCartList: queryCartList,
   updateCart: updateCart,
   clearCart: clearCart,
-  queryStoreList: queryStoreList
+  queryStoreList: queryStoreList,
+  saveAddress: saveAddress,
+  deleteAddress: deleteAddress,
+  setDefaultAddress: setDefaultAddress,
+  queryAddressList: queryAddressList
 }
 
 

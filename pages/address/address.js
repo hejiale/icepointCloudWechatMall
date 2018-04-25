@@ -3,7 +3,7 @@ var app = getApp();
 
 Page({
   data: {
-    addressList: []
+    addressList: null
   },
 
   onLoad: function (options) {
@@ -12,13 +12,18 @@ Page({
   onShow: function () {
     var that = this;
 
-    var list = new Array();
+    let options = {
+      sessionId: app.globalData.sessionId,
+      pagerSearchReq: {
+        pageNo: 1,
+        maxPageSize: 100
+      }
+    };
 
-    for (var i = 0; i < 5; i++) {
-      var productObj = new Object()
-      list.push(productObj)
-    }
-    that.setData({ addressList: list })
+    app.globalData.request.queryAddressList(options, function (data) {
+      that.setData({ addressList: data});
+    });
+
   },
 
   onInsertNewAddress: function (e) {
@@ -26,7 +31,7 @@ Page({
       url: '../editAddress/editAddress'
     })
   },
-  editAddress: function(){
+  editAddress: function () {
     wx.navigateTo({
       url: '../editAddress/editAddress'
     })

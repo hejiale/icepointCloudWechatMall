@@ -34,11 +34,12 @@
         <view class="productView">
           <image src="../images/临时商品图片@2x.png" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
           <view class="productInfoView">
-            <text class="productText">饰水晶方形镜框太阳眼镜</text>
-            <text class="priceText">￥9980</text>
+            <text class="productText"></text>
+            <text class="priceText"></text>
           </view>
         </view>
       </block>
     </view>
   </view>
+  <!-- <button open-type='getUserInfo' bindgetuserinfo='onGetUserInfo' class='button'></button> -->
 </view>

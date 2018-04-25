@@ -6,14 +6,14 @@
           <view class="addressLeftView">
             <view class="topView">
               <view class="nameView">
-                <text class="userNameText">都睿</text>
+                <text class="userNameText">{{}}</text>
               </view>
               <view class="phoneView">
-                <text class="phoneText">15800425356</text>
+                <text class="phoneText">{{}}</text>
               </view>
             </view>
             <view class="addressView">
-              <label class="addressText">上海静安区中山北路756号</label>
+              <label class="addressText">{{}}</label>
             </view>
           </view>
           <image class="cellLine" src='../images/icon_line@2x.png'></image>

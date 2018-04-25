@@ -67,31 +67,30 @@ Page({
   onSelectParameterToCart: function () {
     var that = this;
 
-    if (that.data.parameterObject.specifications.length > 0) {
-      if (that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
-        wx.showToast({
-          title: '请先选择商品规格',
-          icon: 'none'
-        })
-        return;
-      }
+    if (that.data.parameterObject.specifications.length > 0 && that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
+      wx.showToast({
+        title: '请先选择商品规格',
+        icon: 'none'
+      })
+      return;
     }
 
-    var options = {
-      count: that.data.cartNum,
-      phoneNumber: app.globalData.customer.memberPhone,
-      wechatAccount: app.globalData.weChatUser.weChatAccountId
+    var cart = {
+      count: that.data.cartNum
     };
 
     if (that.data.parameterObject.specificationsId) {
-      options.specificationsId = that.data.parameterObject.specificationsId;
+      cart.specificationsId = that.data.parameterObject.specificationsId;
     } else {
-      options.goodsId = that.data.goodsId;
+      cart.goodsId = that.data.goodsId;
     }
+
+    let options = { sessionId: app.globalData.sessionId, shoppingCart: cart };
 
     app.globalData.request.addShoppingCart(options, function (data) {
       that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1 });
       that.data.selectParameters.splice(0, that.data.selectParameters.length);
+
       wx.showToast({
         title: '商品加入购物车成功!',
       })
@@ -118,7 +117,7 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum :1});
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1 });
     that.data.selectParameters.splice(0, that.data.selectParameters.length);
   },
   //点击商品规格参数method

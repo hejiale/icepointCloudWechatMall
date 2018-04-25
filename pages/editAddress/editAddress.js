@@ -1,6 +1,7 @@
 // pages/editAddress/editAddress.js
 
 var address = require('../../utils/city.js')
+var WxValidate = require('../../utils/WxValidate.js')
 var animation
 var app = getApp();
 
@@ -8,6 +9,7 @@ Page({
   data: {
     contacter: '',
     contactPhone: '',
+    areaInfo: '',
     contactAddress: '',
     isVisible: false,
     animationData: {},
@@ -17,12 +19,16 @@ Page({
     provinces: [],
     citys: [],
     areas: [],
-    province: '',
-    city: '',
-    area: ''
+    pickviewHeight: 0
   },
   onLoad: function (options) {
     var that = this;
+
+    app.getSystemInfo(function (systemInfo) {
+      that.setData({
+        pickviewHeight: (systemInfo.windowHeight / 3)
+      })
+    })
 
     //初始化省市区pickerView选择数据
     var animation = wx.createAnimation({
@@ -49,10 +55,27 @@ Page({
     that.startAddressAnimation(true, 0);
   },
   onSaveAddress: function () {
+    var that = this;
 
+    let options = {
+      sessionId: app.globalData.sessionId,
+      weChatUserAddress: {
+        name: that.data.contacter,
+        phone: that.data.contactPhone,
+        region: that.data.areaInfo,
+        address: that.data.contactAddress
+      }
+    };
+    app.globalData.request.saveAddress(options, function (data) {
+
+    });
   },
+  //输入框操作
   onInputFocus: function (e) {
-    this.startAddressAnimation(false, -200);
+    var that = this;
+    if (that.data.addressMenuIsShow) {
+      that.startAddressAnimation(false, -that.data.pickviewHeight);
+    }
   },
   bindContacterInput: function (e) {
     var that = this;
@@ -80,11 +103,9 @@ Page({
       animationData: this.animation.export(),
       isVisible: isShow
     })
-    console.log(that.data)
   },
   // 执行动画
   startAddressAnimation: function (isShow) {
-    console.log(isShow)
     var that = this
     if (isShow) {
       that.animation.translateY(0 + 'vh').step()
@@ -98,14 +119,15 @@ Page({
   },
   // 点击地区选择取消按钮
   cityCancel: function (e) {
-    this.startAddressAnimation(false, -200)
+    var that = this;
+    that.startAddressAnimation(false, -that.data.pickviewHeight)
   },
   // 点击地区选择确定按钮
   citySure: function (e) {
     var that = this
-    var city = that.data.city
+    // var city = that.data.city
     var value = that.data.value
-    that.startAddressAnimation(false, -200);
+    that.startAddressAnimation(false, -that.data.pickviewHeight);
     // 将选择的城市信息显示到输入框
     var areaInfo = that.data.provinces[value[0]].name + ' ' + that.data.citys[value[1]].name + ' ' + that.data.areas[value[2]].name
     that.setData({
@@ -113,12 +135,10 @@ Page({
     })
   },
   hideCitySelected: function (e) {
-    console.log(e)
-    this.startAddressAnimation(false, -200)
+    this.startAddressAnimation(false, -that.data.pickviewHeight)
   },
   // 处理省市县联动逻辑
   cityChange: function (e) {
-    console.log(e)
     var value = e.detail.value
     var provinces = this.data.provinces
     var citys = this.data.citys

@@ -1,4 +1,5 @@
 /* pages/editAddress/editAddress.wxss */
+
 /* pages/editAddress/editAddress.wxss */
 
 page {
@@ -15,7 +16,6 @@ page {
 
 .contactPhoneView {
   display: flex;
-  /* margin-top: 0px; */
   align-items: center;
   width: 100%;
   height: 60px;
@@ -24,7 +24,6 @@ page {
 
 .contactCityView {
   display: flex;
-  /* margin-top: 0px; */
   align-content: center;
   width: 100%;
   height: 60px;
@@ -34,7 +33,6 @@ page {
 .contactTownView {
   display: flex;
   align-items: center;
-  /* margin-top: 0px; */
   width: 100%;
   height: 60px;
   background-color: white;
@@ -42,7 +40,6 @@ page {
 
 .contactAddressView {
   display: flex;
-  /* margin-top: 0px; */
   width: 100%;
   height: 60px;
   background-color: white;
@@ -50,39 +47,21 @@ page {
 
 .contacterText {
   margin-left: 20px;
-  /* margin-top: 0px; */
   font-size: 14px;
   width: 100px;
-  /* height: 26px; */
-  /* line-height: 60px; */
+  color: #999999;
 }
 
 .inputText {
-  /* background: white;
-  border-radius: 5px;
-  margin-top: 17px; */
   margin-left: 20px;
   margin-right: 20px;
-  /* width: 100%; */
-  /* height: 26px; */
-  /* padding-left: 5px; */
   font-size: 14px;
-  /* float: left;
-  position: relative; */
 }
 
-.provinceText{
-  /* background: white;
-  border-radius: 5px;
-  margin-top: 17px; */
+.provinceText {
   margin-left: 20px;
   margin-right: 20px;
-  /* width: 100%; */
-  /* height: 26px; */
-  /* padding-left: 5px; */
   font-size: 14px;
-  /* float: left;
-  position: relative; */
 }
 
 .cityText {
@@ -119,7 +98,7 @@ page {
   height: 30px;
 }
 
-.setDefaultText{
+.setDefaultText {
   margin-left: 20px;
   line-height: 30px;
   color: #63a0d4;
@@ -163,7 +142,7 @@ page {
 .picker-view {
   width: 100%;
   display: flex;
-  z-index:12;
+  z-index: 12;
   background-color: #fff;
   flex-direction: column;
   justify-content: center;
@@ -180,5 +159,3 @@ page {
   margin-right: 5rpx;
   text-align: center;
 }
-
-

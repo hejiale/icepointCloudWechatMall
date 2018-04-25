@@ -7,7 +7,7 @@ Page({
     canEdit: false,
     totalPrice: null
   },
-  onLoad: function () {
+  onShow: function () {
     var that = this;
     that.queryCartList();
   },
@@ -60,12 +60,9 @@ Page({
   onCleanCart: function () {
     var that = this;
 
-    let options = {
-      phoneNumber: app.globalData.customer.memberPhone,
-      wechatAccount: app.globalData.weChatUser.weChatAccountId
-    };
-
-    app.globalData.request.clearCart(options, function (data) {
+    app.globalData.request.clearCart({
+      sessionId: app.globalData.sessionId,
+    }, function (data) {
       that.queryCartList();
     });
   },
@@ -74,8 +71,7 @@ Page({
     var that = this;
 
     let options = {
-      phoneNumber: app.globalData.customer.memberPhone,
-      wechatAccount: app.globalData.weChatUser.weChatAccountId
+      sessionId: app.globalData.sessionId,
     };
     app.globalData.request.queryCartList(options, function (data) {
       if (data.result) {
@@ -120,9 +116,9 @@ Page({
     for (var i = 0; i < that.data.cartList.length; i++) {
       var object = that.data.cartList[i];
       if (object.selected) {
-        if (object.specifications){
+        if (object.specifications) {
           price += object.shoppingCart.count * object.specifications.price;
-        }else{
+        } else {
           price += object.shoppingCart.count * object.goods.goodsRetailPrice;
         }
       }
