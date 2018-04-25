@@ -6,26 +6,26 @@
           <view class="addressLeftView">
             <view class="topView">
               <view class="nameView">
-                <text class="userNameText">{{}}</text>
+                <text class="userNameText">{{item.name}}</text>
               </view>
               <view class="phoneView">
-                <text class="phoneText">{{}}</text>
+                <text class="phoneText">{{item.phone}}</text>
               </view>
             </view>
             <view class="addressView">
-              <label class="addressText">{{}}</label>
+              <label class="addressText">{{item.region + ' ' + item.address}}</label>
             </view>
           </view>
           <image class="cellLine" src='../images/icon_line@2x.png'></image>
           <view class='addressBottomView'>
-            <view class='defaultAddressView'>
-              <icon class='defaultAddressImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
-              <text class='defaultText'>{{item.selected ? '默认' : '设为默认'}}</text>
+            <view class='defaultAddressView' bindtap='onSetDefault' data-key='{{item}}'>
+              <icon class='defaultAddressImage' type="{{item.default ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+              <text class='defaultText'>{{item.default ? '默认' : '设为默认'}}</text>
             </view>
-            <view class='editAddressView' bindtap='editAddress'>
+            <view class='editAddressView' bindtap='editAddress' data-key='{{item}}'>
               <image class='editAddressImage' src='../images/icon_editAddress@2x.png' mode="aspectFit"></image>
             </view>
-            <view class='deleteAddressView'>
+            <view class='deleteAddressView' bindtap='onDeleteAddress' data-key='{{item}}'>
               <image class='deleteAddressImage' src='../images/icon_deleteAddress@2x.png' mode="aspectFit"></image>
             </view>
           </view>

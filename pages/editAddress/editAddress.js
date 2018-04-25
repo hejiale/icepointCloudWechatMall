@@ -19,10 +19,18 @@ Page({
     provinces: [],
     citys: [],
     areas: [],
-    pickviewHeight: 0
+    pickviewHeight: 0,
+    addressId: null
   },
   onLoad: function (options) {
     var that = this;
+    that.setData({ addressId: options.id });
+
+    if (that.data.addressId) {
+      app.globalData.request.getDetailAddress({ userAddressId: that.data.addressId }, function (data) {
+        that.setData({ contacter: data.result.name, contactPhone: data.result.phone, areaInfo: data.result.region, contactAddress: data.result.address });
+      });
+    }
 
     app.getSystemInfo(function (systemInfo) {
       that.setData({
@@ -57,17 +65,23 @@ Page({
   onSaveAddress: function () {
     var that = this;
 
-    let options = {
+    var weChatUserAddress = {
+      name: that.data.contacter,
+      phone: that.data.contactPhone,
+      region: that.data.areaInfo,
+      address: that.data.contactAddress
+    };
+
+    if (that.data.addressId) {
+      weChatUserAddress.id = that.data.addressId;
+    }
+
+    var options = {
       sessionId: app.globalData.sessionId,
-      weChatUserAddress: {
-        name: that.data.contacter,
-        phone: that.data.contactPhone,
-        region: that.data.areaInfo,
-        address: that.data.contactAddress
-      }
+      weChatUserAddress: weChatUserAddress
     };
     app.globalData.request.saveAddress(options, function (data) {
-
+      wx.navigateBack();
     });
   },
   //输入框操作

@@ -221,9 +221,9 @@ function queryAddressList(options, callBack) {
   var that = this;
 
   let msg = {
-    data: options,
-    url: port + '/listUserAddress',
-    method: 'GET'
+    data: options.data,
+    url: port + '/listUserAddress?sessionId=' + options.sessionId,
+    method: 'POST'
   }
 
   http(msg).then(
@@ -258,8 +258,8 @@ function deleteAddress(options, callBack) {
 
   let msg = {
     data: options,
-    url: port + '',
-    method: 'POST'
+    url: port + '/delUserAddress',
+    method: 'GET'
   }
 
   http(msg).then(
@@ -276,8 +276,8 @@ function setDefaultAddress(options, callBack) {
 
   let msg = {
     data: options,
-    url: port + '',
-    method: 'POST'
+    url: port + '/setDefaultUserAddress',
+    method: 'GET'
   }
 
   http(msg).then(
@@ -287,6 +287,43 @@ function setDefaultAddress(options, callBack) {
 
     })
 }
+
+//获取默认地址
+function getDefaultAddress(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getDefaultUserAddress',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//获取地址详情
+function getDetailAddress(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getUserAddressById',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 
 //后台请求
 function http(msg) {
@@ -329,7 +366,10 @@ module.exports = {
   saveAddress: saveAddress,
   deleteAddress: deleteAddress,
   setDefaultAddress: setDefaultAddress,
-  queryAddressList: queryAddressList
+  queryAddressList: queryAddressList,
+  getDefaultAddress: getDefaultAddress,
+  getDetailAddress: getDetailAddress
+
 }
 
 
