@@ -48,13 +48,13 @@ page {
 .contacterText {
   margin-left: 20px;
   font-size: 14px;
-  width: 100px;
+  width: 65px; 
   color: #999999;
 }
 
 .inputText {
   margin-left: 20px;
-  margin-right: 20px;
+  width: 80%;
   font-size: 14px;
 }
 

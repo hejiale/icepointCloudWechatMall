@@ -32,7 +32,7 @@
     <view class='productListView {{isShowProductListView}}'>
       <block wx:for-items="{{productList}}">
         <view class="productView">
-          <image src="../images/临时商品图片@2x.png" class="productImage" mode="aspectFit" data-key="{{item}}"></image>
+          <image  class="productImage" mode="aspectFit" data-key="{{item}}"></image>
           <view class="productInfoView">
             <text class="productText"></text>
             <text class="priceText"></text>

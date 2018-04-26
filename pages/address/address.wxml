@@ -3,7 +3,7 @@
     <block wx:for-items="{{addressList}}">
       <view class="CellItem">
         <view class="CellContentView">
-          <view class="addressLeftView">
+          <view class="addressInfoView" bindtap='onChooseAddress' data-key='{{item}}'>
             <view class="topView">
               <view class="nameView">
                 <text class="userNameText">{{item.name}}</text>
@@ -13,7 +13,7 @@
               </view>
             </view>
             <view class="addressView">
-              <label class="addressText">{{item.region + ' ' + item.address}}</label>
+              <text class="addressText">{{item.region + ' ' + item.address}}</text>
             </view>
           </view>
           <image class="cellLine" src='../images/icon_line@2x.png'></image>

@@ -12,8 +12,8 @@ page {
 }
 
 .CellItem {
+  margin-top: 5px;
   width: 100%;
-  height: 120px;
   background-color: #fbf9fe;
 }
 
@@ -21,13 +21,11 @@ page {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 95%;
   background-color: white;
 }
 
-.addressLeftView {
+.addressInfoView {
   width: 100%;
-  height: 65%;
 }
 
 .cellLine {
@@ -42,7 +40,7 @@ page {
   flex-direction: row;
   margin-top: 1px;
   width: 100%;
-  height: 30%;
+  height: 40px;
 }
 
 .addressRightView {
@@ -60,13 +58,12 @@ page {
 
 .topView {
   display: flex;
+  align-items: center;
+  height: 35px;
 }
 
 .nameView {
   margin-left: 20px;
-  margin-top: 10px;
-  height: 25px;
-  line-height: 25px;
 }
 
 .userNameText {
@@ -75,9 +72,6 @@ page {
 
 .phoneView {
   margin-left: 20px;
-  margin-top: 10px;
-  height: 25px;
-  line-height: 25px;
 }
 
 .phoneText {
@@ -86,14 +80,19 @@ page {
 
 .addressView {
   margin-left: 20px;
-  margin-top: 0px;
-  height: 25px;
-  line-height: 25px;
 }
 
 .addressText {
+   width: 100%;
+   /* line-height: 20px; */
   font-size: 14px;
   color: #666;
+  word-wrap:break-word;
+  word-break:break-all;
+  /* text-overflow:auto;
+    overflow: auto;  */
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap;  */
 }
 
 .defaultAddressView {

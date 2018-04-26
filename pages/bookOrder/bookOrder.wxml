@@ -9,11 +9,11 @@
     <view class='memberRightsBgLine'></view>
     <view class='offsetAmountView'>
       <text class='offsetAmountTitle'>当前抵付金额</text>
-      <text class='offsetAmountValue'>￥ 0.00</text>
+      <text class='offsetAmountValue'>￥ {{inputDiscountValue}}</text>
     </view>
-    <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;'></input>
+    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;' type='number' bindinput='discountTextInput' value='{{inputValue}}'></input>
     <view class='memberRightsBgBottomLine'></view>
-    <view class='memberRightsSureButton'>确定</view>
+    <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
   </view>
 </view>
 <view class="page">
@@ -27,10 +27,11 @@
       <image class="addressIconImage" src='../images/address@2x.png'></image>
       <view class="contactInfoView">
         <view class="contactNameView">
-          <text class="contactNameText">都小睿  15221665605</text>
+          <text style='font-size: 16px;'>{{currentAddress.name}}</text>
+          <text style='font-size: 16px;margin-left:10px;'>{{currentAddress.phone}}</text>
         </view>
         <view class="contactAddressView">
-          <text class="contactAddressText">上海市静安区中山北路756号D102</text>
+          <text style='font-size: 14px;font-weight: 300;'>{{currentAddress.region + " " + currentAddress.address}}</text>
         </view>
       </view>
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
@@ -38,12 +39,15 @@
     <view class='productContentView'>
       <block wx:for-items="{{productList}}">
         <view class="productView">
-          <image mode="aspectFit" class="productImage"></image>
+          <image mode="aspectFit" class="productImage" src='{{item.photos[0]}}'></image>
           <view class="productInfo">
-            <text class="productNameText">防辐射平光镜 金属质感圆框眼镜眼镜…</text>
+            <text class="productNameText">{{item.goods.goodsName}}</text>
+            <view class='specificationsView'>
+              <text class='specificationsText'>{{item.specification}}</text>
+            </view>
             <view class="priceView">
-              <text class="numText">x1</text>
-              <text class="price">￥ 88.88</text>
+              <text class="numText">x{{item.shoppingCart.count}}</text>
+              <text class="price">￥ {{item.specifications.price}}</text>
             </view>
           </view>
         </view>
@@ -52,22 +56,25 @@
     <view class='shouldPayAmountView'>
       <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
       <text class="shouldPayAmountTitle">商品应付金额</text>
-      <text class="shouldPayAmountText">￥170.76</text>
+      <text class="shouldPayAmountText">￥{{shouldPayPrice}}</text>
     </view>
     <view class='memberRightsView'>
       <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
       <view class="memberContentView">
-        <view class="memberRightsTitleView" bindtap='onShowMemberRightsView'>会员权益</view>
+        <view class="memberRightsTitleView">会员权益</view>
         <image class="memberLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
         <view class='memberDiscountView'>
-          <view class="memberDiscounTextView">
+          <view class="memberDiscounTextView" wx:if="{{memberInfo.mallCustomer.discount != null}}">
             <text class="memberDiscounTextTitle">会员折扣</text>
+            <text class='memberDiscounTextValue'>- ￥{{discountPrice}}</text>
           </view>
-          <view class="memberDiscounTextView">
+          <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{memberInfo.mallCustomer.balance != null}}">
             <text class="memberDiscounTextTitle">储值抵扣</text>
+            <text class='memberDiscounTextValue'>- ￥{{balancePrice}}</text>
           </view>
-          <view class="memberDiscounTextView">
+          <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{memberInfo.mallCustomer.integral != null}}">
             <text class="memberDiscounTextTitle">积分</text>
+            <text class='memberDiscounTextValue'>- ￥{{pointPrice}}</text>
           </view>
         </view>
       </view>

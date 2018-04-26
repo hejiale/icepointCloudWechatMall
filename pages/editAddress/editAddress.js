@@ -26,6 +26,7 @@ Page({
     var that = this;
     that.setData({ addressId: options.id });
 
+    //查询客户详细收货地址
     if (that.data.addressId) {
       app.globalData.request.getDetailAddress({ userAddressId: that.data.addressId }, function (data) {
         that.setData({ contacter: data.result.name, contactPhone: data.result.phone, areaInfo: data.result.region, contactAddress: data.result.address });

@@ -2,7 +2,7 @@
   <view class='topView'>
     <view class='titleView'>
       <text class='topText'>商品列表</text>
-      <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit}}">编辑</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit && cartList.length > 0}}">编辑</text>
       <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit}}">保存</text>
     </view>
     <view class='topLine'>
@@ -33,7 +33,7 @@
             <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
           </view>
           <view class='cartView'>
-            <image src="{{item.photos[0].photoUrl}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.photos[0]}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <view class='specificationsView'>

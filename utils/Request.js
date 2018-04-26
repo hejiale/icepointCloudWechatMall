@@ -180,6 +180,24 @@ function updateCart(options, callBack) {
     })
 }
 
+//删除购物车商品
+function deleteCart(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/removeShoppingCarts',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 //清空购物车
 function clearCart(options, callBack) {
   var that = this;
@@ -324,6 +342,41 @@ function getDetailAddress(options, callBack) {
     })
 }
 
+//下单
+function payOrder(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/order/placeOrder',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//订单列表
+function queryOrderList(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/order/listOrderInfo',
+    method: 'POST'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
 
 //后台请求
 function http(msg) {
@@ -362,14 +415,15 @@ module.exports = {
   queryCartList: queryCartList,
   updateCart: updateCart,
   clearCart: clearCart,
+  deleteCart: deleteCart,
   queryStoreList: queryStoreList,
   saveAddress: saveAddress,
   deleteAddress: deleteAddress,
   setDefaultAddress: setDefaultAddress,
   queryAddressList: queryAddressList,
   getDefaultAddress: getDefaultAddress,
-  getDetailAddress: getDetailAddress
-
+  getDetailAddress: getDetailAddress,
+  queryOrderList: queryOrderList
 }
 
 

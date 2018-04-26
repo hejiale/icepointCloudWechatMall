@@ -6,6 +6,21 @@ Page({
     orderList: []
   },
   onLoad: function (options) {
+
+  },
+
+  onShow: function () {
+    var that = this;
+
+    let options = {
+      sessionId: app.globalData.sessionId,
+      pageNumber: 1,
+      pageSize:100
+    };
+
+    app.globalData.request.queryOrderList(options, function (data) {
+      
+    });
   },
 
   onOrderDetail: function (event) {
@@ -14,17 +29,6 @@ Page({
       url: '../orderDetail/orderDetail?orderNum=' + value.orderNumber
     })
 
-  },
-  onShow: function () {
-    var that = this;
-
-    var list = new Array();
-
-    for (var i = 0; i < 3; i++) {
-      var productObj = new Object()
-    
-      list.push(productObj)
-    }
-    that.setData({ orderList: list })
   }
+  
 })

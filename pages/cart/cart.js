@@ -53,8 +53,21 @@ Page({
     that.updateCartTotalPrice();
   },
   onBook: function () {
+    var that = this;
+
+    var productList = [];
+
+    for (var i = 0; i < that.data.cartList.length; i++) {
+      var item = that.data.cartList[i];
+      if (item.selected) {
+        productList.push(item);
+      }
+    }
+
+    var value = { isCart: true, product: productList };
+
     wx.navigateTo({
-      url: '../bookOrder/bookOrder?isCart=1'
+      url: '../bookOrder/bookOrder?value=' + JSON.stringify(value)
     })
   },
   onCleanCart: function () {

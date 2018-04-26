@@ -13,7 +13,8 @@ Page({
     parameterObject: null,
     selectParameters: [],
     parameterPrice: null,
-    cartNum: 1
+    cartNum: 1,
+    isToOrder: false
   },
   onLoad: function (options) {
     var that = this;
@@ -31,10 +32,12 @@ Page({
     })
   },
   onBook: function (event) {
+    var that = this;
+    that.setData({ isToOrder: true });
+
     if (app.globalData.customer) {
-      wx.navigateTo({
-        url: '../bookOrder/bookOrder?isCart=0',
-      })
+      that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
+      that.queryParameterRequest();
     } else {
       wx.navigateTo({
         url: '../bindPhone/bindPhone',
@@ -43,6 +46,7 @@ Page({
   },
   onCart: function () {
     var that = this;
+    that.setData({ isToOrder: false });
 
     if (app.globalData.customer) {
       that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
@@ -75,6 +79,14 @@ Page({
       return;
     }
 
+    if (that.data.isToOrder) {
+      that.addProductToOrder();
+    } else {
+      that.addProductToCart();
+    }
+  },
+  addProductToCart: function () {
+    var that = this;
     var cart = {
       count: that.data.cartNum
     };
@@ -95,6 +107,46 @@ Page({
         title: '商品加入购物车成功!',
       })
     });
+  },
+  addProductToOrder: function () {
+    var that = this;
+    var value = { isCart: false, product: that.bindOrderProduct() };
+
+    wx.navigateTo({
+      url: '../bookOrder/bookOrder?value=' + JSON.stringify(value),
+    })
+  },
+  //立即支付绑定参数数据
+  bindOrderProduct: function () {
+    var that = this;
+    var productList = new Array();
+
+    var product = {
+      goods: that.data.DetailObject.goods,
+      photos: that.data.DetailObject.photos
+    }
+
+    if (that.data.parameterObject.specificationsId) {
+      product.shoppingCart = {
+        count: that.data.cartNum,
+        specificationsId: that.data.parameterObject.specificationsId
+      };
+      product.specifications = {
+        price: that.data.parameterObject.price,
+        id: that.data.parameterObject.specificationsId,
+      };
+      var appendStr = '';
+      for (var i = 0; i < that.data.selectParameters.length; i++) {
+        var parameter = that.data.selectParameters[i];
+        appendStr += parameter.value + ';';
+      }
+      product.specification = appendStr;
+    } else {
+      product.shoppingCart = { count: that.data.cartNum };
+    }
+    productList.push(product);
+
+    return productList;
   },
   onReduceCart: function () {
     var that = this;
