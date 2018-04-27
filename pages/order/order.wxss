@@ -113,20 +113,17 @@ page {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 80px;
 }
 
-.orderPriceView{
+.orderPriceView {
   width: 100%;
-  height: 65px;
+  height: 40px;
 }
 
 .productImage {
   margin-left: 10px;
   width: 54px;
   height: 54px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
 }
 
 .productInfo {
@@ -140,37 +137,38 @@ page {
 .productNameText {
   font-size: 15px;
   width: 100%;
-  height: 20px;
-  line-height: 20px;
+  line-height: 30px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
+.specificationsText {
+  font-size: 13px;
+  color: #999999;
+  line-height: 30px;
+}
+
 .priceView {
-  margin-top: 20px;
   margin-right: 10px;
   display: flex;
   justify-content: space-between;
-  height: 20px;
+  align-items: center;
+  height: 30px;
 }
 
 .numText {
   font-size: 14px;
-  height: 100%;
-  line-height: 20px;
   text-align: right;
-  color: #666666;
+  color: #666;
 }
 
 .price {
   font-size: 14px;
-  height: 100%;
-  line-height: 20px;
-  color: #666666;
+  color: #666;
 }
 
-.totalAmountView{
+.totalAmountView {
   display: flex;
   align-items: center;
   margin-left: 10px;
@@ -178,16 +176,15 @@ page {
   height: 100%;
 }
 
-.totalAmountTitle{
+.totalAmountTitle {
   width: 55px;
   height: 20px;
   font-size: 14px;
-  color: #999999;
+  color: #999;
 }
 
-.totalAmountValue{
+.totalAmountValue {
   width: calc(100% - 55px);
   height: 20px;
   font-size: 14px;
 }
-

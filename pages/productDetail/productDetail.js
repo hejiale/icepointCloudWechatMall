@@ -71,12 +71,14 @@ Page({
   onSelectParameterToCart: function () {
     var that = this;
 
-    if (that.data.parameterObject.specifications.length > 0 && that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
-      wx.showToast({
-        title: '请先选择商品规格',
-        icon: 'none'
-      })
-      return;
+    if (that.data.DetailObject.goods.isSpecifications) {
+      if (that.data.parameterObject.specifications.length > 0 && that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
+        wx.showToast({
+          title: '请先选择商品规格',
+          icon: 'none'
+        })
+        return;
+      }
     }
 
     if (that.data.isToOrder) {
@@ -100,20 +102,27 @@ Page({
     let options = { sessionId: app.globalData.sessionId, shoppingCart: cart };
 
     app.globalData.request.addShoppingCart(options, function (data) {
-      that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1 });
-      that.data.selectParameters.splice(0, that.data.selectParameters.length);
+      if (data.retCode == 101){
+        wx.showToast({
+          title: data.retMsg,
+          icon:"none"
+        })
+      }else{
+        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: []});
 
-      wx.showToast({
-        title: '商品加入购物车成功!',
-      })
+        wx.showToast({
+          title: '商品加入购物车成功!',
+        })
+      }
     });
   },
   addProductToOrder: function () {
     var that = this;
-    var value = { isCart: false, product: that.bindOrderProduct() };
+
+    app.globalData.orderProducts = that.bindOrderProduct()
 
     wx.navigateTo({
-      url: '../bookOrder/bookOrder?value=' + JSON.stringify(value),
+      url: '../bookOrder/bookOrder?isFromCart=0',
     })
   },
   //立即支付绑定参数数据
@@ -169,8 +178,7 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1 });
-    that.data.selectParameters.splice(0, that.data.selectParameters.length);
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters:[] });
   },
   //点击商品规格参数method
   onSelectParameter: function (e) {

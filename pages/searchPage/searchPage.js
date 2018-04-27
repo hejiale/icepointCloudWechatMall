@@ -98,9 +98,7 @@ Page({
   //--------------加载更多（提前加载）----------------//
   onLoadMore: function () {
     var that = this;
-    var page = that.data.currentPage;
-    page = page + 1;
-    that.setData({ currentPage: page });
+    that.data.currentPage += 1;
     that.queryProductsRequest();
   },
   //--------------选择类别操作----------------//
@@ -239,8 +237,7 @@ Page({
 
     var that = this;
 
-    that.setData({ isShowProductList: 'show', isShowSearchView: 'hide', currentPage: 1, isEndLoading: false, scrollTop: 0 });
-    that.data.allProductList.splice(0, that.data.allProductList.length);
+    that.setData({ isShowProductList: 'show', isShowSearchView: 'hide', currentPage: 1, isEndLoading: false, scrollTop: 0, allProductList: [] });
     that.queryProductsRequest();
   },
   //--------------查询商品----------------//
@@ -273,10 +270,15 @@ Page({
       wx.hideLoading();
 
       if (data.resultList.length == 0) {
-        that.setData({ isEndLoading: true });
         if (that.data.allProductList.length == 0) {
           wx.showToast({
             title: '未查询到任何商品',
+            icon: 'none',
+            duration: 2000
+          })
+        }else {
+          wx.showToast({
+            title: '全部商品加载完',
             icon: 'none',
             duration: 2000
           })

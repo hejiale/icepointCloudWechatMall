@@ -62,5 +62,6 @@ App({
     sessionId: null,
     //本地保存商品搜索记录key
     historySearchWords: 'historySearchWordsKey',
+    orderProducts:null
   }
 })

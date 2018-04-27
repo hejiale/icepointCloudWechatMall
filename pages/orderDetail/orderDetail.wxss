@@ -5,7 +5,6 @@ page {
 .scrollView {
   margin: 0px;
   width: 100%;
-  padding-bottom: 45px;
 }
 
 .orderStatusView {
@@ -20,26 +19,21 @@ page {
 
 .orderStatusTitle {
   margin-left: 10px;
-  width: 50%;
-  height: 20px;
   font-size: 20px;
   color: #222;
-  line-height: 20px;
 }
 
 .orderCodeTitle {
   margin-right: 10px;
-  width: calc(50% - 10px);
-  height: 20px;
   font-size: 14px;
   color: #999;
-  line-height: 20px;
   text-align: right;
 }
 
 .deliveryModeView {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-top: 5px;
   background-color: white;
@@ -51,14 +45,14 @@ page {
   display: flex;
   align-items: center;
   margin-left: 10px;
-  width: calc(50% - 10px);
   height: 20px;
 }
 
-.deliveryModeRightView {
+.deliveryModeRightText{
   margin-right: 10px;
-  width: calc(50% - 10px);
-  height: 100%;
+  font-size: 16px;
+  color: #333333;
+  text-align: right;
 }
 
 .pickUpGoodsImage {
@@ -92,14 +86,12 @@ page {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  width: 80%;
-  height: 100%;
+  width: calc(100% - 40px);
 }
 
 .contactNameView {
   display: flex;
   margin-left: 0px;
-  margin-top: 10px;
   width: 100%;
   height: 30px;
 }
@@ -108,7 +100,6 @@ page {
   margin: 0px;
   width: 100%;
   height: 100%;
-  line-height: 30px;
   font-size: 16px;
 }
 
@@ -116,15 +107,14 @@ page {
   display: flex;
   margin-left: 0px;
   width: 100%;
-  height: 30px;
 }
 
 .contactAddressText {
   margin: 0px;
   width: 100%;
   height: 100%;
-  line-height: 30px;
   font-size: 14px;
+  font-weight: 300;
 }
 
 .rightIconImage {
@@ -142,10 +132,7 @@ page {
 
 .productView {
   display: flex;
-  margin-left: 0px;
-  margin-top: 0px;
   width: 100%;
-  height: 100px;
   align-items: center;
   background-color: white;
 }
@@ -154,8 +141,6 @@ page {
   margin-left: 10px;
   width: 80px;
   height: 80px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
 }
 
 .productInfo {
@@ -168,32 +153,32 @@ page {
 .productNameText {
   font-size: 15px;
   width: 100%;
-  height: 20px;
-  line-height: 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
+.specificationsText {
+  font-size: 13px;
+  color: #999999;
+  line-height: 30px;
+}
+
 .priceView {
-  margin-top: 20px;
   margin-right: 10px;
   display: flex;
   justify-content: space-between;
-  height: 40px;
+  align-items: center;
+  height: 30px;
 }
 
 .numText {
   font-size: 14px;
-  height: 100%;
-  line-height: 40px;
   text-align: right;
 }
 
 .price {
   font-size: 14px;
-  height: 100%;
-  line-height: 40px;
 }
 
 .shouldPayAmountView {
@@ -201,26 +186,21 @@ page {
   align-items: center;
   margin-top: 5px;
   width: 100%;
-  height: 80px;
+  height: 60px;
   background-color: white;
 }
 
-.shouldPayAmountTitle{
+.shouldPayAmountTitle {
   margin-left: 7px;
   width: 50%;
-  height: 100%;
   font-size: 18px;
   color: #222;
-  line-height: 80px;
 }
 
 .shouldPayAmountText {
-  margin-left: 0px;
   margin-right: 10px;
   width: 50%;
-  height: 100%;
   text-align: right;
-  line-height: 80px;
   font-size: 15px;
 }
 
@@ -280,9 +260,17 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin: 0px;
   width: 100%;
   height: 38px;
+}
+
+.memberDiscounTextValue {
+  margin-right: 10px;
+  font-size: 14px;
+  text-align: right;
+  color: #999;
 }
 
 .memberDiscounTextTitle {
@@ -294,7 +282,6 @@ page {
   display: flex;
   margin-top: 5px;
   width: 100%;
-  height: 150px;
   background-color: white;
 }
 
@@ -311,7 +298,6 @@ page {
   align-items: center;
   margin-left: 5px;
   width: calc(100% - 35px);
-  height: 100%;
 }
 
 .storeTitleView {
@@ -325,14 +311,14 @@ page {
   font-size: 16px;
 }
 
-.storeInfoTitle{
+.storeInfoTitle {
   width: 50%;
   font-size: 18px;
   color: #222;
   line-height: 80px;
 }
 
-.storeNumText{
+.storeNumText {
   margin-right: 10px;
   font-size: 14px;
   text-align: center;
@@ -348,23 +334,20 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0px;
+  margin-top: 5px;
   width: 100%;
-  height: 98px;
 }
 
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
-  margin: 0px;
   width: 70%;
-  height: 100%;
 }
 
 .storeContacterLine {
   margin-left: 1px;
   width: 1px;
-  height: 70%;
+  height: 45px;
 }
 
 .callPhoneView {
@@ -373,7 +356,6 @@ page {
   align-items: center;
   margin-left: 1px;
   width: calc(30% - 3px);
-  height: 100%;
 }
 
 .callImage {
@@ -385,33 +367,28 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 10px;
   width: 100%;
-  height: 50%;
 }
 
 .storeAddressView {
-  margin-top: 0px;
   width: 100%;
-  height: 50%;
+  height: 40px;
+  line-height: 40px;
   font-size: 13px;
+  font-weight: 300;
 }
 
 .storeNameTextView {
   display: flex;
   align-items: center;
-  margin-top: 0px;
   width: 70%;
-  height: 100%;
   font-size: 15px;
 }
 
 .storeDistanceView {
   align-items: center;
   width: 30%;
-  height: 100%;
   font-size: 12px;
-  line-height: 44px;
   text-align: center;
 }
 

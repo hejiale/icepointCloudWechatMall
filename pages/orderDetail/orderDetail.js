@@ -13,12 +13,29 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    var list = new Array();
+    let parameter = {
+      sessionId: app.globalData.sessionId,
+      orderId: options.id
+    };
 
-    for (var i = 0; i < 5; i++) {
-      var productObj = new Object()
-      list.push(productObj)
-    }
-    that.setData({ productList: list })
+    app.globalData.request.queryOrderDetail(parameter, function (data) {
+
+      var products = data.snapshots;
+      
+      for (var j = 0; j < products.length; j++) {
+        var goods = products[j];
+        if (goods.models.length > 0) {
+
+          var appendStr = '';
+          for (var z = 0; z < goods.models.length; z++) {
+            var spec = goods.models[z];
+            appendStr += spec.specificationValue + ';'
+            goods.specification = appendStr;
+          }
+        }
+      }
+
+      that.setData({ orderDetail: data});
+    });
   }
 })

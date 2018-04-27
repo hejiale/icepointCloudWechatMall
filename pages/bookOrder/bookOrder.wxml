@@ -1,4 +1,5 @@
 <!--pages/bookOrder/bookOrder.wxml-->
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
 <view class='memberRightsEditView {{isShowMemberRights}}'>
   <view id="classViewCover"></view>
   <view class='memberRightsBgView'>
@@ -42,12 +43,10 @@
           <image mode="aspectFit" class="productImage" src='{{item.photos[0]}}'></image>
           <view class="productInfo">
             <text class="productNameText">{{item.goods.goodsName}}</text>
-            <view class='specificationsView'>
-              <text class='specificationsText'>{{item.specification}}</text>
-            </view>
+            <text class='specificationsText'>{{item.specification}}</text>
             <view class="priceView">
               <text class="numText">x{{item.shoppingCart.count}}</text>
-              <text class="price">￥ {{item.specifications.price}}</text>
+              <text class="price">￥ {{filter.numberToFix(item.specifications.price)}}</text>
             </view>
           </view>
         </view>
@@ -56,7 +55,7 @@
     <view class='shouldPayAmountView'>
       <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
       <text class="shouldPayAmountTitle">商品应付金额</text>
-      <text class="shouldPayAmountText">￥{{shouldPayPrice}}</text>
+      <text class="shouldPayAmountText">￥{{filter.numberToFix(shouldPayPrice)}}</text>
     </view>
     <view class='memberRightsView'>
       <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
@@ -66,15 +65,15 @@
         <view class='memberDiscountView'>
           <view class="memberDiscounTextView" wx:if="{{memberInfo.mallCustomer.discount != null}}">
             <text class="memberDiscounTextTitle">会员折扣</text>
-            <text class='memberDiscounTextValue'>- ￥{{discountPrice}}</text>
+            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(discountPrice)}}</text>
           </view>
           <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{memberInfo.mallCustomer.balance != null}}">
             <text class="memberDiscounTextTitle">储值抵扣</text>
-            <text class='memberDiscounTextValue'>- ￥{{balancePrice}}</text>
+            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(balancePrice)}}</text>
           </view>
           <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{memberInfo.mallCustomer.integral != null}}">
             <text class="memberDiscounTextTitle">积分</text>
-            <text class='memberDiscounTextValue'>- ￥{{pointPrice}}</text>
+            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(pointPrice)}}</text>
           </view>
         </view>
       </view>

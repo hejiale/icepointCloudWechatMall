@@ -6,7 +6,7 @@
         <image src="{{userInfo.avatarUrl}}" class="photo" mode="aspectFit"></image>
         <view class='personInfoView'>
           <text class="userName">{{userInfo.nickName}}</text>
-          <text class="memberCardNum">会员号 15047257034</text>
+          <text class="memberCardNum">会员号 暂无</text>
         </view>
         <view class='scanCodeView'>
           <image class='scanCodeImage' src='../images/person_scanCode@2x.png' mode="aspectFit"></image>
@@ -15,7 +15,7 @@
       <view class='headLine'></view>
       <view class='memberInfoView'>
         <view class='memberLevelView'>
-          <text class='memberInfoValue'>白金会员</text>
+          <text class='memberInfoValue'>普通会员</text>
           <text class='memberInfoTitle'>会员等级</text>
         </view>
         <view class='memberPointView'>

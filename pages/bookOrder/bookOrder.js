@@ -25,18 +25,16 @@ Page({
     isFromCart: false
   },
   onLoad: function (options) {
-    console.log(JSON.parse(options.value));
-
     var that = this;
+    that.setData({ isFromCart: options.isFromCart });
+
     //获取会员信息
     app.globalData.request.getMemberInfo({
       sessionId: app.globalData.sessionId,
     }, function (data) {
       that.setData({ memberInfo: data });
       //处理商品数据
-      var value = JSON.parse(options.value);
-
-      that.setData({ productList: value.product, isFromCart: value.isCart });
+      that.setData({ productList: app.globalData.orderProducts });
       that.getCartTotalPrice();
     });
 
@@ -120,7 +118,7 @@ Page({
       title: '正在提交订单...',
     })
     app.globalData.request.payOrder(orderParameter, function (data) {
-      if (that.data.isFromCart) {
+      if (that.data.isFromCart == 1) {
         app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
           wx.hideLoading();
           wx.navigateBack();
@@ -173,9 +171,9 @@ Page({
     if (that.data.inputValue.length > 0) {
       if (that.data.isInputPoint) {
         var point = (parseInt(that.data.inputValue) * that.data.memberInfo.integralTrade.money) / that.data.memberInfo.integralTrade.integral_sum;
-        that.setData({ inputDiscountValue: that.returnFloat(point) });
+        that.setData({ inputDiscountValue: point });
       } else {
-        that.setData({ inputDiscountValue: that.returnFloat(that.data.inputValue) })
+        that.setData({ inputDiscountValue: that.data.inputValue })
       }
     } else {
       that.setData({ inputDiscountValue: "0.00" });
@@ -210,29 +208,14 @@ Page({
     if (that.data.memberInfo.mallCustomer.discount != null) {
       discountPrice = price * (1 - (that.data.memberInfo.mallCustomer.discount / 10));
     }
-    that.setData({ totalPrice: that.returnFloat(price), discountPrice: that.returnFloat(discountPrice), balancePrice: that.returnFloat(that.data.balancePrice), pointPrice: that.returnFloat(that.data.pointPrice) });
+    that.setData({ totalPrice: price });
     that.getShouldPayAmount();
   },
   //计算剩余应付金额
   getShouldPayAmount: function () {
     var that = this;
     var shouldPay = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.balancePrice) - parseFloat(that.data.pointPrice);
-    that.setData({ shouldPayPrice: that.returnFloat(shouldPay) });
-  },
-  //保留两位数操作
-  returnFloat: function (value) {
-    var value = Math.round(parseFloat(value) * 100) / 100;
-    var xsd = value.toString().split(".");
-    if (xsd.length == 1) {
-      value = value.toString() + ".00";
-      return value;
-    }
-    if (xsd.length > 1) {
-      if (xsd[1].length < 2) {
-        value = value.toString() + "0";
-      }
-      return value;
-    }
+    that.setData({ shouldPayPrice: shouldPay });
   }
   // paySignData: function(data,date){
   //   var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;

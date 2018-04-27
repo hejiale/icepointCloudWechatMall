@@ -19,7 +19,7 @@
             <image src="{{item.photos[0].photoUrl}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
               <text class="productNameText">{{item.goods.goodsName}}</text>
-              <text class="price">￥ {{item.specifications ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
+              <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
               <view class='editCartNumView'>
                 <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
                 <text class='cartNumText'>{{item.shoppingCart.count}}</text>
@@ -40,7 +40,7 @@
                 <text class='specificationsText'>{{item.specification}}</text>
               </view>
               <view class="priceView">
-                <text class="price">￥ {{item.specifications ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
+                <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
                 <text class="numText">x {{item.shoppingCart.count}}</text>
               </view>
             </view>

@@ -378,6 +378,24 @@ function queryOrderList(options, callBack) {
     })
 }
 
+//查询订单详情
+function queryOrderDetail(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/order/getOrderDetail',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 //后台请求
 function http(msg) {
   return new Promise((resolve, reject) => {
@@ -423,7 +441,8 @@ module.exports = {
   queryAddressList: queryAddressList,
   getDefaultAddress: getDefaultAddress,
   getDetailAddress: getDetailAddress,
-  queryOrderList: queryOrderList
+  queryOrderList: queryOrderList,
+  queryOrderDetail: queryOrderDetail
 }
 
 

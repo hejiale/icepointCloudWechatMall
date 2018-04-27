@@ -1,33 +1,37 @@
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
 <view class="page">
   <view class='topView'>
     <view class='searchView'>
       <image class='seachImage' src='../images/icon_seach@2x.png'></image>
-      <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;'></input>
+      <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
     </view>
     <view class='searchMenuView'>
-      <view class='orderMenuView' style='color:#4D9FD8;'>全部订单</view>
-      <view class='orderMenuView'>待付款</view>
-      <view class='orderMenuView'>待发货</view>
-      <view class='orderMenuView'>待收货</view>
+      <view class='orderMenuView' wx:if="{{orderType == null}}" style='color:#4D9FD8;' bindtap='onAllOrder'>全部订单</view>
+      <view class='orderMenuView' wx:else style='color:#222;' bindtap='onAllOrder'>全部订单</view>
+      <view class='orderMenuView' bindtap='onUnProcess' wx:if="{{orderType == 'UNTREATED'}}" style='color: #4d9fd8;'>未处理</view>
+      <view class='orderMenuView' bindtap='onUnProcess' wx:else style='color: #222;'>未处理</view>
+      <view class='orderMenuView' bindtap='onProcess' wx:if="{{orderType == 'PROCESSED'}}" style='color: #4d9fd8;'>已处理</view>
+      <view class='orderMenuView' bindtap='onProcess' wx:else style='color: #222;'>已处理</view>
     </view>
   </view>
-  <scroll-view scroll-y="true" class="scrollView">
+  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200'>
     <block wx:for-items="{{orderList}}">
       <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
         <view class="codeView">
-          <text class="title">订单号：212312312323</text>
-          <text class="statusTitle">交易成功</text>
+          <text class="title">订单号：{{item.order.orderSerialNumber}}</text>
+          <text class="statusTitle">{{item.order.orderStatus == 'UNTREATED' ? "未处理":"已处理"}}</text>
         </view>
         <view class='line'></view>
         <view class='productListView'>
-          <block wx:for-items="{{orderList}}">
+          <block wx:for-items="{{item.snapshots}}">
             <view class='productContentView'>
-              <image mode="aspectFit" class="productImage"></image>
+              <image mode="aspectFit" class="productImage" src='{{item.goodsOrder.photoUrl}}'></image>
               <view class="productInfo">
-                <text class="productNameText">防辐射平光镜 金属质感圆框眼镜眼镜…</text>
+                <text class="productNameText">{{item.goodsOrder.name}}</text>
+                <text class='specificationsText'>{{item.specification}}</text>
                 <view class="priceView">
-                  <text class="numText">x1</text>
-                  <text class="price">￥ 88.88</text>
+                  <text class="numText">x{{item.goodsOrder.count}}</text>
+                  <text class="price">￥ {{filter.numberToFix(item.goodsOrder.price)}}</text>
                 </view>
               </view>
             </view>
@@ -37,7 +41,7 @@
         <view class='orderPriceView'>
           <view class='totalAmountView'>
             <text class='totalAmountTitle'>总金额:</text>
-            <text class='totalAmountValue'>￥2122.00</text>
+            <text class='totalAmountValue'>￥{{filter.numberToFix(item.order.amountPayable)}}</text>
           </view>
         </view>
       </view>

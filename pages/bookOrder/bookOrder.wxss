@@ -127,8 +127,6 @@ page {
 
 .numText {
   font-size: 14px;
-  height: 100%;
-  line-height: 40px;
   text-align: right;
   font-weight: 300;
 }
@@ -136,12 +134,6 @@ page {
 .price {
   font-size: 14px;
   font-weight: 300;
-}
-
-.specificationsView {
-  display: flex;
-  align-items: center;
-  height: 25px;
 }
 
 .specificationsText {

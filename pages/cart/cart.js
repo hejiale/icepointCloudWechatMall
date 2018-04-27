@@ -64,10 +64,10 @@ Page({
       }
     }
 
-    var value = { isCart: true, product: productList };
+    app.globalData.orderProducts = productList;
 
     wx.navigateTo({
-      url: '../bookOrder/bookOrder?value=' + JSON.stringify(value)
+      url: '../bookOrder/bookOrder?isFromCart=1'
     })
   },
   onCleanCart: function () {
@@ -88,22 +88,31 @@ Page({
     };
     app.globalData.request.queryCartList(options, function (data) {
       if (data.result) {
-        for (var i = 0; i < data.result.length; i++) {
-          var object = data.result[i];
-          object.selected = true;
+        if (data.result.length > 0) {
+          for (var i = 0; i < data.result.length; i++) {
+            var object = data.result[i];
+            object.selected = true;
 
-          var specificationStr = object.specifications.groupValues;
-          var specifications = JSON.parse(specificationStr);
+            if (object.specifications != null) {
+              var specificationStr = object.specifications.groupValues;
+              var specifications = JSON.parse(specificationStr);
 
-          var appendStr = '';
-          for (var j = 0; j < specifications.length; j++) {
-            var spec = specifications[j];
-            appendStr += spec.specificationValue + ';';
+              var appendStr = '';
+              for (var j = 0; j < specifications.length; j++) {
+                var spec = specifications[j];
+                appendStr += spec.specificationValue + ';';
+              }
+              object.specification = appendStr;
+            }
           }
-          object.specification = appendStr;
+          that.setData({ cartList: data.result });
+          that.updateCartTotalPrice();
+        } else {
+          wx.showToast({
+            title: '购物车未添加任何商品!',
+            icon: "none"
+          })
         }
-        that.setData({ cartList: data.result });
-        that.updateCartTotalPrice();
       } else {
         that.setData({ cartList: null });
       }
@@ -129,7 +138,7 @@ Page({
     for (var i = 0; i < that.data.cartList.length; i++) {
       var object = that.data.cartList[i];
       if (object.selected) {
-        if (object.specifications) {
+        if (object.specifications != null) {
           price += object.shoppingCart.count * object.specifications.price;
         } else {
           price += object.shoppingCart.count * object.goods.goodsRetailPrice;

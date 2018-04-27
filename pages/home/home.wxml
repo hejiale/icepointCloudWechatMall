@@ -22,7 +22,10 @@
     <view class='classMenuView'>
       <scroll-view class="scroll-view-x" scroll-x="true" scroll-top="100">
         <ul class="hengxiangul">
-          <li wx:for="{{classList}}" wx:for-item="item" bindtap="onClassItemClicked">{{item}}</li>
+          <li wx:for="{{classList}}" wx:for-item="item" bindtap="onClassItemClicked">
+            <text class='liText'>{{item}}</text>
+            <view class='liBottomLine'></view>
+          </li>
         </ul>
       </scroll-view>
       <view class='openView' bindtap='onShowClassView'>
@@ -32,7 +35,7 @@
     <view class='productListView {{isShowProductListView}}'>
       <block wx:for-items="{{productList}}">
         <view class="productView">
-          <image  class="productImage" mode="aspectFit" data-key="{{item}}"></image>
+          <image class="productImage" mode="aspectFit" data-key="{{item}}"></image>
           <view class="productInfoView">
             <text class="productText"></text>
             <text class="priceText"></text>
