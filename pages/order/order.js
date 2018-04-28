@@ -56,7 +56,6 @@ Page({
     //PROCESSED 已处理 UNTREATED
 
     let options = {
-      sessionId: app.globalData.sessionId,
       pageNumber: that.data.currentPage,
       pageSize: 10,
       order: { orderStatus: that.data.orderType, orderSerialNumber: that.data.keyword },

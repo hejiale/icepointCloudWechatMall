@@ -4,29 +4,14 @@ var MD5 = require('utils/md5.js')
 
 App({
   onLaunch: function () {
-    var that = this;
-
-    wx.login({
-      success: function (res) {
-        that.globalData.loginCode = res.code;
-
-        let options = { jsCode: res.code };
-
-        that.globalData.request.login(options, function (data) {
-          that.globalData.customer = data.weChatUserInfo.customer;
-          that.globalData.weChatUser = data.weChatUserInfo.weChatUserKey;
-          that.globalData.sessionId = data.sessionId;
-        });
-      }
-    });
+    var that = this
+    that.userLogin();
   },
-
   getUserInfo: function (cb) {
     var that = this
     if (that.globalData.userInfo) {
       typeof cb == "function" && cb(that.globalData.userInfo)
-    }
-    else {
+    }else {
       wx.getUserInfo({
         success: function (res) {
           console.log(res);
@@ -40,8 +25,7 @@ App({
     var that = this;
     if (that.globalData.systemInfo) {
       typeof cb == "function" && cb(that.globalData.systemInfo)
-    }
-    else {
+    } else {
       wx.getSystemInfo({
         success: function (res) {
           that.globalData.systemInfo = res;
@@ -50,18 +34,41 @@ App({
       })
     }
   },
+  userLogin: function () {
+    var that = this;
+
+    wx.login({
+      success: function (res) {
+        let options = {
+          jsCode: res.code,
+          appid: 'wx06e40d400ac63b20',//公众号id
+          webappId: 'wx59f8055b3b0422a4',//小程序id
+          webappSecret: '461d1eb1041cb22e4bd6a9b9f6ce9c34'//小程序密钥
+        };
+
+        that.globalData.request.login(options, function (data) {
+          that.globalData.customer = data.weChatUserInfo.customer;
+          that.globalData.weChatUser = data.weChatUserInfo.weChatUserKey;
+          that.globalData.request.setSessionId(data.sessionId);
+        });
+      }
+    });
+  },
   globalData: {
+    //微信登录用户信息
     userInfo: null,
+    //设备信息
     systemInfo: null,
-    loginCode: null,
     request: request,
     MD5: MD5,
+    //公司id
     companyId: 60,
+    //登录用户信息
     customer: null,
     weChatUser: null,
-    sessionId: null,
     //本地保存商品搜索记录key
     historySearchWords: 'historySearchWordsKey',
-    orderProducts:null
+    //下单商品集合
+    orderProducts: null,
   }
 })

@@ -99,9 +99,7 @@ Page({
       cart.goodsId = that.data.goodsId;
     }
 
-    let options = { sessionId: app.globalData.sessionId, shoppingCart: cart };
-
-    app.globalData.request.addShoppingCart(options, function (data) {
+    app.globalData.request.addShoppingCart(cart, function (data) {
       if (data.retCode == 101){
         wx.showToast({
           title: data.retMsg,

@@ -1,6 +1,12 @@
 // var HostURL = 'https://dev.icepointcloud.com';
 var HostURL = 'http://guirong.private.icepointcloud.com';
 var port = '/wechat/api/mall';
+var sessionId = null;
+
+function setSessionId(id) {
+  var that = this;
+  that.sessionId = id;
+}
 
 //登录
 function login(options, callBack) {
@@ -21,13 +27,13 @@ function login(options, callBack) {
 }
 
 //客户会员信息
-function getMemberInfo(options, callBack) {
+function getMemberInfo(callBack) {
   var that = this;
 
   let msg = {
-    data: options,
     url: port + '/customerInfo',
-    method: 'GET'
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -133,7 +139,8 @@ function addShoppingCart(options, callBack) {
   let msg = {
     data: options,
     url: port + '/addShopping',
-    method: 'POST'
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -145,13 +152,13 @@ function addShoppingCart(options, callBack) {
 }
 
 //查询购物车列表
-function queryCartList(options, callBack) {
+function queryCartList(callBack) {
   var that = this;
 
   let msg = {
-    data: options,
     url: port + '/listShoppingCart',
-    method: 'GET'
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -199,13 +206,13 @@ function deleteCart(options, callBack) {
 }
 
 //清空购物车
-function clearCart(options, callBack) {
+function clearCart(callBack) {
   var that = this;
 
   let msg = {
-    data: options,
     url: port + '/cleanShoppingCart',
-    method: 'GET'
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -239,9 +246,10 @@ function queryAddressList(options, callBack) {
   var that = this;
 
   let msg = {
-    data: options.data,
-    url: port + '/listUserAddress?sessionId=' + options.sessionId,
-    method: 'POST'
+    data: options,
+    url: port + '/listUserAddress',
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -259,7 +267,8 @@ function saveAddress(options, callBack) {
   let msg = {
     data: options,
     url: port + '/saveUserAddress',
-    method: 'POST'
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -307,13 +316,13 @@ function setDefaultAddress(options, callBack) {
 }
 
 //获取默认地址
-function getDefaultAddress(options, callBack) {
+function getDefaultAddress(callBack) {
   var that = this;
 
   let msg = {
-    data: options,
     url: port + '/getDefaultUserAddress',
-    method: 'GET'
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -349,7 +358,8 @@ function payOrder(options, callBack) {
   let msg = {
     data: options,
     url: port + '/order/placeOrder',
-    method: 'POST'
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -367,7 +377,8 @@ function queryOrderList(options, callBack) {
   let msg = {
     data: options,
     url: port + '/order/listOrderInfo',
-    method: 'POST'
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -385,7 +396,8 @@ function queryOrderDetail(options, callBack) {
   let msg = {
     data: options,
     url: port + '/order/getOrderDetail',
-    method: 'GET'
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
   }
 
   http(msg).then(
@@ -398,22 +410,32 @@ function queryOrderDetail(options, callBack) {
 
 //后台请求
 function http(msg) {
+  var header = {
+    'content-type': 'application/json'
+  };
+
+  if (msg.sessionId != null) {
+    header.Cookie = msg.sessionId;
+  }
+
   return new Promise((resolve, reject) => {
     wx.request({
       url: HostURL + msg.url,
       data: msg.data,
-      header: {
-        'content-type': 'application/json'
-      },
+      header: header,
       method: msg.method,
       success: function (res) {
-        if (res.statusCode == 200) {
+        if (res.statusCode == 200 && res != null) {
           console.log(res);
           resolve(res.data);
+        }else{
+          wx.showToast({
+            title: '请求服务器端数据出错，请稍后重试',
+            icon: 'none'
+          })
         }
       },
       fail: function (res) {
-        console.log(res);
         reject(res);
       }
     })
@@ -442,7 +464,9 @@ module.exports = {
   getDefaultAddress: getDefaultAddress,
   getDetailAddress: getDetailAddress,
   queryOrderList: queryOrderList,
-  queryOrderDetail: queryOrderDetail
+  queryOrderDetail: queryOrderDetail,
+  setSessionId: setSessionId,
+  sessionId: sessionId
 }
 
 

@@ -77,11 +77,7 @@ Page({
       weChatUserAddress.id = that.data.addressId;
     }
 
-    var options = {
-      sessionId: app.globalData.sessionId,
-      weChatUserAddress: weChatUserAddress
-    };
-    app.globalData.request.saveAddress(options, function (data) {
+    app.globalData.request.saveAddress(weChatUserAddress, function (data) {
       wx.navigateBack();
     });
   },

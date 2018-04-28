@@ -14,7 +14,6 @@ Page({
     var that = this;
 
     let parameter = {
-      sessionId: app.globalData.sessionId,
       orderId: options.id
     };
 

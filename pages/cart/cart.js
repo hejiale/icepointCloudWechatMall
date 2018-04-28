@@ -73,9 +73,7 @@ Page({
   onCleanCart: function () {
     var that = this;
 
-    app.globalData.request.clearCart({
-      sessionId: app.globalData.sessionId,
-    }, function (data) {
+    app.globalData.request.clearCart(function (data) {
       that.queryCartList();
     });
   },
@@ -83,10 +81,7 @@ Page({
   queryCartList: function () {
     var that = this;
 
-    let options = {
-      sessionId: app.globalData.sessionId,
-    };
-    app.globalData.request.queryCartList(options, function (data) {
+    app.globalData.request.queryCartList(function (data) {
       if (data.result) {
         if (data.result.length > 0) {
           for (var i = 0; i < data.result.length; i++) {

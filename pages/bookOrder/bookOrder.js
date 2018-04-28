@@ -29,9 +29,7 @@ Page({
     that.setData({ isFromCart: options.isFromCart });
 
     //获取会员信息
-    app.globalData.request.getMemberInfo({
-      sessionId: app.globalData.sessionId,
-    }, function (data) {
+    app.globalData.request.getMemberInfo(function (data) {
       that.setData({ memberInfo: data });
       //处理商品数据
       that.setData({ productList: app.globalData.orderProducts });
@@ -39,9 +37,7 @@ Page({
     });
 
     //获取客户默认地址
-    app.globalData.request.getDefaultAddress({
-      sessionId: app.globalData.sessionId,
-    }, function (data) {
+    app.globalData.request.getDefaultAddress(function (data) {
       that.setData({ currentAddress: data.result, selectAddressId: data.result.id });
     });
   },
@@ -75,7 +71,7 @@ Page({
     var that = this;
 
     var orderParameter = {
-      order: {
+      order:{
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
         netPointId: 2,
         addressId: that.data.selectAddressId,
@@ -86,8 +82,7 @@ Page({
         integralPrice: that.data.pointPrice,
         balance: that.data.useBalance,
         balancePrice: that.data.balancePrice
-      },
-      sessionId: app.globalData.sessionId
+      }
     };
 
     var products = [];

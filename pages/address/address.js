@@ -68,11 +68,8 @@ Page({
     var that = this;
 
     let options = {
-      sessionId: app.globalData.sessionId,
-      data: {
-        pageNo: 1,
-        maxPageSize: 100
-      }
+      pageNo: 1,
+      maxPageSize: 100
     };
 
     wx.showLoading({});
