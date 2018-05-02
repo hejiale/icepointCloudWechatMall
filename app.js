@@ -5,7 +5,10 @@ var MD5 = require('utils/md5.js')
 App({
   onLaunch: function () {
     var that = this
-    that.userLogin();
+
+    that.userLogin(function () {
+      
+    })
   },
   getUserInfo: function (cb) {
     var that = this
@@ -34,11 +37,12 @@ App({
       })
     }
   },
-  userLogin: function () {
+  userLogin: function (cb) {
     var that = this;
 
     wx.login({
       success: function (res) {
+        console.log(res);
         let options = {
           jsCode: res.code,
           appid: 'wx06e40d400ac63b20',//公众号id
@@ -47,9 +51,11 @@ App({
         };
 
         that.globalData.request.login(options, function (data) {
-          that.globalData.customer = data.weChatUserInfo.customer;
-          that.globalData.weChatUser = data.weChatUserInfo.weChatUserKey;
-          that.globalData.request.setSessionId(data.sessionId);
+          that.globalData.customer = data.result.weChatUserInfo.customer;
+          that.globalData.weChatUser = data.result.weChatUserInfo.weChatUserKey;
+          that.globalData.weChatAccountObject = data.result.weChatAccountObject;
+          that.globalData.request.setSessionId(data.result.sessionId);
+          typeof cb == "function" && cb();
         });
       }
     });
@@ -66,6 +72,7 @@ App({
     //登录用户信息
     customer: null,
     weChatUser: null,
+    weChatAccountObject: null,
     //本地保存商品搜索记录key
     historySearchWords: 'historySearchWordsKey',
     //下单商品集合

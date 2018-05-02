@@ -63,8 +63,8 @@ Page({
 
     app.globalData.request.queryOrderList(options, function (data) {
 
-      for (var i = 0; i < data.resultList.length; i++){
-        var products = data.resultList[i].snapshots;
+      for (var i = 0; i < data.result.resultList.length; i++){
+        var products = data.result.resultList[i].snapshots;
         for(var j = 0; j < products.length; j++){
           var goods = products[j];
           if (goods.models.length > 0){
@@ -79,7 +79,7 @@ Page({
         }
       }
 
-      that.setData({ orderList: that.data.orderList.concat(data.resultList) })
+      that.setData({ orderList: that.data.orderList.concat(data.result.resultList) })
 
       if (data.resultList.length == 0) {
         if (that.data.orderList.length == 0) {

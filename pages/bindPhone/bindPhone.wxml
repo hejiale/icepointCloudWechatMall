@@ -46,8 +46,11 @@
         </view>
       </view>
       <view class="inputLine"></view>
-      <view class="bindView" bindtap="onBindPhone">
-        <text class='bindText'>立即开卡</text>
+      <view class="bindView" bindtap="onBindPhone" wx:if="{{isCanBind}}" style='color: white; background-color: #63a0d4;'>
+        立即开卡
+      </view>
+      <view class="bindView" bindtap="onBindPhone" wx:else style='color: white; background-color: #C3C3C3;'>
+        立即开卡
       </view>
     </view>
   </view>

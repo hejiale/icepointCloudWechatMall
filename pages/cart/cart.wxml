@@ -16,7 +16,7 @@
             <image src="../images/icon_cartReduce@2x.png" class="iconSelectedImage" mode="aspectFit"></image>
           </view>
           <view class="cartView">
-            <image src="{{item.photos[0].photoUrl}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.photos[0]}}" mode="aspectFit" class="productImage"></image>
             <view class="productInfo">
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}} </text>

@@ -26,6 +26,46 @@ function login(options, callBack) {
     })
 }
 
+
+//验证手机验证码并绑定手机号
+function verityPhoneCode(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/confirmLoginValidateCode',
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//发送验证码
+function sendVerityCode(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/sendLoginValidateCode',
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+
 //客户会员信息
 function getMemberInfo(callBack) {
   var that = this;
@@ -81,11 +121,12 @@ function queryProductList(options, callBack) {
 }
 
 //查询商品分类信息
-function queryProductCategory(callBack) {
+function queryProductCategory(options, callBack) {
   var that = this;
 
   let msg = {
-    url: port + "/companys/60/searchInfos",
+    data: options,
+    url: port + "/company/searchInfos",
     method: 'GET'
   }
 
@@ -98,11 +139,12 @@ function queryProductCategory(callBack) {
 }
 
 //查询商品详情
-function queryProductDetail(id, callBack) {
+function queryProductDetail(options, callBack) {
   var that = this;
 
   let msg = {
-    url: port + '/goods/' + id,
+    data: options,
+    url: port + '/goods/detail',
     method: 'GET'
   }
 
@@ -426,9 +468,16 @@ function http(msg) {
       method: msg.method,
       success: function (res) {
         if (res.statusCode == 200 && res != null) {
+          if (res.data.retCode == 400) {
+            wx.showToast({
+              title: res.data.retMsg,
+              icon: 'none'
+            })
+          } else {
+            resolve(res.data);
+          }
           console.log(res);
-          resolve(res.data);
-        }else{
+        } else {
           wx.showToast({
             title: '请求服务器端数据出错，请稍后重试',
             icon: 'none'
@@ -466,7 +515,9 @@ module.exports = {
   queryOrderList: queryOrderList,
   queryOrderDetail: queryOrderDetail,
   setSessionId: setSessionId,
-  sessionId: sessionId
+  sessionId: sessionId,
+  verityPhoneCode: verityPhoneCode,
+  sendVerityCode: sendVerityCode
 }
 
 

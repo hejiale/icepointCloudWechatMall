@@ -53,7 +53,7 @@ Page({
     userInfo: null,
     isShowMemberRightsMemo: 'hide'
   },
-  onShow: function(){
+  onShow: function () {
     // 页面显示
     var that = this;
 
@@ -64,15 +64,57 @@ Page({
     })
   },
   onBindPhone: function (e) {
-    
+    var that = this;
+
+    if (that.data.isCanBind) {
+      let options = {
+        validCode: that.data.bindCode,
+        phone: that.data.bindPhone,
+        userAccount: app.globalData.weChatUser.openId,
+        weChatAccount: app.globalData.weChatAccountObject.wechatAccount
+      };
+
+      app.globalData.request.verityPhoneCode(options, function (data) {
+        wx.showModal({
+          content: '用户绑定手机号成功!',
+          showCancel: false,
+          success: function (res) {
+            //重新登录
+            app.userLogin(function () {
+              wx.navigateBack()
+            })
+          }
+        })
+      })
+    }
   },
   onSendCode: function () {
-    if (this.data.bindPhone.length == 0) {
+    var that = this;
+
+    if (that.data.bindPhone.length == 0) {
       wx.showToast({
         title: '请输入有效手机号',
         icon: 'none'
       })
       return
+    }
+
+    if (!that.data.isSendCode) {
+      let options = {
+        phone: that.data.bindPhone,
+        userAccount: app.globalData.weChatUser.openId,
+        weChatAccount: app.globalData.weChatAccountObject.wechatAccount
+      };
+
+      app.globalData.request.sendVerityCode(options, function (data) {
+        count_down(that);
+        that.setData({ isSendCode: true })
+
+        wx.showModal({
+          showCancel: false,
+          content: '手机验证码发送成功，请注意查收短信!'
+        })
+      })
     }
   },
   onPhoneTextFieldChange: function (e) {
@@ -87,16 +129,16 @@ Page({
   },
   onCheckBindStatus: function () {
     var that = this;
-    if (this.data.bindPhone.length > 0 && this.data.bindCode.length > 0) {
+    if (that.data.bindPhone.length > 0 && that.data.bindCode.length > 0) {
       that.setData({ isCanBind: true })
     } else {
       that.setData({ isCanBind: false })
     }
   },
-  onLookMemberRightsMemo: function(){
-    this.setData({ isShowMemberRightsMemo: 'show'})
+  onLookMemberRightsMemo: function () {
+    this.setData({ isShowMemberRightsMemo: 'show' })
   },
-  onCloseMemberRightBg: function(){
+  onCloseMemberRightBg: function () {
     this.setData({ isShowMemberRightsMemo: 'hide' })
   }
 })

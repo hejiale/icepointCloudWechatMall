@@ -19,8 +19,8 @@ Page({
 
     app.globalData.request.queryOrderDetail(parameter, function (data) {
 
-      var products = data.snapshots;
-      
+      var products = data.result.snapshots;
+
       for (var j = 0; j < products.length; j++) {
         var goods = products[j];
         if (goods.models.length > 0) {
@@ -34,7 +34,7 @@ Page({
         }
       }
 
-      that.setData({ orderDetail: data});
+      that.setData({ orderDetail: data.result });
     });
   }
 })

@@ -7,7 +7,7 @@ Page({
     isExtractEmail: 'show',
     isExtractSelf: 'hide',
     //自提或邮寄标签判定是否选择地址选项
-    isShowStore: 'hide',
+    isShowStore: '',
     currentAddress: null,
     selectAddressId: null,
     totalPrice: null,
@@ -22,7 +22,8 @@ Page({
     inputValue: null,
     useBalance: null,
     usePoint: null,
-    isFromCart: false
+    isFromCart: false,
+    currentStore:null
   },
   onLoad: function (options) {
     var that = this;
@@ -30,7 +31,7 @@ Page({
 
     //获取会员信息
     app.globalData.request.getMemberInfo(function (data) {
-      that.setData({ memberInfo: data });
+      that.setData({ memberInfo: data.result});
       //处理商品数据
       that.setData({ productList: app.globalData.orderProducts });
       that.getCartTotalPrice();
@@ -52,9 +53,16 @@ Page({
   },
   onSelectAddress: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../address/address?id=' + that.data.currentAddress.id,
-    })
+
+    if (that.data.currentAddress != null){
+      wx.navigateTo({
+        url: '../address/address?id=' + that.data.currentAddress.id,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../address/address',
+      })
+    }
   },
   onSelectStore: function () {
     wx.navigateTo({
@@ -211,7 +219,37 @@ Page({
     var that = this;
     var shouldPay = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.balancePrice) - parseFloat(that.data.pointPrice);
     that.setData({ shouldPayPrice: shouldPay });
-  }
+  },
+  //查询默认门店
+  queryStoreList: function () {
+    var that = this;
+
+    let options = {
+      key: 'Hy9Krb6NIp8LGslMfXtuLCi89ThcuuAp5S8OST3PYCk='
+    };
+
+    app.globalData.request.queryStoreList(options, function (data) {
+      var store = data.result.content[0];
+
+      map.calculateDistance({
+        to: [{
+          latitude: store.latitude,
+          longitude: store.longitude
+        }],
+        complete: function (res) {
+          var longDistance = res.result.elements[0].distance;
+
+          if (longDistance >= 1000) {
+            var distance = (longDistance / 1000).toFixed(0);
+            store.distance = distance + '公里';
+          } else {
+            store.distance = distance + '米';
+          }
+          that.setData({ currentStore: store });
+        }
+      })
+    });
+  },
   // paySignData: function(data,date){
   //   var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
 

@@ -3,9 +3,7 @@
   <view id="classViewCover" bindtap='onCoverClick'></view>
   <view class='parameterContentView'>
     <view class='parameterInfoView'>
-      <view class='parameterImageView'>
-        <image src="{{DetailObject.photos[0]}}" class="parameterImage" mode="aspectFit" />
-      </view>
+      <image src="{{DetailObject.photos[0]}}" class="parameterImage" mode="aspectFit" />
       <view class='parameterRightView'>
         <text class="productName">{{DetailObject.goods.goodsName}}</text>
         <text class="priceText">￥{{parameterPrice}}</text>

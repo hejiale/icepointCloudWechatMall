@@ -78,7 +78,15 @@ Page({
     }
 
     app.globalData.request.saveAddress(weChatUserAddress, function (data) {
-      wx.navigateBack();
+      var pages = getCurrentPages()
+      var prevPage = pages[pages.length - 3]
+
+      prevPage.setData({
+        selectAddressId: data.result.id
+      })
+      wx.navigateBack({
+        delta: 2
+      })
     });
   },
   //输入框操作

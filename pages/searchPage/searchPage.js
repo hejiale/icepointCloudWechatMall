@@ -55,7 +55,9 @@ Page({
     that.setData({ showOrHide: 'show' });
     wx.showLoading({});
 
-    app.globalData.request.queryProductCategory(function (data) {
+    let options = { companyId: app.globalData.companyId};
+
+    app.globalData.request.queryProductCategory(options, function (data) {
       var classTypes = data.types;
       var parameters = data.parameters;
 
@@ -269,21 +271,22 @@ Page({
 
       wx.hideLoading();
 
-      if (data.resultList.length == 0) {
-        if (that.data.allProductList.length == 0) {
-          wx.showToast({
-            title: '未查询到任何商品',
-            icon: 'none',
-            duration: 2000
-          })
-        }else {
-          wx.showToast({
-            title: '全部商品加载完',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }
+      // if (data.resultList.length == 0) {
+      //   if (that.data.allProductList.length == 0) {
+      //     wx.showToast({
+      //       title: '未查询到任何商品',
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //   }
+      //   else {
+      //     wx.showToast({
+      //       title: '全部商品加载完',
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //   }
+      // }
     })
   },
   //--------------本地保存商品搜索记录----------------//

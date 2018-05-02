@@ -37,6 +37,26 @@ page {
   height: 35px;
 }
 
+.deliveryModeValue {
+  margin-right: 20px;
+  font-size: 17px;
+}
+
+.setDefaultAddressView{
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  background-color: white;
+}
+
+.setDefaultAddressText{
+  margin-left: 15px;
+  font-size: 15px;
+  width: calc(100% - 40px);
+}
+
 .addressInfoView {
   display: flex;
   align-items: center;

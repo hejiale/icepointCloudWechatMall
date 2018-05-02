@@ -43,7 +43,7 @@ Page({
     that.setData({ productList: list })
   },
   onShoppingCart: function () {
-    if (app.globalData.customer) {
+    if (app.globalData.customer != null) {
       wx.navigateTo({
         url: '../cart/cart',
       })

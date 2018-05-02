@@ -21,10 +21,12 @@
   <view class="scrollView">
     <view class="deliveryModeView">
       <text class="deliveryModeTitle">提货方式</text>
-      <image class='deliveryModeImage {{isExtractEmail}}' src='../images/extract_switch_left@2x.png' mode="aspectFit" bindtap='onExtractEmail'></image>
-      <image class='deliveryModeImage {{isExtractSelf}}' src='../images/extract_switch_right@2x.png' mode="aspectFit" bindtap='onExtractSelf'></image>
+      <!-- 暂时只支持门店自提方式-->
+      <text class='deliveryModeValue'>自提</text>
+      <!-- <image class='deliveryModeImage {{isExtractEmail}}' src='../images/extract_switch_left@2x.png' mode="aspectFit" bindtap='onExtractEmail'></image>
+      <image class='deliveryModeImage {{isExtractSelf}}' src='../images/extract_switch_right@2x.png' mode="aspectFit" bindtap='onExtractSelf'></image> -->
     </view>
-    <view class="addressInfoView" bindtap='onSelectAddress'>
+    <view class="addressInfoView" bindtap='onSelectAddress' wx:if="{{currentAddress != null}}">
       <image class="addressIconImage" src='../images/address@2x.png'></image>
       <view class="contactInfoView">
         <view class="contactNameView">
@@ -35,6 +37,10 @@
           <text style='font-size: 14px;font-weight: 300;'>{{currentAddress.region + " " + currentAddress.address}}</text>
         </view>
       </view>
+      <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
+    </view>
+    <view class='setDefaultAddressView' wx:else bindtap='onSelectAddress'>
+      <text class='setDefaultAddressText'>设置默认收货地址</text>
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
     </view>
     <view class='productContentView'>
@@ -89,10 +95,10 @@
         <view class='storeAddressInfoView'>
           <view class='storeContactInfoView' bindtap='onSelectStore'>
             <view class='storeNameView'>
-              <view class="storeNameTextView">上海中山北路自营店</view>
-              <view class='storeDistanceView'>0.5km</view>
+              <view class="storeNameTextView">{{currentStore.name}}</view>
+              <view class='storeDistanceView'>{{currentStore.distance}}</view>
             </view>
-            <view class='storeAddressView'>上海市静安区中山北路756号D102</view>
+            <view class='storeAddressView'>{{currentStore.region + currentStore.address}}</view>
           </view>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
           <view class='callPhoneView' bindtap="onCall">

@@ -20,7 +20,9 @@ Page({
     var that = this;
     that.setData({ goodsId: options.id });
 
-    app.globalData.request.queryProductDetail(options.id, function (data) {
+    let parameter = { goodsId: options.id};
+
+    app.globalData.request.queryProductDetail(parameter, function (data) {
       WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 5);
       that.setData({ DetailObject: data });
     })
@@ -35,7 +37,7 @@ Page({
     var that = this;
     that.setData({ isToOrder: true });
 
-    if (app.globalData.customer) {
+    if (app.globalData.customer != null) {
       that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
@@ -48,7 +50,7 @@ Page({
     var that = this;
     that.setData({ isToOrder: false });
 
-    if (app.globalData.customer) {
+    if (app.globalData.customer != null) {
       that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
@@ -58,7 +60,7 @@ Page({
     }
   },
   onToCart: function () {
-    if (app.globalData.customer) {
+    if (app.globalData.customer != null) {
       wx.navigateTo({
         url: '../cart/cart',
       })
@@ -117,7 +119,9 @@ Page({
   addProductToOrder: function () {
     var that = this;
 
-    app.globalData.orderProducts = that.bindOrderProduct()
+    app.globalData.orderProducts = that.bindOrderProduct();
+
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
 
     wx.navigateTo({
       url: '../bookOrder/bookOrder?isFromCart=0',

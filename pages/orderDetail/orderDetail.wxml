@@ -10,6 +10,7 @@
         <image class='pickUpGoodsImage' src='../images/icon_pickUpGoods@2x.png' mode="aspectFit"></image>
         <text class='pickUpGoodsTitle'>提货方式</text>
       </view>
+      <!-- 暂时只支持门店自提方式-->
       <text class='deliveryModeRightText'>自提</text>
     </view>
     <view class="addressInfoView" bindtap='onSelectAddress'>
