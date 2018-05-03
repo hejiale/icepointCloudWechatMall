@@ -49,10 +49,10 @@
           <image mode="aspectFit" class="productImage" src='{{item.photos[0]}}'></image>
           <view class="productInfo">
             <text class="productNameText">{{item.goods.goodsName}}</text>
-            <text class='specificationsText'>{{item.specification}}</text>
+            <text class='specificationsText' wx:if="{{item.specifications != null}}">{{item.specification}}</text>
             <view class="priceView">
               <text class="numText">x{{item.shoppingCart.count}}</text>
-              <text class="price">￥ {{filter.numberToFix(item.specifications.price)}}</text>
+              <text class="price">￥ {{filter.numberToFix(item.specifications != null ? item.specifications.price: item.goods.goodsRetailPrice)}}</text>
             </view>
           </view>
         </view>
@@ -84,19 +84,19 @@
         </view>
       </view>
     </view>
-    <view class='storeInfoView {{isShowStore}}'>
+    <view class='storeInfoView'>
       <image class="storeIconImage" src='../images/address@2x.png'></image>
       <view class='storeContentView'>
         <view class="storeTitleView">
           <text class='storeInfoTitle'>线下服务点</text>
-          <text class='storeNumText'>共 32 家门店</text>
+          <text class='storeNumText'>共{{totalStore}}家门店</text>
         </view>
         <image class="storeLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
         <view class='storeAddressInfoView'>
           <view class='storeContactInfoView' bindtap='onSelectStore'>
             <view class='storeNameView'>
               <view class="storeNameTextView">{{currentStore.name}}</view>
-              <view class='storeDistanceView'>{{currentStore.distance}}</view>
+              <!-- <view class='storeDistanceView'>{{currentStore.distance}}</view> -->
             </view>
             <view class='storeAddressView'>{{currentStore.region + currentStore.address}}</view>
           </view>

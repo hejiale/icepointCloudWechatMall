@@ -76,7 +76,7 @@
           <view class='storeContactInfoView' bindtap='onSelectStore'>
             <view class='storeNameView'>
               <view class="storeNameTextView">{{orderDetail.order.netPointName}}</view>
-              <view class='storeDistanceView'>0.5km</view>
+              <!-- <view class='storeDistanceView'>0.5km</view> -->
             </view>
             <view class='storeAddressView'>{{orderDetail.order.netPointAddress}}</view>
           </view>

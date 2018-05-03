@@ -99,6 +99,8 @@ Page({
       return
     }
 
+    console.log(app.globalData.weChatUser);
+
     if (!that.data.isSendCode) {
       let options = {
         phone: that.data.bindPhone,

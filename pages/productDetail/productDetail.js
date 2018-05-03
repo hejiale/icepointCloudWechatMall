@@ -20,7 +20,7 @@ Page({
     var that = this;
     that.setData({ goodsId: options.id });
 
-    let parameter = { goodsId: options.id};
+    let parameter = { goodsId: options.id };
 
     app.globalData.request.queryProductDetail(parameter, function (data) {
       WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 5);
@@ -45,6 +45,19 @@ Page({
         url: '../bindPhone/bindPhone',
       })
     }
+  },
+  onCall: function () {
+    var that = this;
+    wx.makePhoneCall({
+      phoneNumber: that.data.DetailObject.goods.belongedCompany.contactMobilePhone,
+    })
+  },
+  onTryGlass: function () {
+    var that = this;
+
+    wx.navigateTo({
+      url: '../tryGlass/tryGlass?link=' + that.data.DetailObject.photos[0],
+    })
   },
   onCart: function () {
     var that = this;
@@ -102,16 +115,16 @@ Page({
     }
 
     app.globalData.request.addShoppingCart(cart, function (data) {
-      if (data.retCode == 101){
+      if (data.retCode >= 301 && data.retCode <= 304) {
         wx.showToast({
           title: data.retMsg,
-          icon:"none"
+          icon: "none"
         })
-      }else{
-        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: []});
+      } else {
+        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
 
         wx.showToast({
-          title: '商品加入购物车成功!',
+          title: '加入购物车成功!'
         })
       }
     });
@@ -180,7 +193,7 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters:[] });
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
   },
   //点击商品规格参数method
   onSelectParameter: function (e) {

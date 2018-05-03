@@ -1,20 +1,27 @@
 // pages/person/person.js
 var app = getApp();
+
 Page({
   data: {
     userInfo: null,
-    showLogin: 'hide',
-    showPerson: 'hide',
-    bindPhone: ''
+    memberCustomer: null
   },
-  onShow: function () {
-    // 页面显示
+  onLoad: function () {
     var that = this;
+
+    wx.showLoading()
 
     app.getUserInfo(function (userInfo) {
       that.setData({
-        userInfo: userInfo,
+        userInfo: userInfo
       })
+    })
+
+    app.userLogin(function () {
+      that.setData({
+        memberCustomer: app.globalData.customer
+      })
+      wx.hideLoading();
     })
   }
 })

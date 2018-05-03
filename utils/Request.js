@@ -1,5 +1,5 @@
-// var HostURL = 'https://dev.icepointcloud.com';
-var HostURL = 'http://guirong.private.icepointcloud.com';
+var HostURL = 'https://dev.icepointcloud.com';
+// var HostURL = 'http://guirong.private.icepointcloud.com';
 var port = '/wechat/api/mall';
 var sessionId = null;
 
@@ -468,14 +468,7 @@ function http(msg) {
       method: msg.method,
       success: function (res) {
         if (res.statusCode == 200 && res != null) {
-          if (res.data.retCode == 400) {
-            wx.showToast({
-              title: res.data.retMsg,
-              icon: 'none'
-            })
-          } else {
-            resolve(res.data);
-          }
+          resolve(res.data);
           console.log(res);
         } else {
           wx.showToast({

@@ -43,14 +43,21 @@ Page({
     var that = this;
     var value = e.currentTarget.dataset.key;
 
-    for (var i = 0; i < that.data.cartList.length; i++) {
-      var object = that.data.cartList[i];
-      if (object.shoppingCart.cartId == value.shoppingCart.cartId) {
-        object.selected = !object.selected;
+    if (value.isShelves){
+      for (var i = 0; i < that.data.cartList.length; i++) {
+        var object = that.data.cartList[i];
+        if (object.shoppingCart.cartId == value.shoppingCart.cartId) {
+          object.selected = !object.selected;
+        }
       }
+      that.setData({ cartList: that.data.cartList });
+      that.updateCartTotalPrice();
+    }else{
+      wx.showToast({
+        title: '该商品已下架',
+        icon:'none'
+      })
     }
-    that.setData({ cartList: that.data.cartList });
-    that.updateCartTotalPrice();
   },
   onBook: function () {
     var that = this;
@@ -82,12 +89,15 @@ Page({
     var that = this;
 
     app.globalData.request.queryCartList(function (data) {
-      if (data.result) {
+      if (data.result != null) {
         if (data.result.length > 0) {
           for (var i = 0; i < data.result.length; i++) {
             var object = data.result[i];
-            object.selected = true;
 
+            if (object.goods.isShelves){
+              object.selected = true;
+            }
+            
             if (object.specifications != null) {
               var specificationStr = object.specifications.groupValues;
               var specifications = JSON.parse(specificationStr);
@@ -102,13 +112,12 @@ Page({
           }
           that.setData({ cartList: data.result });
           that.updateCartTotalPrice();
-        } else {
-          wx.showToast({
-            title: '购物车未添加任何商品!',
-            icon: "none"
-          })
         }
       } else {
+        wx.showToast({
+          title: '购物车未添加任何商品!',
+          icon: "none"
+        })
         that.setData({ cartList: null });
       }
     });

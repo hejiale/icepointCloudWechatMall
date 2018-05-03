@@ -1,13 +1,21 @@
 // pages/tryGlass/tryGlass.js
 Page({
-  data:{
-    tryLinkURL:'https://icepointcloud.com/wechat/mall/getStartExperience.html?photoLink=https://storage.icepointcloud.com//1e703e276bd8a8a093768c1d3be9c9ba/20170628/dfdcacfe-52de-40f4-ba43-be30c148755b.png'
+  data: {
+    tryLinkURL: 'https://dev.icepointcloud.com/wechat/mall/getStartExperience.html?photoLink='
   },
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
 
+
+  onLoad: function (options) {
+    // 页面初始化 options为页面跳转所带来的参数
+    console.log(options);
+
+    var that = this;
+
+    that.setData({ tryLinkURL: that.data.tryLinkURL + options.link });
+
+    console.log(that.data.tryLinkURL);
   },
-  onShow:function(){
+  onShow: function () {
     // 页面显示
   }
 })

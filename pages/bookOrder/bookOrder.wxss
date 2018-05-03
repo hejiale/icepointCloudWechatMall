@@ -255,7 +255,6 @@ page {
   display: flex;
   margin-top: 5px;
   width: 100%;
-  height: 120px;
   background-color: white;
 }
 
@@ -272,14 +271,12 @@ page {
   align-items: center;
   margin-left: 5px;
   width: calc(100% - 35px);
-  height: 100%;
 }
 
 .storeTitleView {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0px;
   width: 100%;
   height: 50px;
   line-height: 50px;
@@ -300,7 +297,6 @@ page {
 }
 
 .storeLineImage {
-  margin: 0px;
   width: 100%;
   height: 1px;
 }
@@ -308,17 +304,19 @@ page {
 .storeAddressInfoView {
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
+  height: 70px;
 }
 
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
   width: 70%;
+  height: 100%;
 }
 
 .storeContacterLine {
-  margin-top: 10px;
   margin-left: 10px;
   width: 1px;
   height: 92rpx;
@@ -328,7 +326,6 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
   margin-left: 1px;
   width: calc(30% - 12px);
 }
@@ -342,15 +339,13 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 100%;
-  height: 50%;
 }
 
 .storeAddressView {
   margin-top: 5px;
   width: 100%;
-  height: 50%;
   font-size: 13px;
   font-weight: 300;
 }

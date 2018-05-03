@@ -7,19 +7,19 @@
   </view>
   <view class="storeListView">
     <block wx:for-items="{{storeList}}">
-      <view class="contentView" bindtap="onSelectStore" data-key="{{item}}">
+      <view class="contentView">
         <view class='storeNameView'>
           <text class="contentText">{{item.name}}</text>
-          <view class='distanceView'>
+          <!-- <view class='distanceView'>
             <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
             <text class='distanceText'>{{item.distance}}</text>
-          </view>
+          </view> -->
         </view>
-        <image class='storeImage' src='{{item.pictures[0]}}' mode="aspectFit" wx:if="{{item.pictures[0].length > 0}}"></image>
+        <image class='storeImage' src='{{item.pictures[0]}}' mode="aspectFit" wx:if="{{item.pictures[0].length > 0}}" bindtap="onSelectStore" data-key="{{item}}"></image>
         <view class='storeAddressView'>
           <text class="addressText">{{item.region + item.address}}</text>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
-          <view class='callPhoneView' bindtap="onCall">
+          <view class='callPhoneView' bindtap="onCall" data-key="{{item}}">
             <image class='callImage' src='../images/store_phone@2x.png' mode="aspectFit"></image>
           </view>
         </view>

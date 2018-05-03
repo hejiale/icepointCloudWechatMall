@@ -36,5 +36,12 @@ Page({
 
       that.setData({ orderDetail: data.result });
     });
+  },
+  onCall: function(){
+    var that = this;
+
+    wx.makePhoneCall({
+      phoneNumber: that.data.orderDetail.order.netPointPhone,
+    })
   }
 })

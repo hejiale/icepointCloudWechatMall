@@ -1,3 +1,7 @@
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var map = new QQMapWX({
+  key: '7KFBZ-DM533-AJE3Q-YOEM3-ZLKOS-EGBBL'
+});
 var app = getApp();
 
 Page({
@@ -23,7 +27,8 @@ Page({
     useBalance: null,
     usePoint: null,
     isFromCart: false,
-    currentStore:null
+    currentStore:null,
+    totalStore:0
   },
   onLoad: function (options) {
     var that = this;
@@ -41,6 +46,9 @@ Page({
     app.globalData.request.getDefaultAddress(function (data) {
       that.setData({ currentAddress: data.result, selectAddressId: data.result.id });
     });
+
+    //获取门店
+    that.queryStoreList();
   },
   onShow: function () {
     var that = this;
@@ -70,8 +78,10 @@ Page({
     })
   },
   onCall: function () {
+    var that = this;
+
     wx.makePhoneCall({
-      phoneNumber: '',
+      phoneNumber: that.data.currentStore.phone,
     })
   },
   //下单
@@ -81,7 +91,7 @@ Page({
     var orderParameter = {
       order:{
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
-        netPointId: 2,
+        netPointId: that.data.currentStore.id,
         addressId: that.data.selectAddressId,
         amountPayable: that.data.shouldPayPrice,
         discount: that.data.memberInfo.mallCustomer.discount,
@@ -121,14 +131,21 @@ Page({
       title: '正在提交订单...',
     })
     app.globalData.request.payOrder(orderParameter, function (data) {
-      if (that.data.isFromCart == 1) {
-        app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
+      if (data.retCode == 305){
+        wx.showToast({
+          title: data.retMsg,
+          icon: "none"
+        })
+      }else{
+        if (that.data.isFromCart == 1) {
+          app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
+            wx.hideLoading();
+            wx.navigateBack();
+          });
+        } else {
           wx.hideLoading();
           wx.navigateBack();
-        });
-      } else {
-        wx.hideLoading();
-        wx.navigateBack();
+        }
       }
     });
   },
@@ -225,29 +242,30 @@ Page({
     var that = this;
 
     let options = {
-      key: 'Hy9Krb6NIp8LGslMfXtuLCi89ThcuuAp5S8OST3PYCk='
+      key: 'FCtwvJYVNagFHA+a0IJbNxTSsxFoLTy6CFzpKDmPnc8='
     };
 
     app.globalData.request.queryStoreList(options, function (data) {
       var store = data.result.content[0];
+      that.setData({ currentStore: store, totalStore: data.result.numberOfElements});
 
-      map.calculateDistance({
-        to: [{
-          latitude: store.latitude,
-          longitude: store.longitude
-        }],
-        complete: function (res) {
-          var longDistance = res.result.elements[0].distance;
+      // map.calculateDistance({
+      //   to: [{
+      //     latitude: store.latitude,
+      //     longitude: store.longitude
+      //   }],
+      //   complete: function (res) {
+      //     var longDistance = res.result.elements[0].distance;
 
-          if (longDistance >= 1000) {
-            var distance = (longDistance / 1000).toFixed(0);
-            store.distance = distance + '公里';
-          } else {
-            store.distance = distance + '米';
-          }
-          that.setData({ currentStore: store });
-        }
-      })
+      //     if (longDistance >= 1000) {
+      //       var distance = (longDistance / 1000).toFixed(0);
+      //       store.distance = distance + '公里';
+      //     } else {
+      //       store.distance = distance + '米';
+      //     }
+      //     that.setData({ currentStore: store });
+      //   }
+      // })
     });
   },
   // paySignData: function(data,date){

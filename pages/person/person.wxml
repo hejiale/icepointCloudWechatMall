@@ -15,15 +15,15 @@
       <view class='headLine'></view>
       <view class='memberInfoView'>
         <view class='memberLevelView'>
-          <text class='memberInfoValue'>普通会员</text>
+          <text class='memberInfoValue'>{{memberCustomer.memberlevel}}</text>
           <text class='memberInfoTitle'>会员等级</text>
         </view>
         <view class='memberPointView'>
-          <text class='memberInfoValue'>10000</text>
+          <text class='memberInfoValue'>{{memberCustomer.integral}}</text>
           <text class='memberInfoTitle'>积分</text>
         </view>
         <view class='memberBalanceView'>
-          <text class='memberInfoValue'>100000</text>
+          <text class='memberInfoValue'>{{memberCustomer.balance}}</text>
           <text class='memberInfoTitle'>储值余额</text>
         </view>
       </view>

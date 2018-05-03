@@ -20,6 +20,24 @@ Page({
     isShowProductListView: 'hide',
     productList: []
   },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '冰点云微商城',
+      path: '/pages/home/home',
+      success: function (res) {
+        // 转发成功
+        console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res)
+      }
+    }
+  },
   onLoad: function (options) {
     var that = this;
     app.getSystemInfo(function (systemInfo) {
@@ -28,6 +46,8 @@ Page({
       that.setData({
         deviceWidth: winWidth, deviceHeight: winHeight
       })
+    })
+    app.userLogin(function () {
     })
   },
   onShow: function () {
