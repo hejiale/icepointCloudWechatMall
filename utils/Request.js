@@ -1,5 +1,5 @@
 var HostURL = 'https://dev.icepointcloud.com';
-// var HostURL = 'http://guirong.private.icepointcloud.com';
+// var HostURL = 'http://guirong.private.icepointcloud.com';/
 var port = '/wechat/api/mall';
 var sessionId = null;
 
@@ -15,6 +15,42 @@ function login(options, callBack) {
   let msg = {
     data: options,
     url: port + '/login',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//获取公司信息
+function getCompanyInfo(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getCompanyInfo',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+//获取公司首页模板
+function getCompanyTemplate(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getWechatAccountDefaultMallTemplate',
     method: 'GET'
   }
 
@@ -487,7 +523,9 @@ function http(msg) {
 
 module.exports = {
   login: login,
+  getCompanyInfo: getCompanyInfo,
   getMemberInfo: getMemberInfo,
+  getCompanyTemplate: getCompanyTemplate,
   payOrder: payOrder,
   queryProductList: queryProductList,
   queryProductCategory: queryProductCategory,

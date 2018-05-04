@@ -87,6 +87,7 @@ Page({
   //查询购物车列表
   queryCartList: function () {
     var that = this;
+    wx.showLoading();
 
     app.globalData.request.queryCartList(function (data) {
       if (data.result != null) {
@@ -94,7 +95,7 @@ Page({
           for (var i = 0; i < data.result.length; i++) {
             var object = data.result[i];
 
-            if (object.goods.isShelves){
+            if (object.status == "NORMAL"){
               object.selected = true;
             }
             
@@ -112,6 +113,7 @@ Page({
           }
           that.setData({ cartList: data.result });
           that.updateCartTotalPrice();
+          wx.hideLoading();
         }
       } else {
         wx.showToast({

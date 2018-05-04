@@ -3,64 +3,20 @@ var app = getApp()
 
 Page({
   data: {
-    deviceWidth: 0,
-    deviceHeight: 0,
-    classItemList: [],
-    classList: [
-      '精选',
-      '送女票',
-      '海淘',
-      '创意生活',
-      '送基友',
-      '送爸妈',
-      '设计感',
-      '文艺风',
-    ],
+    classList: [{ typeName: '精选' }],
     isShowClassView: 'hide',
     isShowProductListView: 'hide',
-    productList: []
-  },
-  onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '冰点云微商城',
-      path: '/pages/home/home',
-      success: function (res) {
-        // 转发成功
-        console.log(res)
-      },
-      fail: function (res) {
-        // 转发失败
-        console.log(res)
-      }
-    }
+    isShowTemplateView: 'show',
+    productList: [],
+    templateList: null,
+    currentType: "精选",
+    currentPage: 1,
+    pageSize: 20,
   },
   onLoad: function (options) {
     var that = this;
-    app.getSystemInfo(function (systemInfo) {
-      var winWidth = systemInfo.windowWidth;
-      var winHeight = systemInfo.windowHeight;
-      that.setData({
-        deviceWidth: winWidth, deviceHeight: winHeight
-      })
-    })
-    app.userLogin(function () {
-    })
-  },
-  onShow: function () {
-    var that = this;
-
-    var list = new Array();
-
-    for (var i = 0; i < 10; i++) {
-      var productObj = new Object()
-      list.push(productObj)
-    }
-    that.setData({ classItemList: list })
-    that.setData({ productList: list })
+    that.getCompanyTemplate();
+    app.userLogin(function () { });
   },
   onShoppingCart: function () {
     if (app.globalData.customer != null) {
@@ -84,10 +40,89 @@ Page({
   onCloseClassCover: function () {
     this.setData({ isShowClassView: 'hide' });
   },
-  onClassItemClicked: function () {
-    this.setData({ isShowProductListView: 'show' });
+  onClassItemClicked: function (e) {
+    var that = this;
+    var item = e.currentTarget.dataset.key;
+
+    that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
+
+    if (item.typeName == '精选') {
+      that.setData({ isShowProductListView: 'hide', isShowTemplateView: 'show' });
+    } else {
+      that.setData({ isShowProductListView: 'show', isShowTemplateView: 'hide', productList: [] });
+      that.queryProductsRequest(item.typeId);
+    }
   },
-  onGetUserInfo: function(e){
-    console.log(e);
-  }
+  onTemplateDetail: function (e) {
+    var that = this;
+    var item = e.currentTarget.dataset.key;
+
+    app.globalData.templateObject = item;
+
+    wx.navigateTo({
+      url: '../productList/productList',
+    })
+
+  },
+  onGoodsDetail: function (e) {
+    var that = this;
+    var item = e.currentTarget.dataset.key;
+
+    wx.navigateTo({
+      url: '../productDetail/productDetail?id=' + item.goodsId,
+    })
+  },
+  onLoadMore: function () {
+    var that = this;
+    that.data.currentPage += 1;
+    that.queryProductsRequest();
+  },
+  //获取商店展示模板
+  getCompanyTemplate: function () {
+    var that = this;
+
+    app.getCompanyInfo(function () {
+      let options = { companyId: app.globalData.belongCompany.id };
+
+      app.globalData.request.getCompanyTemplate(options, function (data) {
+        if (data.retCode == 401) {
+          wx.showToast({
+            title: data.retMsg,
+            icon:'none'
+          })
+        } else {
+          var viewList = [];
+
+          for (var i = 0; i < data.result.previewData.length; i++) {
+            var value = data.result.previewData[i];
+            if (value.type == "SESSION") {
+              viewList.push(value);
+            } else if (value.type == "NAVIGATION") {
+              for (var j = 0; j < value.navDataBeans.length; j++) {
+                var bean = value.navDataBeans[j];
+                that.data.classList.push(bean);
+              }
+            }
+          }
+          that.setData({ templateList: viewList, classList: that.data.classList });
+        }
+      })
+    })
+  },
+  //--------------查询商品----------------//
+  queryProductsRequest: function (typeId) {
+    var that = this;
+
+    let options = {
+      companyId: app.globalData.belongCompany.id,
+      pageNumber: that.data.currentPage,
+      pageSize: that.data.pageSize,
+      typeId: typeId
+    };
+
+    app.globalData.request.queryProductList(options, function (data) {
+      that.setData({ productList: that.data.productList.concat(data.resultList) });
+      console.log(that.data.productList);
+    })
+  },
 })

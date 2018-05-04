@@ -3,12 +3,18 @@ var app = getApp()
 
 Page({
   data: {
-    productList: [],
-    currentPage: 1,
-    allProductList: null
+    templateObject: null
   },
+  onLoad: function(){
+    var that = this;
+    that.setData({ templateObject: app.globalData.templateObject})
+  },
+  onGoodsDetail: function (e) {
+    var that = this;
+    var item = e.currentTarget.dataset.key;
 
-  onShow: function(){
-    
-  }
+    wx.navigateTo({
+      url: '../productDetail/productDetail?id=' + item.goodsId,
+    })
+  },
 })

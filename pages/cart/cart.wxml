@@ -30,7 +30,8 @@
         </view>
         <view class="unOpenView" wx:else data-key="{{item}}">
           <view class="onSelectView" bindtap='onSelectCart' data-key='{{item}}'>
-            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4' wx:if="{{item.status == 'NORMAL'}}"></icon>
+            <text style='font-size: 13px;color: white;background-color: #e6e6e6;' wx:else>失效</text>
           </view>
           <view class='cartView'>
             <image src="{{item.photos[0]}}" mode="aspectFit" class="productImage"></image>

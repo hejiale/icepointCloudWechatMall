@@ -55,7 +55,7 @@ Page({
     that.setData({ showOrHide: 'show' });
     wx.showLoading({});
 
-    let options = { companyId: app.globalData.companyId};
+    let options = { companyId: app.globalData.belongCompany.id};
 
     app.globalData.request.queryProductCategory(options, function (data) {
       var classTypes = data.types;
@@ -249,7 +249,7 @@ Page({
     if (that.data.isEndLoading) return;
 
     var options = new Object();
-    options.companyId = app.globalData.companyId;
+    options.companyId = app.globalData.belongCompany.id;
     options.pageNumber = that.data.currentPage;
     options.pageSize = that.data.pageSize;
 
