@@ -96,15 +96,13 @@ page {
   display: flex;
   flex-direction: column;
   margin-left: 5px;
-  margin-top: 0px;
   width: calc(100% - 85px);
-  height: 80%;
 }
 
 .productImage {
   margin-left: 0px;
   width: 80px;
-  height: 80px;
+  height: 44px;
 }
 
 .productNameText {

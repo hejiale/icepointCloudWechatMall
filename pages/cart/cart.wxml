@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
 <view class="page">
   <view class='topView'>
     <view class='titleView'>
@@ -34,10 +35,10 @@
             <text style='font-size: 13px;color: white;background-color: #e6e6e6;' wx:else>失效</text>
           </view>
           <view class='cartView'>
-            <image src="{{item.photos[0]}}" mode="aspectFit" class="productImage"></image>
+            <image src="{{item.photos[0]}}" class="productImage"></image>
             <view class="productInfo">
               <text class="productNameText">{{item.goods.goodsName}}</text>
-              <view class='specificationsView'>
+              <view class='specificationsView' wx:if="{{item.specification.length > 0}}">
                 <text class='specificationsText'>{{item.specification}}</text>
               </view>
               <view class="priceView">
@@ -52,7 +53,7 @@
   </view>
   <view class="footView" wx:if="{{cartList.length > 0}}">
     <view class='normalBottomView' wx:if="{{!canEdit}}" bindtap='onBook'>
-      <text class="totalOrderPriceText">￥ {{totalPrice}} 结算</text>
+      <text class="totalOrderPriceText">￥ {{filter.numberToFix(totalPrice)}} 结算</text>
     </view>
     <view class="chooseAllView" wx:if="{{canEdit}}" bindtap='onCleanCart'>
       <text class="totalOrderPriceText">全部删除</text>

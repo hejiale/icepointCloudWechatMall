@@ -34,7 +34,7 @@
           <text style='font-size: 16px;margin-left:10px;'>{{currentAddress.phone}}</text>
         </view>
         <view class="contactAddressView">
-          <text style='font-size: 14px;font-weight: 300;'>{{currentAddress.region + " " + currentAddress.address}}</text>
+          <text style='font-size: 14px;'>{{currentAddress.region + " " + currentAddress.address}}</text>
         </view>
       </view>
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>

@@ -9,6 +9,7 @@ Page({
     isSelectDetail: true,
     showParameterView: 'hide',
     goodsId: null,
+    deviceWidth:0,
     deviceHeight: 0,
     parameterObject: null,
     selectParameters: [],
@@ -29,6 +30,7 @@ Page({
 
     app.getSystemInfo(function (systemInfo) {
       that.setData({
+        deviceWidth: systemInfo.windowWidth,
         deviceHeight: systemInfo.windowHeight
       })
     })
@@ -115,7 +117,7 @@ Page({
     }
 
     app.globalData.request.addShoppingCart(cart, function (data) {
-      if (data.retCode >= 301 && data.retCode <= 304) {
+      if (data.retCode >= 301 && data.retCode <= 305) {
         wx.showToast({
           title: data.retMsg,
           icon: "none"

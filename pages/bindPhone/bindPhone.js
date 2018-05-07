@@ -53,14 +53,34 @@ Page({
     userInfo: null,
     isShowMemberRightsMemo: 'hide'
   },
+  onLoad: function () {
+
+  },
   onShow: function () {
-    // 页面显示
     var that = this;
 
     app.getUserInfo(function (userInfo) {
-      that.setData({
-        userInfo: userInfo,
-      })
+      if (userInfo != null) {
+        that.setData({
+          userInfo: userInfo,
+        })
+      } else {
+        wx.showModal({
+          content: '检测到您未打开微信用户信息授权，开启后即可进行登录',
+          confirmText: '去开启',
+          success: function (res) {
+            if (res.confirm) {
+              wx.openSetting({
+                success: (res) => {
+
+                }
+              })
+            } else if (res.cancel) {
+              wx.navigateBack();
+            }
+          }
+        })
+      }
     })
   },
   onBindPhone: function (e) {

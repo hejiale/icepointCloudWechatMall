@@ -15,6 +15,9 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+
+    wx.showLoading({});
+
     that.getCompanyTemplate();
     app.userLogin(function () { });
   },
@@ -35,7 +38,7 @@ Page({
     })
   },
   onShowClassView: function () {
-    this.setData({ isShowClassView: 'show' });
+    this.setData({ isShowClassView: '' });
   },
   onCloseClassCover: function () {
     this.setData({ isShowClassView: 'hide' });
@@ -47,9 +50,9 @@ Page({
     that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
 
     if (item.typeName == '精选') {
-      that.setData({ isShowProductListView: 'hide', isShowTemplateView: 'show' });
+      that.setData({ isShowProductListView: 'hide', isShowTemplateView: '' });
     } else {
-      that.setData({ isShowProductListView: 'show', isShowTemplateView: 'hide', productList: [] });
+      that.setData({ isShowProductListView: '', isShowTemplateView: 'hide', productList: [] });
       that.queryProductsRequest(item.typeId);
     }
   },
@@ -77,6 +80,28 @@ Page({
     that.data.currentPage += 1;
     that.queryProductsRequest();
   },
+  onBottomMenuToOrder: function () {
+    if (app.globalData.customer != null) {
+      wx.navigateTo({
+        url: '../order/order',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
+  },
+  onBottomMenuToCart: function () {
+    if (app.globalData.customer != null) {
+      wx.navigateTo({
+        url: '../cart/cart',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../bindPhone/bindPhone',
+      })
+    }
+  },
   //获取商店展示模板
   getCompanyTemplate: function () {
     var that = this;
@@ -88,7 +113,7 @@ Page({
         if (data.retCode == 401) {
           wx.showToast({
             title: data.retMsg,
-            icon:'none'
+            icon: 'none'
           })
         } else {
           var viewList = [];
@@ -105,6 +130,7 @@ Page({
             }
           }
           that.setData({ templateList: viewList, classList: that.data.classList });
+          wx.hideLoading();
         }
       })
     })
@@ -122,7 +148,6 @@ Page({
 
     app.globalData.request.queryProductList(options, function (data) {
       that.setData({ productList: that.data.productList.concat(data.resultList) });
-      console.log(that.data.productList);
     })
   },
 })

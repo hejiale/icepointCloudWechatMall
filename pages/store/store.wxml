@@ -15,7 +15,7 @@
             <text class='distanceText'>{{item.distance}}</text>
           </view> -->
         </view>
-        <image class='storeImage' src='{{item.pictures[0]}}' mode="aspectFit" wx:if="{{item.pictures[0].length > 0}}" bindtap="onSelectStore" data-key="{{item}}"></image>
+        <image class='storeImage' src='{{item.pictures[0]}}' wx:if="{{item.pictures[0].length > 0}}" bindtap="onSelectStore" data-key="{{item}}"></image>
         <view class='storeAddressView'>
           <text class="addressText">{{item.region + item.address}}</text>
           <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>

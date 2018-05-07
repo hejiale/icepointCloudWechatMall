@@ -17,6 +17,9 @@ App({
           console.log(res);
           that.globalData.userInfo = res.userInfo
           typeof cb == "function" && cb(that.globalData.userInfo)
+        },
+        fail:function(res){
+          typeof cb == "function" && cb(that.globalData.userInfo)
         }
       })
     }
@@ -39,8 +42,9 @@ App({
   userLogin: function (cb) {
     var that = this;
 
-    // let appId = "wxb6c27db2d85fd508";//(线上商城测试公众号)
-    let appId = "wx06e40d400ac63b20";
+    let appId = "wxb6c27db2d85fd508";//(线上商城测试公众号)
+    // let appId = "wx06e40d400ac63b20";
+    // let appId = "wx8cb86a24040f0da8";
 
     wx.login({
       success: function (res) {
@@ -66,8 +70,9 @@ App({
   getCompanyInfo: function (cb) {
     var that = this;
 
-    // let appId = "wxb6c27db2d85fd508";//(线上商城测试公众号)
-    let appId = "wx06e40d400ac63b20";
+    let appId = "wxb6c27db2d85fd508";//(线上商城测试公众号)
+    // let appId = "wx06e40d400ac63b20";
+    // let appId = "wx8cb86a24040f0da8";
 
     let options = {
       appid: appId,//公众号id 

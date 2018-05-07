@@ -45,14 +45,14 @@
   </view>
 </view>
 <view class="page">
-  <view class='tryGlassView' bindtap='onTryGlass' wx:if="{{DetailObject.goods.proTry}}">
+  <!-- <view class='tryGlassView' bindtap='onTryGlass' wx:if="{{DetailObject.goods.proTry}}">
     <image class="tryGlassImage" src='../images/detail_tryGlass@2x.png' mode="aspectFit"></image>
-  </view>
+  </view> -->
   <view class="contentView">
-    <swiper class="swiper_box" indicator-dots="true" indicator-color="#F0F0F0" indicator-active-color="#222222">
+    <swiper class="swiper_box" indicator-dots="true" indicator-color="#F0F0F0" indicator-active-color="#222222" style='height: {{(deviceWidth * 9) / 16}}px;'>
       <block wx:for-items="{{DetailObject.photos}}">
         <swiper-item>
-          <image src="{{item}}" class="bannerImage" mode="aspectFit" />
+          <image src="{{item}}" class="bannerImage"/>
         </swiper-item>
       </block>
     </swiper>

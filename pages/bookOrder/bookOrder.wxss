@@ -148,12 +148,12 @@ page {
 .numText {
   font-size: 14px;
   text-align: right;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 
 .price {
   font-size: 14px;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 
 .specificationsText {
@@ -241,7 +241,7 @@ page {
 
 .memberDiscounTextTitle {
   font-size: 14px;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 
 .memberDiscounTextValue {
@@ -256,6 +256,7 @@ page {
   margin-top: 5px;
   width: 100%;
   background-color: white;
+  padding-bottom: 5px;
 }
 
 .storeIconImage {
@@ -306,14 +307,12 @@ page {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 70px;
 }
 
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 100%;
 }
 
 .storeContacterLine {
@@ -347,7 +346,7 @@ page {
   margin-top: 5px;
   width: 100%;
   font-size: 13px;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 
 .storeNameTextView {

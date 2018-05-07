@@ -34,6 +34,7 @@ Page({
     var that = this;
     that.setData({ isFromCart: options.isFromCart });
 
+    wx.showLoading();
     //获取会员信息
     app.globalData.request.getMemberInfo(function (data) {
       that.setData({ memberInfo: data.result});
@@ -88,10 +89,19 @@ Page({
   offerOrder: function () {
     var that = this;
 
+    if (that.data.selectAddressId == null){
+      wx.showToast({
+        title: '请选择收货地址!',
+        icon:'none'
+      })
+      return;
+    }
+
     var orderParameter = {
       order:{
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
         netPointId: that.data.currentStore.id,
+        // netPointId: 2,
         addressId: that.data.selectAddressId,
         amountPayable: that.data.shouldPayPrice,
         discount: that.data.memberInfo.mallCustomer.discount,
@@ -131,7 +141,7 @@ Page({
       title: '正在提交订单...',
     })
     app.globalData.request.payOrder(orderParameter, function (data) {
-      if (data.retCode == 305){
+      if (data.retCode == 306 || data.retCode == 500){
         wx.showToast({
           title: data.retMsg,
           icon: "none"
@@ -248,6 +258,7 @@ Page({
     app.globalData.request.queryStoreList(options, function (data) {
       var store = data.result.content[0];
       that.setData({ currentStore: store, totalStore: data.result.numberOfElements});
+      wx.hideLoading();
 
       // map.calculateDistance({
       //   to: [{

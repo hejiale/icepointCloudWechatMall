@@ -71,11 +71,18 @@ Page({
       }
     }
 
-    app.globalData.orderProducts = productList;
+    if (productList.length > 0){
+      app.globalData.orderProducts = productList;
 
-    wx.navigateTo({
-      url: '../bookOrder/bookOrder?isFromCart=1'
-    })
+      wx.navigateTo({
+        url: '../bookOrder/bookOrder?isFromCart=1'
+      })
+    }else{
+      wx.showToast({
+        title: '购物车未选中任何商品!',
+        icon:'none'
+      })
+    }
   },
   onCleanCart: function () {
     var that = this;

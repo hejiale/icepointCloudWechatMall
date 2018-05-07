@@ -18,7 +18,7 @@ page {
 .inputSearch {
   margin-left: 5px;
   height: 30px;
-  font-size: 13px;
+  font-size: 14px;
   width: calc(100% - 25px);
   background-color: white;
 }
@@ -160,7 +160,7 @@ page {
 }
 
 .productImage {
-  width: 80%;
+  width: 100%;
   height: 112px;
 }
 

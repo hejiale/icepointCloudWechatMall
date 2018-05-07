@@ -2,9 +2,16 @@
   <image src='{{templateObject.mainPic[0]}}' style='width: 100%;'></image>
   <scroll-view scroll-y="true" class="productListView">
     <block wx:for-items="{{templateObject.productBeans}}">
-      <view class="productView" style='{{templateObject.layout == "2" ? "width: 50%;":"width: 100%;"}}' bindtap='onGoodsDetail' data-key='{{item}}'>
+      <view class="productView" bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{templateObject.layout == '2'}}">
         <image src="{{item.picture}}" class="productImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{item}}"></image>
         <view class="productInfoView">
+          <text class="productText">{{item.goodsName}}</text>
+          <text class="priceText">￥{{item.price}}</text>
+        </view>
+      </view>
+      <view class="productSingleView" bindtap='onGoodsDetail' data-key='{{item}}' wx:else>
+        <image src="{{item.picture}}" class="productSingleImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{item}}"></image>
+        <view class="productSingleInfoView">
           <text class="productText">{{item.goodsName}}</text>
           <text class="priceText">￥{{item.price}}</text>
         </view>
