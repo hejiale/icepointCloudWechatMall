@@ -43,7 +43,7 @@ Page({
     var that = this;
     var value = e.currentTarget.dataset.key;
 
-    if (value.isShelves){
+    if (value.goods.isShelves){
       for (var i = 0; i < that.data.cartList.length; i++) {
         var object = that.data.cartList[i];
         if (object.shoppingCart.cartId == value.shoppingCart.cartId) {

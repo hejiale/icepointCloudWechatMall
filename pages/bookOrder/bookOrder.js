@@ -22,13 +22,13 @@ Page({
     pointPrice: 0,
     isInputPoint: false,
     //当前输入折扣抵扣金额
-    inputDiscountValue: null,
-    inputValue: null,
+    inputDiscountValue: 0,
+    inputValue: 0,
     useBalance: null,
     usePoint: null,
     isFromCart: false,
-    currentStore:null,
-    totalStore:0
+    currentStore: null,
+    totalStore: 0
   },
   onLoad: function (options) {
     var that = this;
@@ -37,7 +37,7 @@ Page({
     wx.showLoading();
     //获取会员信息
     app.globalData.request.getMemberInfo(function (data) {
-      that.setData({ memberInfo: data.result});
+      that.setData({ memberInfo: data.result });
       //处理商品数据
       that.setData({ productList: app.globalData.orderProducts });
       that.getCartTotalPrice();
@@ -63,11 +63,11 @@ Page({
   onSelectAddress: function () {
     var that = this;
 
-    if (that.data.currentAddress != null){
+    if (that.data.currentAddress != null) {
       wx.navigateTo({
         url: '../address/address?id=' + that.data.currentAddress.id,
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: '../address/address',
       })
@@ -89,19 +89,19 @@ Page({
   offerOrder: function () {
     var that = this;
 
-    if (that.data.selectAddressId == null){
+    if (that.data.selectAddressId == null) {
       wx.showToast({
         title: '请选择收货地址!',
-        icon:'none'
+        icon: 'none'
       })
       return;
     }
 
     var orderParameter = {
-      order:{
+      order: {
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
-        netPointId: that.data.currentStore.id,
-        // netPointId: 2,
+        // netPointId: that.data.currentStore.id,
+        netPointId: 2,
         addressId: that.data.selectAddressId,
         amountPayable: that.data.shouldPayPrice,
         discount: that.data.memberInfo.mallCustomer.discount,
@@ -141,12 +141,12 @@ Page({
       title: '正在提交订单...',
     })
     app.globalData.request.payOrder(orderParameter, function (data) {
-      if (data.retCode == 306 || data.retCode == 500){
+      if (data.retCode >= 306 || data.retCode <= 308) {
         wx.showToast({
           title: data.retMsg,
           icon: "none"
         })
-      }else{
+      } else {
         if (that.data.isFromCart == 1) {
           app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
             wx.hideLoading();
@@ -161,11 +161,11 @@ Page({
   },
   onShowInputBalance: function () {
     var that = this;
-    that.setData({ isShowMemberRights: 'show', isInputPoint: false, inputDiscountValue: "0.00", inputValue: '' });
+    that.setData({ isShowMemberRights: 'show', isInputPoint: false, inputDiscountValue: that.data.balancePrice, inputValue: that.data.balancePrice });
   },
   onShowInputPoint: function () {
     var that = this;
-    that.setData({ isShowMemberRights: 'show', isInputPoint: true, inputDiscountValue: "0.00", inputValue: '' });
+    that.setData({ isShowMemberRights: 'show', isInputPoint: true, inputDiscountValue: that.data.pointPrice, inputValue: that.data.pointPrice });
   },
   onCoverClicked: function (e) {
     this.setData({ isShowMemberRights: 'hide' });
@@ -185,15 +185,25 @@ Page({
     var str = event.detail.value;
 
     if (that.data.isInputPoint) {
-      if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.integral)) {
+      var pointMoney = (parseInt(str) * that.data.memberInfo.integralTrade.money) / that.data.memberInfo.integralTrade.integral_sum;
+
+      var shouldMoney = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.balancePrice);
+
+      if (parseFloat(pointMoney) > shouldMoney) {
+        that.setData({ inputValue: '0.00' })
+      } else if (parseInt(str) > parseInt(that.data.memberInfo.mallCustomer.integral)) {
         that.setData({ inputValue: that.data.memberInfo.mallCustomer.integral });
       } else {
         that.setData({ inputValue: str })
       }
     } else {
-      if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.balance)) {
+      var shouldPay = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.pointPrice);
+
+      if (parseFloat(str) > shouldPay) {
+        that.setData({ inputValue: '0.00'})
+      } else if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.balance)) {
         that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance });
-      } else {
+      }else {
         that.setData({ inputValue: str })
       }
     }
@@ -205,9 +215,7 @@ Page({
       } else {
         that.setData({ inputDiscountValue: that.data.inputValue })
       }
-    } else {
-      that.setData({ inputDiscountValue: "0.00" });
-    }
+    } 
   },
   onSureDiscount: function () {
     var that = this;
@@ -238,7 +246,7 @@ Page({
     if (that.data.memberInfo.mallCustomer.discount != null) {
       discountPrice = price * (1 - (that.data.memberInfo.mallCustomer.discount / 10));
     }
-    that.setData({ totalPrice: price });
+    that.setData({ totalPrice: price, discountPrice: discountPrice });
     that.getShouldPayAmount();
   },
   //计算剩余应付金额
@@ -257,7 +265,7 @@ Page({
 
     app.globalData.request.queryStoreList(options, function (data) {
       var store = data.result.content[0];
-      that.setData({ currentStore: store, totalStore: data.result.numberOfElements});
+      that.setData({ currentStore: store, totalStore: data.result.numberOfElements });
       wx.hideLoading();
 
       // map.calculateDistance({

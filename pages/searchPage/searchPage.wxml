@@ -7,7 +7,7 @@
           <text class="TitleText">价格</text>
           <view class="priceSpaceView">
             <text class="priceSpaceText">价格区间(元)</text>
-            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{lowPriceStr}}" style='margin-left: 5px;'/>
+            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{lowPriceStr}}" style='margin-left: 25px;'/>
             <view class="priceSpace"></view>
             <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{heighPriceStr}}" />
           </view>
@@ -67,12 +67,12 @@
   <view class="hotSearchView {{isShowSearchView}}">
     <view class="hotSearchTopView">
       <text class="hotTitle">最近搜索</text>
-      <text style="font-size: 13px;color: #999999;margin-right: 0px;width: 80px;text-align: center;" bindtap="onClearHistoryWords">清空</text>
+      <text style="font-size: 12px;color: #999999;margin-right: 0px;width: 80px;text-align: center;" bindtap="onClearHistoryWords">清空</text>
     </view>
     <view class="hotItemView">
       <block wx:for-items="{{historySearchWords}}">
         <view class="searchClassItem" style="background-color: #FFFFFF;" data-key="{{item}}" bindtap='onLastesItem'>
-          <label class="searchClassItemText" style="color:gray">{{item}}</label>
+          <label class="searchClassItemText" >{{item}}</label>
         </view>
       </block>
     </view>

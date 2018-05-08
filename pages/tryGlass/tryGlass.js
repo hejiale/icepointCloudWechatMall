@@ -1,7 +1,7 @@
 // pages/tryGlass/tryGlass.js
 Page({
   data: {
-    tryLinkURL: 'https://dev.icepointcloud.com/wechat/mall/getStartExperience.html?photoLink='
+    tryLinkURL: 'https://dev.icepointcloud.com/wechat/mall/getStartExperience.html?type=miniprogram'
   },
 
 
@@ -11,7 +11,7 @@ Page({
 
     var that = this;
 
-    that.setData({ tryLinkURL: that.data.tryLinkURL + options.link });
+    that.setData({ tryLinkURL: that.data.tryLinkURL + "&key=" + encodeURIComponent("FCtwvJYVNagFHA+a0IJbNxTSsxFoLTy6CFzpKDmPnc8=") + "&photoLink=" + options.link });
 
     console.log(that.data.tryLinkURL);
   },

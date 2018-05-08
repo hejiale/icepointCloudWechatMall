@@ -1,21 +1,25 @@
 <view class="page">
-  <image src='{{templateObject.mainPic[0]}}' style='width: 100%;'></image>
-  <scroll-view scroll-y="true" class="productListView">
-    <block wx:for-items="{{templateObject.productBeans}}">
-      <view class="productView" bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{templateObject.layout == '2'}}">
-        <image src="{{item.picture}}" class="productImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{item}}"></image>
-        <view class="productInfoView">
-          <text class="productText">{{item.goodsName}}</text>
-          <text class="priceText">￥{{item.price}}</text>
+  <view style='{{templateObject.layout == "2" ? "background-color: #f5f5f5;":"background-color: white;"}};height: 100%;'>
+    <image src='{{templateObject.mainPic[0]}}' style='width: 100%;'></image>
+    <scroll-view scroll-y="true" class="productListView">
+      <block wx:for-items="{{templateObject.productBeans}}">
+        <view class='productContentView' bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{templateObject.layout == '2'}}">
+          <view class="productView">
+            <image src="{{item.picture}}" class="productImage" bindtap="onProductDetail" data-key="{{item}}" mode="aspectFit"></image>
+            <view class="productInfoView">
+              <text class="productText">{{item.goodsName}}</text>
+              <text class="priceText">￥{{item.price}}</text>
+            </view>
+          </view>
         </view>
-      </view>
-      <view class="productSingleView" bindtap='onGoodsDetail' data-key='{{item}}' wx:else>
-        <image src="{{item.picture}}" class="productSingleImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{item}}"></image>
-        <view class="productSingleInfoView">
-          <text class="productText">{{item.goodsName}}</text>
-          <text class="priceText">￥{{item.price}}</text>
+        <view class="productSingleView" bindtap='onGoodsDetail' data-key='{{item}}' wx:else>
+          <image src="{{item.picture}}" class="productSingleImage" mode="aspectFit" bindtap="onProductDetail" data-key="{{item}}"></image>
+          <view class="productSingleInfoView">
+            <text class="productText">{{item.goodsName}}</text>
+            <text class="priceText">￥{{item.price}}</text>
+          </view>
         </view>
-      </view>
-    </block>
-  </scroll-view>
+      </block>
+    </scroll-view>
+  </view>
 </view>

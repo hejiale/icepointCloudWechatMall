@@ -40,7 +40,7 @@ Page({
     that.setData({ isToOrder: true });
 
     if (app.globalData.customer != null) {
-      that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
+      that.setData({ showParameterView: '', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
       wx.navigateTo({
@@ -66,7 +66,7 @@ Page({
     that.setData({ isToOrder: false });
 
     if (app.globalData.customer != null) {
-      that.setData({ showParameterView: 'show', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
+      that.setData({ showParameterView: '', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
       wx.navigateTo({

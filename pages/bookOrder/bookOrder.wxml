@@ -12,7 +12,7 @@
       <text class='offsetAmountTitle'>当前抵付金额</text>
       <text class='offsetAmountValue'>￥ {{inputDiscountValue}}</text>
     </view>
-    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;' type='number' bindinput='discountTextInput' value='{{inputValue}}'></input>
+    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
     <view class='memberRightsBgBottomLine'></view>
     <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
   </view>

@@ -78,6 +78,9 @@ Page({
     }
 
     app.globalData.request.saveAddress(weChatUserAddress, function (data) {
+      wx.showLoading({
+        title: '新建收货地址成功!',
+      })
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 3]
 

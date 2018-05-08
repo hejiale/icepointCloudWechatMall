@@ -54,6 +54,7 @@ Page({
     var that = this;
 
     //PROCESSED 已处理 UNTREATED
+    wx.showLoading();
 
     let options = {
       pageNumber: that.data.currentPage,
@@ -80,6 +81,8 @@ Page({
       }
 
       that.setData({ orderList: that.data.orderList.concat(data.result.resultList) })
+
+      wx.hideLoading();
 
       if (data.resultList.length == 0) {
         if (that.data.orderList.length == 0) {

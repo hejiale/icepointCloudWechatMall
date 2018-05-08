@@ -16,10 +16,14 @@ Page({
   onLoad: function (options) {
     var that = this;
 
+    that.getCompanyTemplate();
+
     wx.showLoading({});
 
-    that.getCompanyTemplate();
     app.userLogin(function () { });
+  },
+  onShow: function () {
+    
   },
   onShoppingCart: function () {
     if (app.globalData.customer != null) {
@@ -47,10 +51,13 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
+    wx.showLoading();
+
     that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
 
     if (item.typeName == '精选') {
-      that.setData({ isShowProductListView: 'hide', isShowTemplateView: '' });
+      that.setData({ isShowProductListView: 'hide', isShowTemplateView: '', templateList: [], classList: [{ typeName: '精选' }] });
+      that.getCompanyTemplate();
     } else {
       that.setData({ isShowProductListView: '', isShowTemplateView: 'hide', productList: [] });
       that.queryProductsRequest(item.typeId);
@@ -102,6 +109,9 @@ Page({
       })
     }
   },
+  onBgClicked: function(){
+    this.setData({ isShowClassView: 'hide' });
+  },
   //获取商店展示模板
   getCompanyTemplate: function () {
     var that = this;
@@ -125,7 +135,9 @@ Page({
             } else if (value.type == "NAVIGATION") {
               for (var j = 0; j < value.navDataBeans.length; j++) {
                 var bean = value.navDataBeans[j];
-                that.data.classList.push(bean);
+                if (!bean.hide) {
+                  that.data.classList.push(bean);
+                }
               }
             }
           }
@@ -148,6 +160,7 @@ Page({
 
     app.globalData.request.queryProductList(options, function (data) {
       that.setData({ productList: that.data.productList.concat(data.resultList) });
+      wx.hideLoading();
     })
   },
 })

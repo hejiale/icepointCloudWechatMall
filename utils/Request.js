@@ -1,6 +1,6 @@
 var HostURL = 'https://dev.icepointcloud.com';
 // var HostURL = 'http://guirong.private.icepointcloud.com';
-// var HostURL = 'http://192.168.1.44:8080';
+// var HostURL = 'http://192.168.1.45:8080';
 var port = '/wechat/api/mall';
 var sessionId = null;
 
