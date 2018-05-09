@@ -26,9 +26,10 @@ page {
 .deliveryModeTitle {
   margin-left: 15px;
   width: 50%;
-  font-size: 18px;
+  font-size: 20px;
   color: #222;
   line-height: 80px;
+  font-weight: 500;
 }
 
 .deliveryModeImage {
@@ -39,10 +40,10 @@ page {
 
 .deliveryModeValue {
   margin-right: 20px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
-.setDefaultAddressView{
+.setDefaultAddressView {
   display: flex;
   margin-top: 5px;
   width: 100%;
@@ -51,7 +52,7 @@ page {
   background-color: white;
 }
 
-.setDefaultAddressText{
+.setDefaultAddressText {
   margin-left: 15px;
   font-size: 15px;
   width: calc(100% - 40px);
@@ -75,7 +76,7 @@ page {
 .contactInfoView {
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  margin-left: 10px;
   width: 80%;
 }
 
@@ -109,35 +110,37 @@ page {
   display: flex;
   margin-top: 1px;
   width: 100%;
-  height: 100px;
+  height: 94px;
   align-items: center;
   background-color: white;
 }
 
 .productImage {
   margin-left: 10px;
-  width: 80px;
-  height: 80px;
+  width: 54px;
+  height: 54px;
 }
 
 .productInfo {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  width: calc(100% - 100px);
+  margin-left: 20px;
+  width: calc(100% - 74px);
 }
 
 .productNameText {
-  font-size: 15px;
+  font-size: 16px;
   width: 100%;
   height: 25px;
   line-height: 25px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 500;
 }
 
 .priceView {
+  margin-top: 5px;
   margin-right: 10px;
   display: flex;
   justify-content: space-between;
@@ -145,20 +148,25 @@ page {
   height: 30px;
 }
 
+.specificationView{
+  display: flex;
+  align-items: center;
+}
+
 .numText {
   font-size: 14px;
   text-align: right;
-  /* font-weight: 300; */
+  color: #666666;
 }
 
 .price {
   font-size: 14px;
-  /* font-weight: 300; */
+  color: #666666;
 }
 
 .specificationsText {
   font-size: 13px;
-  color: #999999;
+  color: #999;
 }
 
 .shouldPayAmountView {
@@ -174,15 +182,16 @@ page {
   margin-right: 10px;
   width: calc(50% - 10px);
   text-align: right;
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .shouldPayAmountTitle {
   margin-left: 5px;
   width: 50%;
-  font-size: 17px;
+  font-size: 16px;
   color: #222;
+  font-weight: 500;
 }
 
 .memberRightsView {
@@ -217,7 +226,8 @@ page {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  font-size: 17px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .memberLineImage {
@@ -241,7 +251,6 @@ page {
 
 .memberDiscounTextTitle {
   font-size: 14px;
-  /* font-weight: 300; */
 }
 
 .memberDiscounTextValue {
@@ -286,9 +295,9 @@ page {
 
 .storeInfoTitle {
   width: 50%;
-  font-size: 17px;
+  font-size: 16px;
   color: #222;
-  line-height: 80px;
+  font-weight: 500;
 }
 
 .storeNumText {
@@ -312,7 +321,7 @@ page {
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 75%;
 }
 
 .storeContacterLine {
@@ -326,7 +335,7 @@ page {
   justify-content: center;
   align-items: center;
   margin-left: 1px;
-  width: calc(30% - 12px);
+  width: calc(25% - 12px);
 }
 
 .callImage {
@@ -346,7 +355,7 @@ page {
   margin-top: 5px;
   width: 100%;
   font-size: 13px;
-  /* font-weight: 300; */
+  padding-bottom: 10px;
 }
 
 .storeNameTextView {
@@ -417,7 +426,6 @@ page {
   margin-left: 10%;
   top: calc(50% - 160px);
   width: 80%;
-  height: 260px;
   background-color: white;
   border-radius: 8px;
 }
@@ -431,10 +439,9 @@ page {
 
 .memberBgTitle {
   width: 100%;
-  height: 20px;
-  line-height: 20px;
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .memberCancleButton {
@@ -442,15 +449,13 @@ page {
   font-size: 15px;
   right: 0px;
   width: 60px;
-  height: 20px;
-  line-height: 20px;
+  font-weight: 500;
   color: #4d9fd8;
   text-align: center;
 }
 
 .memberRightsBgLine {
-  margin: 0px;
-  width: 100%;
+  width: 92%;
   height: 1px;
   background-color: #e6e6e6;
 }
@@ -459,7 +464,6 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0px;
   width: 100%;
   height: 50px;
 }
@@ -467,32 +471,53 @@ page {
 .offsetAmountTitle {
   margin-left: 10px;
   width: 100px;
-  height: 25px;
-  line-height: 25px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.offsetUseAmountView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+}
+
+.offsetUseAmountTitle {
+  margin-left: 10px;
+  width: 50%;
+  font-size: 12px;
+  color: #999;
+}
+
+.offsetUseAmountValue {
+  margin-right: 10px;
+  width: 150px;
+  font-size: 12px;
+  text-align: right;
+  color: #999;
 }
 
 .offsetAmountValue {
   margin-right: 10px;
   width: 150px;
-  height: 25px;
-  line-height: 25px;
-  font-size: 14px;
+  font-size: 17px;
   text-align: right;
+  font-weight: 500;
 }
 
 .offsetAmountInput {
   margin-top: 15px;
   width: 90%;
-  height: 30px;
+  height: 38px;
   font-size: 14px;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
 }
 
 .memberRightsBgBottomLine {
-  margin-top: 30px;
-  width: 100%;
+  margin-top: 20px;
+  width: 92%;
   height: 1px;
   background-color: #e6e6e6;
 }
@@ -502,6 +527,7 @@ page {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 90%;
   height: 36px;
   line-height: 36px;

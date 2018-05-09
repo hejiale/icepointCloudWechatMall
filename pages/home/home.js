@@ -14,16 +14,15 @@ Page({
     pageSize: 20,
   },
   onLoad: function (options) {
-    var that = this;
-
-    that.getCompanyTemplate();
-
-    wx.showLoading({});
-
     app.userLogin(function () { });
   },
   onShow: function () {
-    
+    var that = this;
+
+    if (that.data.currentType == '精选'){
+      wx.showLoading({});
+      that.getCompanyTemplate();
+    }
   },
   onShoppingCart: function () {
     if (app.globalData.customer != null) {
@@ -56,7 +55,6 @@ Page({
     that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
 
     if (item.typeName == '精选') {
-      that.setData({ isShowProductListView: 'hide', isShowTemplateView: '', templateList: [], classList: [{ typeName: '精选' }] });
       that.getCompanyTemplate();
     } else {
       that.setData({ isShowProductListView: '', isShowTemplateView: 'hide', productList: [] });
@@ -115,6 +113,8 @@ Page({
   //获取商店展示模板
   getCompanyTemplate: function () {
     var that = this;
+
+    that.setData({ isShowProductListView: 'hide', isShowTemplateView: '', templateList: [], classList: [{ typeName: '精选' }] });
 
     app.getCompanyInfo(function () {
       let options = { companyId: app.globalData.belongCompany.id };

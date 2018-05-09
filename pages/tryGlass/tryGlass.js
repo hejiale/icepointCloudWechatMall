@@ -17,5 +17,18 @@ Page({
   },
   onShow: function () {
     // 页面显示
+  },
+  bindGetMsg: function (e) {
+    console.log(e.detail.data[0].isOrder);
+
+    //试戴下单
+    if (e.detail.data[0].isOrder == true){
+      var pages = getCurrentPages()
+      var prevPage = pages[pages.length - 2]
+
+      prevPage.setData({
+        tryGlassToOrder: true
+      })
+    }
   }
 })

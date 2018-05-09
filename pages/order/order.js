@@ -73,7 +73,7 @@ Page({
             var appendStr = '';
             for (var z = 0; z < goods.models.length; z++) {
               var spec = goods.models[z];
-              appendStr += spec.specificationValue + ';'
+              appendStr += spec.specificationName + ':' + spec.specificationValue + ' ';
               goods.specification = appendStr;
             }
           }

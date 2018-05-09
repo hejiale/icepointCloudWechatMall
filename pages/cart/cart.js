@@ -113,7 +113,7 @@ Page({
               var appendStr = '';
               for (var j = 0; j < specifications.length; j++) {
                 var spec = specifications[j];
-                appendStr += spec.specificationValue + ';';
+                appendStr += spec.specificationName + ':' + spec.specificationValue + ' ';
               }
               object.specification = appendStr;
             }

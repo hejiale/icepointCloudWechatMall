@@ -21,6 +21,7 @@ page {
   margin-left: 10px;
   font-size: 20px;
   color: #222;
+  font-weight: 500;
 }
 
 .orderCodeTitle {
@@ -65,6 +66,7 @@ page {
   width: 70px;
   height: 20px;
   font-size: 16px;
+  font-weight: 500;
 }
 
 .addressInfoView {
@@ -101,6 +103,7 @@ page {
   width: 100%;
   height: 100%;
   font-size: 16px;
+  font-weight: 500;
 }
 
 .contactAddressView {
@@ -114,7 +117,6 @@ page {
   width: 100%;
   height: 100%;
   font-size: 14px;
-  /* font-weight: 300; */
 }
 
 .rightIconImage {
@@ -133,35 +135,38 @@ page {
 .productView {
   display: flex;
   width: 100%;
+  height: 84px;
   align-items: center;
   background-color: white;
 }
 
 .productImage {
   margin-left: 10px;
-  width: 80px;
-  height: 80px;
+  width: 54px;
+  height: 54px;
 }
 
 .productInfo {
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
-  width: calc(100% - 90px);
+  margin-left: 20px;
+  width: calc(100% - 84px);
 }
 
 .productNameText {
-  font-size: 15px;
+  font-size: 16px;
   width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 500;
 }
 
 .specificationsText {
   font-size: 13px;
   color: #999999;
-  line-height: 30px;
+  height: 25px;
+  line-height: 25px;
 }
 
 .priceView {
@@ -169,16 +174,17 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 30px;
 }
 
 .numText {
   font-size: 14px;
   text-align: right;
+  color: #666666;
 }
 
 .price {
   font-size: 14px;
+  color: #666666;
 }
 
 .shouldPayAmountView {
@@ -193,15 +199,17 @@ page {
 .shouldPayAmountTitle {
   margin-left: 7px;
   width: 50%;
-  font-size: 18px;
+  font-size: 16px;
   color: #222;
+  font-weight: 500;
 }
 
 .shouldPayAmountText {
   margin-right: 10px;
   width: 50%;
   text-align: right;
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .memberRightsView {
@@ -239,7 +247,8 @@ page {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .memberLineImage {
@@ -313,9 +322,9 @@ page {
 
 .storeInfoTitle {
   width: 50%;
-  font-size: 18px;
+  font-size: 16px;
   color: #222;
-  line-height: 80px;
+  font-weight: 500;
 }
 
 .storeNumText {
@@ -342,7 +351,7 @@ page {
 .storeContactInfoView {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
 }
 
 .storeContacterLine {
@@ -356,7 +365,7 @@ page {
   justify-content: center;
   align-items: center;
   margin-left: 1px;
-  width: calc(30% - 3px);
+  width: calc(20% - 3px);
 }
 
 .callImage {
@@ -373,7 +382,7 @@ page {
 
 .storeAddressView {
   width: 100%;
-  font-size: 13px;
+  font-size: 14px;
   /* font-weight: 300; */
 }
 
@@ -381,7 +390,7 @@ page {
   display: flex;
   align-items: center;
   width: 70%;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .storeDistanceView {

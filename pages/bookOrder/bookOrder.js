@@ -14,8 +14,8 @@ Page({
     isShowStore: '',
     currentAddress: null,
     selectAddressId: null,
-    totalPrice: null,
-    shouldPayPrice: null,
+    totalPrice: 0,
+    shouldPayPrice: 0,
     memberInfo: null,
     discountPrice: 0,
     balancePrice: 0,
@@ -24,8 +24,8 @@ Page({
     //当前输入折扣抵扣金额
     inputDiscountValue: 0,
     inputValue: 0,
-    useBalance: null,
-    usePoint: null,
+    useBalance: 0,
+    usePoint: 0,
     isFromCart: false,
     currentStore: null,
     totalStore: 0
@@ -100,16 +100,16 @@ Page({
     var orderParameter = {
       order: {
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
-        // netPointId: that.data.currentStore.id,
-        netPointId: 2,
+        netPointId: that.data.currentStore.id,
+        // netPointId: 2,
         addressId: that.data.selectAddressId,
-        amountPayable: that.data.shouldPayPrice,
+        amountPayable: parseFloat(that.data.shouldPayPrice).toFixed(2),
         discount: that.data.memberInfo.mallCustomer.discount,
-        discountPrice: that.data.discountPrice,
+        discountPrice: parseFloat(that.data.discountPrice).toFixed(2),
         integral: that.data.usePoint,
         integralPrice: that.data.pointPrice,
-        balance: that.data.useBalance,
-        balancePrice: that.data.balancePrice
+        balance: parseFloat(that.data.useBalance).toFixed(2),
+        balancePrice: parseFloat(that.data.balancePrice).toFixed(2)
       }
     };
 
@@ -141,7 +141,7 @@ Page({
       title: '正在提交订单...',
     })
     app.globalData.request.payOrder(orderParameter, function (data) {
-      if (data.retCode >= 306 || data.retCode <= 308) {
+      if (data.retCode >= 306 && data.retCode <= 308) {
         wx.showToast({
           title: data.retMsg,
           icon: "none"
@@ -190,9 +190,9 @@ Page({
       var shouldMoney = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.balancePrice);
 
       if (parseFloat(pointMoney) > shouldMoney) {
-        that.setData({ inputValue: '0.00' })
+        that.setData({ inputValue: '0' })
       } else if (parseInt(str) > parseInt(that.data.memberInfo.mallCustomer.integral)) {
-        that.setData({ inputValue: that.data.memberInfo.mallCustomer.integral });
+        that.setData({ inputValue: '0' });
       } else {
         that.setData({ inputValue: str })
       }
@@ -200,22 +200,24 @@ Page({
       var shouldPay = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.pointPrice);
 
       if (parseFloat(str) > shouldPay) {
-        that.setData({ inputValue: '0.00'})
+        that.setData({ inputValue: '0' })
       } else if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.balance)) {
-        that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance });
-      }else {
+        that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance});
+      } else {
         that.setData({ inputValue: str })
       }
     }
 
-    if (that.data.inputValue.length > 0) {
+    if (str.length > 0) {
       if (that.data.isInputPoint) {
         var point = (parseInt(that.data.inputValue) * that.data.memberInfo.integralTrade.money) / that.data.memberInfo.integralTrade.integral_sum;
-        that.setData({ inputDiscountValue: point });
+        that.setData({ inputDiscountValue: point.toFixed(2) });
       } else {
         that.setData({ inputDiscountValue: that.data.inputValue })
       }
-    } 
+    }else{
+      that.setData({ inputDiscountValue: 0})
+    }
   },
   onSureDiscount: function () {
     var that = this;
@@ -329,3 +331,4 @@ Page({
   //   })
   // })
 })
+

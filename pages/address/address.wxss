@@ -68,6 +68,7 @@ page {
 
 .userNameText {
   font-size: 15px;
+  font-weight: 500;
 }
 
 .phoneView {
@@ -76,6 +77,7 @@ page {
 
 .phoneText {
   font-size: 15px;
+  font-weight: 500;
 }
 
 .addressView {
@@ -84,15 +86,9 @@ page {
 
 .addressText {
    width: 100%;
-   /* line-height: 20px; */
   font-size: 14px;
-  color: #666;
   word-wrap:break-word;
   word-break:break-all;
-  /* text-overflow:auto;
-    overflow: auto;  */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap;  */
 }
 
 .defaultAddressView {

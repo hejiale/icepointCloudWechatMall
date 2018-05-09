@@ -10,9 +10,13 @@
     <view class='memberRightsBgLine'></view>
     <view class='offsetAmountView'>
       <text class='offsetAmountTitle'>当前抵付金额</text>
-      <text class='offsetAmountValue'>￥ {{inputDiscountValue}}</text>
+      <text class='offsetAmountValue'>￥ {{filter.numberToFix(inputDiscountValue)}}</text>
     </view>
-    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 14px;margin-left: 5px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
+    <view class='offsetUseAmountView'>
+      <text class='offsetUseAmountTitle'>{{isInputPoint ? "账户可使用积分":"账户可使用储值余额"}}</text>
+      <text class='offsetUseAmountValue'>{{isInputPoint ? memberInfo.mallCustomer.integral:memberInfo.mallCustomer.balance}}</text>
+    </view>
+    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 15px;margin-left: 5px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
     <view class='memberRightsBgBottomLine'></view>
     <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
   </view>
@@ -30,8 +34,8 @@
       <image class="addressIconImage" src='../images/address@2x.png'></image>
       <view class="contactInfoView">
         <view class="contactNameView">
-          <text style='font-size: 16px;'>{{currentAddress.name}}</text>
-          <text style='font-size: 16px;margin-left:10px;'>{{currentAddress.phone}}</text>
+          <text style='font-size: 16px;font-weight: 500;'>{{currentAddress.name}}</text>
+          <text style='font-size: 16px;margin-left:10px;font-weight: 500;'>{{currentAddress.phone}}</text>
         </view>
         <view class="contactAddressView">
           <text style='font-size: 14px;'>{{currentAddress.region + " " + currentAddress.address}}</text>
@@ -40,7 +44,7 @@
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
     </view>
     <view class='setDefaultAddressView' wx:else bindtap='onSelectAddress'>
-      <text class='setDefaultAddressText'>设置默认收货地址</text>
+      <text class='setDefaultAddressText'>设置联系人信息</text>
       <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
     </view>
     <view class='productContentView'>

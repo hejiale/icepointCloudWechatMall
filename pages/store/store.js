@@ -9,11 +9,18 @@ var app = getApp();
 Page({
   data: {
     storeList: null,
-    keyword: ''
+    keyword: '',
+    imageHeight: 0
   },
   onLoad: function () {
     var that = this;
     that.queryStoreList();
+
+    app.getSystemInfo(function (systemInfo) {
+      that.setData({
+        imageHeight: (((systemInfo.windowWidth - 40)*9)/16),
+      })
+    })
   },
   onSelectStore: function (event) {
     var that = this;

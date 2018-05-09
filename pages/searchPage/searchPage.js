@@ -6,7 +6,7 @@ Page({
     historySearchWords: [],
     allProductList: [],
     isShowProductList: 'hide',
-    isShowSearchView: 'show',
+    isShowSearchView: '',
     showOrHide: 'hide',
     classList: [],
     parameterList: [],
@@ -35,7 +35,7 @@ Page({
   //--------------点击搜索记录查询商品----------------//
   onLastesItem: function (e) {
     var that = this;
-    that.setData({ isShowProductList: 'show', isShowSearchView: 'hide', keyWord: e.currentTarget.dataset.key, isFilter: false });
+    that.setData({ isShowProductList: '', isShowSearchView: 'hide', keyWord: e.currentTarget.dataset.key, isFilter: false });
     that.onResetProperty();
     that.filterProductsRequest();
   },
@@ -52,7 +52,7 @@ Page({
   //--------------点击分类----------------//
   onClassClicked: function () {
     var that = this;
-    that.setData({ showOrHide: 'show' });
+    that.setData({ showOrHide: '' });
     wx.showLoading({});
 
     let options = { companyId: app.globalData.belongCompany.id};
@@ -239,7 +239,7 @@ Page({
 
     var that = this;
 
-    that.setData({ isShowProductList: 'show', isShowSearchView: 'hide', currentPage: 1, isEndLoading: false, scrollTop: 0, allProductList: [] });
+    that.setData({ isShowProductList: '', isShowSearchView: 'hide', currentPage: 1, isEndLoading: false, scrollTop: 0, allProductList: [] });
     that.queryProductsRequest();
   },
   //--------------查询商品----------------//

@@ -9,13 +9,14 @@ Page({
     isSelectDetail: true,
     showParameterView: 'hide',
     goodsId: null,
-    deviceWidth:0,
+    deviceWidth: 0,
     deviceHeight: 0,
     parameterObject: null,
     selectParameters: [],
     parameterPrice: null,
     cartNum: 1,
-    isToOrder: false
+    isToOrder: false,
+    tryGlassToOrder:false
   },
   onLoad: function (options) {
     var that = this;
@@ -35,12 +36,19 @@ Page({
       })
     })
   },
+  onShow:function(){
+    var that = this;
+
+    if (that.data.tryGlassToOrder){
+      that.setData({ tryGlassToOrder: false});
+      that.onBook();
+    }
+  },
   onBook: function (event) {
     var that = this;
     that.setData({ isToOrder: true });
 
     if (app.globalData.customer != null) {
-      that.setData({ showParameterView: '', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
       wx.navigateTo({
@@ -66,7 +74,6 @@ Page({
     that.setData({ isToOrder: false });
 
     if (app.globalData.customer != null) {
-      that.setData({ showParameterView: '', parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       that.queryParameterRequest();
     } else {
       wx.navigateTo({
@@ -164,7 +171,7 @@ Page({
       var appendStr = '';
       for (var i = 0; i < that.data.selectParameters.length; i++) {
         var parameter = that.data.selectParameters[i];
-        appendStr += parameter.value + ';';
+        appendStr += parameter.name + ":" + parameter.value + ';';
       }
       product.specification = appendStr;
     } else {
@@ -217,7 +224,7 @@ Page({
       } else {
         for (var i = 0; i < that.data.selectParameters.length; i++) {
           var selectItem = that.data.selectParameters[i];
-          if (selectItem.value == item.value && selectItem.name == item.name) {
+          if (selectItem.value == item.value && selectItem.nameId == item.nameId) {
             that.data.selectParameters.splice(i, 1);
           }
         }
@@ -264,7 +271,7 @@ Page({
           }
         }
       }
-      that.setData({ parameterObject: data });
+      that.setData({ parameterObject: data, showParameterView: '' });
       wx.hideLoading();
     })
   }

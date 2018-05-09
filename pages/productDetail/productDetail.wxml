@@ -1,8 +1,11 @@
 <import src="../../wxParse/wxParse.wxml" />
 <view class='parameterMainView {{showParameterView}}'>
-  <view id="classViewCover" bindtap='onCoverClick'></view>
-  <view class='parameterContentView'>
-  <text style='font-size: 17px;text-align: center;padding-top: 10px;padding-bottom: 10px;'>商品规格</text>
+  <view id="classViewCover" catchtouchmove='true'></view>
+  <view class='parameterContentView' catchtouchmove='true'>
+    <view class='topTitleView'>
+      <text style='font-size: 17px;text-align: center;padding-top: 10px;padding-bottom: 10px;font-weight: 500;'>商品规格</text>
+      <text class='topCancleButton' bindtap='onCoverClick'>取消</text>
+    </view>
     <image class="parameterLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
     <view class='parameterInfoView'>
       <view class='parameterRightView'>
@@ -11,7 +14,7 @@
       </view>
       <image src="{{DetailObject.photos[0]}}" class="parameterImage" mode="aspectFit" />
     </view>
-    <scroll-view class='specificationsView' scroll-y="true">
+    <scroll-view class='specificationsView' scroll-y="true" style='height: {{parameterObject.specifications.length > 0 ? deviceHeight/4 : 0}}px;'>
       <block wx:for-items="{{parameterObject.specifications}}">
         <view class="popPropertyView">
           <view class="popPropertyTitleView">
@@ -64,9 +67,9 @@
     </view>
     <view class="specificationView">
       <view class='specificationTitleView'>
-        <text class='specificationDetailText' style='{{isSelectDetail ? "color:#222;" : "color:#999;"}}' bindtap='onDetail'>图文详情</text>
+        <text class='specificationDetailText' style='{{isSelectDetail ? "color:#222;font-weight: 500;" : "color:#999;font-weight: 400;"}}' bindtap='onDetail'>图文详情</text>
         <image class='columnLine' src='../images/icon_columnLine@2x.png'></image>
-        <text class='specificationParameterText' style='{{isSelectDetail ? "color:#999;" : "color:#222;"}}' bindtap='onParameter'>商品参数</text>
+        <text class='specificationParameterText' style='{{isSelectDetail ? "color:#999;font-weight: 400;" : "color:#222;font-weight: 500;"}}' bindtap='onParameter'>商品参数</text>
       </view>
       <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
       <view class="webView" wx:if="{{isSelectDetail}}">
@@ -77,7 +80,7 @@
           <block wx:for-items="{{DetailObject.details}}">
             <view class="specificationItem">
               <text class="keyText">{{item.parameterName.parameterName}}</text>
-              <text class="valueText">{{item.valueDetail.parameterValue}}</text>
+              <text class="valueText">{{item.valueDetail}}</text>
             </view>
           </block>
         </view>
