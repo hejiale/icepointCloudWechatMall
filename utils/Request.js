@@ -302,6 +302,26 @@ function clearCart(callBack) {
     })
 }
 
+//验证购物车库存数量
+function valityCartStock(options, callBack) {
+  var that = this;
+
+  let msg = {
+    url: port + '/validationShoppingStatus',
+    method: 'POST',
+    data: options,
+    sessionId: 'JSESSIONID=' + that.sessionId
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+
 //门店列表
 function queryStoreList(options, callBack) {
   var that = this;
@@ -536,6 +556,7 @@ module.exports = {
   queryCartList: queryCartList,
   updateCart: updateCart,
   clearCart: clearCart,
+  valityCartStock: valityCartStock,
   deleteCart: deleteCart,
   queryStoreList: queryStoreList,
   saveAddress: saveAddress,

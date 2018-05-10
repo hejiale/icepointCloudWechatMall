@@ -43,7 +43,7 @@ Page({
     var that = this;
     var value = e.currentTarget.dataset.key;
 
-    if (value.goods.isShelves){
+    if (value.goods.isShelves) {
       for (var i = 0; i < that.data.cartList.length; i++) {
         var object = that.data.cartList[i];
         if (object.shoppingCart.cartId == value.shoppingCart.cartId) {
@@ -52,10 +52,10 @@ Page({
       }
       that.setData({ cartList: that.data.cartList });
       that.updateCartTotalPrice();
-    }else{
+    } else {
       wx.showToast({
         title: '该商品已下架',
-        icon:'none'
+        icon: 'none'
       })
     }
   },
@@ -71,16 +71,52 @@ Page({
       }
     }
 
-    if (productList.length > 0){
-      app.globalData.orderProducts = productList;
+    if (productList.length > 0) {
+      var parameterList = [];
 
-      wx.navigateTo({
-        url: '../bookOrder/bookOrder?isFromCart=1'
-      })
-    }else{
+      for (var i = 0; i < productList.length; i++) {
+        var item = productList[i];
+
+        if (item.specifications != null) {
+          parameterList.push({ specificationsId: item.specifications.id, cartId: item.shoppingCart.cartId, count: item.shoppingCart.count });
+        } else {
+          parameterList.push({ goodsId: item.goods.goodsId, cartId: item.shoppingCart.cartId, count: item.shoppingCart.count });
+        }
+      }
+
+      console.log(JSON.stringify(parameterList));
+
+      app.globalData.request.valityCartStock(JSON.stringify(parameterList), function (data) {
+        // var isCanOrder = true;
+
+        for (var i = 0; i < data.result.length; i++) {
+          var item = data.result[i];
+          if (item.retCode != 200) {
+            wx.showModal({
+              title: '提示',
+              content: '购物车商品库存不足或商品已失效!',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  that.queryCartList();
+                }
+              }
+            })
+            return;
+          }
+        }
+
+        app.globalData.orderProducts = productList;
+
+        wx.navigateTo({
+          url: '../bookOrder/bookOrder?isFromCart=1'
+        })
+
+      });
+    } else {
       wx.showToast({
         title: '购物车未选中任何商品!',
-        icon:'none'
+        icon: 'none'
       })
     }
   },
@@ -94,7 +130,7 @@ Page({
   //查询购物车列表
   queryCartList: function () {
     var that = this;
-    wx.showLoading();
+    // wx.showLoading();
 
     app.globalData.request.queryCartList(function (data) {
       if (data.result != null) {
@@ -102,10 +138,10 @@ Page({
           for (var i = 0; i < data.result.length; i++) {
             var object = data.result[i];
 
-            if (object.status == "NORMAL"){
+            if (object.code == 200 || object.code == 305) {
               object.selected = true;
             }
-            
+
             if (object.specifications != null) {
               var specificationStr = object.specifications.groupValues;
               var specifications = JSON.parse(specificationStr);
@@ -120,7 +156,7 @@ Page({
           }
           that.setData({ cartList: data.result });
           that.updateCartTotalPrice();
-          wx.hideLoading();
+          // wx.hideLoading();
         }
       } else {
         wx.showToast({
@@ -140,6 +176,12 @@ Page({
       count: count
     };
     app.globalData.request.updateCart(options, function (data) {
+      if (data.retCode == 305) {
+        wx.showModal({
+          showCancel: false,
+          content: data.retMsg,
+        })
+      }
       that.queryCartList();
     });
   },

@@ -39,7 +39,7 @@ page {
 }
 
 .deliveryModeValue {
-  margin-right: 20px;
+  margin-right: 10px;
   font-size: 16px;
 }
 
@@ -84,14 +84,15 @@ page {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 30px;
+  /* height: 30px; */
 }
 
 .contactAddressView {
   display: flex;
   align-items: center;
+  margin-top: 5px;
   width: 100%;
-  height: 40px;
+  /* height: 40px; */
 }
 
 .rightIconImage {
@@ -187,7 +188,7 @@ page {
 }
 
 .shouldPayAmountTitle {
-  margin-left: 5px;
+  margin-left: 15px;
   width: 50%;
   font-size: 16px;
   color: #222;
@@ -218,7 +219,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 5px;
+  margin-left: 15px;
   width: calc(100% - 35px);
 }
 
@@ -279,7 +280,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 5px;
+  margin-left: 15px;
   width: calc(100% - 35px);
 }
 
@@ -470,7 +471,6 @@ page {
 
 .offsetAmountTitle {
   margin-left: 10px;
-  width: 100px;
   font-size: 16px;
   font-weight: 500;
 }
@@ -506,13 +506,22 @@ page {
   font-weight: 500;
 }
 
-.offsetAmountInput {
+.offsetAmountInputView{
+  display: flex;
+  align-items: center;
   margin-top: 15px;
-  width: 90%;
+  width: calc(100% - 20px);
   height: 38px;
   font-size: 14px;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
+}
+
+.offsetAmountInput {
+  width: 90%;
+  height: 100%;
+  margin-left: 5px;
+  font-size: 14px;
 }
 
 .memberRightsBgBottomLine {

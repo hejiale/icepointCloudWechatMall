@@ -13,10 +13,12 @@
       <text class='offsetAmountValue'>￥ {{filter.numberToFix(inputDiscountValue)}}</text>
     </view>
     <view class='offsetUseAmountView'>
-      <text class='offsetUseAmountTitle'>{{isInputPoint ? "账户可使用积分":"账户可使用储值余额"}}</text>
+      <text class='offsetUseAmountTitle'>{{isInputPoint ? "账户积分":"账户储值余额"}}</text>
       <text class='offsetUseAmountValue'>{{isInputPoint ? memberInfo.mallCustomer.integral:memberInfo.mallCustomer.balance}}</text>
     </view>
-    <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 15px;margin-left: 5px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
+    <view class='offsetAmountInputView'>
+      <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 15px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
+    </view>
     <view class='memberRightsBgBottomLine'></view>
     <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
   </view>

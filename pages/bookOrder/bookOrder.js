@@ -150,11 +150,31 @@ Page({
         if (that.data.isFromCart == 1) {
           app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
             wx.hideLoading();
-            wx.navigateBack();
+
+            wx.showModal({
+              title: '提示',
+              content: '订单提交成功!',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack();
+                }
+              }
+            })
           });
         } else {
           wx.hideLoading();
-          wx.navigateBack();
+
+          wx.showModal({
+            title: '提示',
+            content: '订单提交成功!',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack();
+              }
+            }
+          })
         }
       }
     });
@@ -202,7 +222,7 @@ Page({
       if (parseFloat(str) > shouldPay) {
         that.setData({ inputValue: '0' })
       } else if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.balance)) {
-        that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance});
+        that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance });
       } else {
         that.setData({ inputValue: str })
       }
@@ -215,8 +235,8 @@ Page({
       } else {
         that.setData({ inputDiscountValue: that.data.inputValue })
       }
-    }else{
-      that.setData({ inputDiscountValue: 0})
+    } else {
+      that.setData({ inputDiscountValue: 0 })
     }
   },
   onSureDiscount: function () {

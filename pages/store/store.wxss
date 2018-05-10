@@ -20,7 +20,7 @@ page {
   width: 100%;
 }
 
-.topView{
+.topView {
   display: flex;
   position: fixed;
   justify-content: center;
@@ -28,11 +28,11 @@ page {
   top: 0px;
   width: 100%;
   height: 50px;
-  z-index: 1000; 
+  z-index: 1000;
   background-color: #fbf9fe;
 }
 
-.searchView{
+.searchView {
   display: flex;
   align-items: center;
   width: 90%;
@@ -41,13 +41,13 @@ page {
   border-radius: 8px;
 }
 
-.seachImage{
+.seachImage {
   margin-left: 10px;
   width: 15px;
   height: 15px;
 }
 
-.searchInput{
+.searchInput {
   margin-left: 10px;
   width: calc(100% - 25px);
   height: 100%;
@@ -67,10 +67,9 @@ page {
   margin-top: 1px;
   width: 100%;
   background-color: white;
-  padding-bottom: 10px;
 }
 
-.storeNameView{
+.storeNameView {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -79,25 +78,25 @@ page {
   height: 30px;
 }
 
-.distanceView{
+.distanceView {
   display: flex;
   align-items: center;
   height: 100%;
   margin-right: 10px;
 }
 
-.storeImage{
+.storeImage {
   margin-top: 10px;
   margin-left: 20px;
   margin-right: 20px;
-  width: calc(100% - 40px); 
+  width: calc(100% - 40px);
   border-radius: 8px;
-} 
+}
 
-.storeAddressView{
+.storeAddressView {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: 10px;
   margin-left: 20px;
   width: calc(100% - 20px);
   height: 50px;
@@ -106,21 +105,22 @@ page {
 .contentText {
   margin-left: 20px;
   font-size: 14px;
-  color: #666666;
+  color: #666;
 }
-.addressText{
+
+.addressText {
   font-size: 20px;
   width: 80%;
-  line-height: 20px;
+  line-height: 25px;
   font-weight: 500;
 }
 
-.addressImage{
+.addressImage {
   width: 20px;
   height: 20px;
 }
 
-.distanceText{
+.distanceText {
   margin-left: 5px;
   font-size: 14px;
   line-height: 25px;

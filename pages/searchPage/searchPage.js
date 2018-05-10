@@ -21,11 +21,14 @@ Page({
     isFilter: false,
     scrollTop: 0,
     selectAllClass: [],
-    selectAllParameter: []
+    selectAllParameter: [],
+    doubleLayoutWidth: 0
   },
   //--------------页面初始化 加载分类商品参数----------------//
   onLoad: function () {
     var that = this;
+
+    that.setData({ doubleLayoutWidth: app.globalData.doubleLayoutWidth});
 
     var historyKeywords = wx.getStorageSync(app.globalData.historySearchWords);
     if (historyKeywords.length > 0) {
@@ -153,7 +156,7 @@ Page({
       for (var j = 0; j < object.goodsParameters.length; j++) {
         var parameter = object.goodsParameters[j];
         if (parameter.selected) {
-          allParameter.push(parameter.goodsId);
+          allParameter.push(parameter.id);
         }
       }
     }
@@ -260,7 +263,7 @@ Page({
         options.typeId = that.chooseClass();
       }
       if (that.chooseParameter().length > 0) {
-        options.goodsIds = that.chooseParameter().join(',');
+        options.goodsParameterIds = that.chooseParameter().join(',');
       }
     } else {
       options.keyword = that.data.keyWord;

@@ -136,6 +136,10 @@ page {
   font-size: 14px;
   color: #999999;
   font-weight: 300;
+  width: calc(100% - 65px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .shelvesImage{
@@ -188,7 +192,7 @@ page {
   height: 26px;
   line-height: 26px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .footView {

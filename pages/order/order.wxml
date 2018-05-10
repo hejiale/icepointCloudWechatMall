@@ -7,11 +7,11 @@
     </view>
     <view class='searchMenuView'>
       <view class='orderMenuView' wx:if="{{orderType == null}}" style='color:#4D9FD8;' bindtap='onAllOrder'>全部订单</view>
-      <view class='orderMenuView' wx:else style='color:#222;' bindtap='onAllOrder'>全部订单</view>
+      <view class='orderMenuView' wx:else style='color:#999;' bindtap='onAllOrder'>全部订单</view>
       <view class='orderMenuView' bindtap='onUnProcess' wx:if="{{orderType == 'UNTREATED'}}" style='color: #4d9fd8;'>未处理</view>
-      <view class='orderMenuView' bindtap='onUnProcess' wx:else style='color: #222;'>未处理</view>
+      <view class='orderMenuView' bindtap='onUnProcess' wx:else style='color: #999;'>未处理</view>
       <view class='orderMenuView' bindtap='onProcess' wx:if="{{orderType == 'PROCESSED'}}" style='color: #4d9fd8;'>已处理</view>
-      <view class='orderMenuView' bindtap='onProcess' wx:else style='color: #222;'>已处理</view>
+      <view class='orderMenuView' bindtap='onProcess' wx:else style='color: #999;'>已处理</view>
     </view>
   </view>
   <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200'>

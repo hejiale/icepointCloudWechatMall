@@ -66,7 +66,7 @@ Page({
     var that = this;
 
     wx.navigateTo({
-      url: '../tryGlass/tryGlass?link=' + that.data.DetailObject.photos[0],
+      url: '../tryGlass/tryGlass?link=' + that.data.DetailObject.goods.proTryImage,
     })
   },
   onCart: function () {
@@ -171,7 +171,7 @@ Page({
       var appendStr = '';
       for (var i = 0; i < that.data.selectParameters.length; i++) {
         var parameter = that.data.selectParameters[i];
-        appendStr += parameter.name + ":" + parameter.value + ';';
+        appendStr += parameter.name + ":" + parameter.value + ' ';
       }
       product.specification = appendStr;
     } else {

@@ -12,14 +12,27 @@ Page({
     currentType: "精选",
     currentPage: 1,
     pageSize: 20,
+    singleLayoutWidth: 0,
+    doubleLayoutWidth: 0,
+    deviceWidth:0,
+    scrollLeft:0
   },
   onLoad: function (options) {
     app.userLogin(function () { });
+
+    var that = this;
+    that.setData({ singleLayoutWidth: app.globalData.singleLayoutWidth, doubleLayoutWidth: app.globalData.doubleLayoutWidth })
+
+    app.getSystemInfo(function (systemInfo) {
+      that.setData({
+        deviceWidth: systemInfo.windowWidth,
+      })
+    })
   },
   onShow: function () {
     var that = this;
 
-    if (that.data.currentType == '精选'){
+    if (that.data.currentType == '精选') {
       wx.showLoading({});
       that.getCompanyTemplate();
     }
@@ -50,9 +63,7 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    wx.showLoading();
-
-    that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
+    that.setData({ currentType: item.typeName, isShowClassView: 'hide', scrollLeft: e.currentTarget.offsetLeft });
 
     if (item.typeName == '精选') {
       that.getCompanyTemplate();
@@ -61,6 +72,12 @@ Page({
       that.queryProductsRequest(item.typeId);
     }
   },
+  // onCoverClassItemClicked: function(e){
+  //   var that = this;
+  //   var item = e.currentTarget.dataset.key;
+
+  //   that.onClassItemClicked(e);
+  // },
   onTemplateDetail: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
@@ -107,7 +124,7 @@ Page({
       })
     }
   },
-  onBgClicked: function(){
+  onBgClicked: function () {
     this.setData({ isShowClassView: 'hide' });
   },
   //获取商店展示模板

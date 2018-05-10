@@ -4,7 +4,12 @@ var MD5 = require('utils/md5.js')
 
 App({
   onLaunch: function () {
+    var that = this
 
+    that.getSystemInfo(function (systemInfo) {
+      that.globalData.singleLayoutWidth = ((systemInfo.windowWidth * 0.8 * 9) / 16);
+      that.globalData.doubleLayoutWidth = ((systemInfo.windowWidth * 0.5 * 0.8 * 9) / 16);
+    })
   },
   //获取微信用户信息
   getUserInfo: function (cb) {
@@ -18,7 +23,7 @@ App({
           that.globalData.userInfo = res.userInfo
           typeof cb == "function" && cb(that.globalData.userInfo)
         },
-        fail:function(res){
+        fail: function (res) {
           typeof cb == "function" && cb(that.globalData.userInfo)
         }
       })
@@ -101,6 +106,9 @@ App({
     //下单商品集合
     orderProducts: null,
     //专场详情object
-    templateObject:null
+    templateObject: null,
+    //商品双排 单排高度
+    singleLayoutWidth: 0,
+    doubleLayoutWidth: 0
   }
 })

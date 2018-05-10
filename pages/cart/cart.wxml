@@ -24,7 +24,8 @@
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <view class='openPriceView'>
                 <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
-                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.status !== 'NORMAL'}}"></image>
+                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.code != 200 && item.code != 305}}"></image>
+                <image class='shelvesImage' src='../images/icon_cartNoStock@2x.png' mode="aspectFit" wx:elif="{{item.code == 305}}"></image>
               </view>
               <view class='editCartNumView'>
                 <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
@@ -46,7 +47,8 @@
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <view class='specificationsView'>
                 <text class='specificationsText'>{{item.specification}}</text>
-                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.status !== 'NORMAL'}}"></image>
+                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.code != 200 && item.code != 305}}"></image>
+                <image class='shelvesImage' src='../images/icon_cartNoStock@2x.png' mode="aspectFit" wx:elif="{{item.code == 305}}"></image>
               </view>
               <view class="priceView">
                 <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
