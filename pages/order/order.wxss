@@ -190,3 +190,19 @@ page {
   font-size: 16px;
   font-weight: 500;
 }
+
+.emptyCartView{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 105px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.emptyImage{
+  width: 182px;
+  height: 218px;
+}

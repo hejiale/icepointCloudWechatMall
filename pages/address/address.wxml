@@ -1,5 +1,5 @@
 <view class="page">
-  <scroll-view class="scroll-container" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" style="height:calc(100% - 1px)">
+  <scroll-view class="scroll-container" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" style="height:calc(100% - 1px)" wx:if="{{addressList.length > 0}}">
     <block wx:for-items="{{addressList}}">
       <view class="CellItem">
         <view class="CellContentView">
@@ -33,6 +33,9 @@
       </view>
     </block>
   </scroll-view>
+  <view class='emptyCartView' wx:else>
+    <image src='../images/icon_emptyAddress@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
 </view>
 <view class="footView" bindtap="onInsertNewAddress">
   <text class="footText">新增收货地址</text>

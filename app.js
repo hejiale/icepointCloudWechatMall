@@ -12,23 +12,23 @@ App({
     })
   },
   //获取微信用户信息
-  getUserInfo: function (cb) {
-    var that = this
-    if (that.globalData.userInfo) {
-      typeof cb == "function" && cb(that.globalData.userInfo)
-    } else {
-      wx.getUserInfo({
-        success: function (res) {
-          console.log(res);
-          that.globalData.userInfo = res.userInfo
-          typeof cb == "function" && cb(that.globalData.userInfo)
-        },
-        fail: function (res) {
-          typeof cb == "function" && cb(that.globalData.userInfo)
-        }
-      })
-    }
-  },
+  // getUserInfo: function (cb) {
+  //   var that = this
+  //   if (that.globalData.userInfo) {
+  //     typeof cb == "function" && cb(that.globalData.userInfo)
+  //   } else {
+  //     wx.getUserInfo({
+  //       success: function (res) {
+  //         console.log(res);
+  //         that.globalData.userInfo = res.userInfo
+  //         typeof cb == "function" && cb(that.globalData.userInfo)
+  //       },
+  //       fail: function (res) {
+  //         typeof cb == "function" && cb(that.globalData.userInfo)
+  //       }
+  //     })
+  //   }
+  // },
   //获取设备信息
   getSystemInfo: function (cb) {
     var that = this;
@@ -68,6 +68,18 @@ App({
           that.globalData.request.setSessionId(data.result.sessionId);
           typeof cb == "function" && cb();
         });
+      }
+    });
+  },
+  //校验用户登录状态
+  valityLogigStatus: function (cb) {
+    var that = this;
+
+    that.globalData.request.valityLoginStatus(function (data) {
+      if (data.retCode == 201 || data.retCode == 203) {
+        typeof cb == "function" && cb(false);
+      } else {
+        typeof cb == "function" && cb(true);
       }
     });
   },

@@ -16,7 +16,7 @@ Page({
     parameterPrice: null,
     cartNum: 1,
     isToOrder: false,
-    tryGlassToOrder:false
+    tryGlassToOrder: false
   },
   onLoad: function (options) {
     var that = this;
@@ -36,25 +36,35 @@ Page({
       })
     })
   },
-  onShow:function(){
+  onShow: function () {
     var that = this;
 
-    if (that.data.tryGlassToOrder){
-      that.setData({ tryGlassToOrder: false});
+    if (that.data.tryGlassToOrder) {
+      that.setData({ tryGlassToOrder: false });
       that.onBook();
     }
   },
   onBook: function (event) {
     var that = this;
-    that.setData({ isToOrder: true });
 
-    if (app.globalData.customer != null) {
-      that.queryParameterRequest();
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
+    wx.showLoading({});
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            that.setData({ isToOrder: true });
+            that.queryParameterRequest();
+          } else {
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        that.setData({ isToOrder: true });
+        that.queryParameterRequest();
+      }
+    })
   },
   onCall: function () {
     var that = this;
@@ -71,26 +81,46 @@ Page({
   },
   onCart: function () {
     var that = this;
-    that.setData({ isToOrder: false });
 
-    if (app.globalData.customer != null) {
-      that.queryParameterRequest();
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
+    wx.showLoading({});
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            that.setData({ isToOrder: false });
+            that.queryParameterRequest();
+          } else {
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        that.setData({ isToOrder: false });
+        that.queryParameterRequest();
+      }
+    })
   },
   onToCart: function () {
-    if (app.globalData.customer != null) {
-      wx.navigateTo({
-        url: '../cart/cart',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            wx.navigateTo({
+              url: '../cart/cart',
+            })
+          } else {
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        wx.navigateTo({
+          url: '../cart/cart',
+        })
+      }
+    })
   },
   onSelectParameterToCart: function () {
     var that = this;
@@ -229,6 +259,7 @@ Page({
           }
         }
       }
+      wx.showLoading({});
       that.queryParameterRequest();
     }
   },
@@ -248,8 +279,6 @@ Page({
       }
       options.specificationsModels = array;
     }
-
-    wx.showLoading({});
 
     app.globalData.request.queryProductDetailParameter(JSON.stringify(options), function (data) {
 

@@ -39,11 +39,6 @@
         </view>
       </block>
     </view>
-    <view class='shouldPayAmountView'>
-      <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
-      <text class="shouldPayAmountTitle">商品应付金额</text>
-      <text class="shouldPayAmountText">￥{{filter.numberToFix(orderDetail.order.amountPayable)}}</text>
-    </view>
     <view class='memberRightsView'>
       <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
       <view class="memberContentView">
@@ -59,11 +54,16 @@
             <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(orderDetail.order.balancePrice)}}</text>
           </view>
           <view class="memberDiscounTextView">
-            <text class="memberDiscounTextTitle">积分</text>
+            <text class="memberDiscounTextTitle">积分抵扣</text>
             <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(orderDetail.order.integralPrice)}}</text>
           </view>
         </view>
       </view>
+    </view>
+    <view class='shouldPayAmountView'>
+      <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
+      <text class="shouldPayAmountTitle">商品应付金额</text>
+      <text class="shouldPayAmountText">￥{{filter.numberToFix(orderDetail.order.amountPayable)}}</text>
     </view>
     <view class='storeInfoView'>
       <image class="storeIconImage" src='../images/address@2x.png'></image>

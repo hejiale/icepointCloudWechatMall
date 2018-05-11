@@ -14,12 +14,11 @@ Page({
     pageSize: 20,
     singleLayoutWidth: 0,
     doubleLayoutWidth: 0,
-    deviceWidth:0,
-    scrollLeft:0
+    deviceWidth: 0,
+    scrollLeft: 0,
+    isShowEmpty:'hide'
   },
   onLoad: function (options) {
-    app.userLogin(function () { });
-
     var that = this;
     that.setData({ singleLayoutWidth: app.globalData.singleLayoutWidth, doubleLayoutWidth: app.globalData.doubleLayoutWidth })
 
@@ -37,17 +36,6 @@ Page({
       that.getCompanyTemplate();
     }
   },
-  onShoppingCart: function () {
-    if (app.globalData.customer != null) {
-      wx.navigateTo({
-        url: '../cart/cart',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
-  },
   onSearchProduct: function () {
     wx.navigateTo({
       url: '../searchPage/searchPage',
@@ -63,7 +51,19 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    that.setData({ currentType: item.typeName, isShowClassView: 'hide', scrollLeft: e.currentTarget.offsetLeft });
+    that.setData({scrollLeft: e.currentTarget.offsetLeft });
+    that.chooseClassItem(item);
+  },
+  onCoverItemClicked: function (e) {
+    var that = this;
+    var item = e.currentTarget.dataset.key;
+    that.chooseClassItem(item);
+  },
+  //选择类目
+  chooseClassItem:function(item){
+    var that = this;
+
+    that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
 
     if (item.typeName == '精选') {
       that.getCompanyTemplate();
@@ -72,12 +72,6 @@ Page({
       that.queryProductsRequest(item.typeId);
     }
   },
-  // onCoverClassItemClicked: function(e){
-  //   var that = this;
-  //   var item = e.currentTarget.dataset.key;
-
-  //   that.onClassItemClicked(e);
-  // },
   onTemplateDetail: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
@@ -103,27 +97,64 @@ Page({
     that.queryProductsRequest();
   },
   onBottomMenuToOrder: function () {
-    if (app.globalData.customer != null) {
-      wx.navigateTo({
-        url: '../order/order',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
+    wx.showLoading();
+
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            wx.hideLoading();
+            
+            wx.navigateTo({
+              url: '../order/order',
+            })
+          } else {
+            wx.hideLoading();
+
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        wx.hideLoading();
+
+        wx.navigateTo({
+          url: '../order/order',
+        })
+      }
+    })
   },
   onBottomMenuToCart: function () {
-    if (app.globalData.customer != null) {
-      wx.navigateTo({
-        url: '../cart/cart',
-      })
-    } else {
-      wx.navigateTo({
-        url: '../bindPhone/bindPhone',
-      })
-    }
+    wx.showLoading();
+
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            wx.hideLoading();
+
+            wx.navigateTo({
+              url: '../cart/cart',
+            })
+          } else {
+            wx.hideLoading();
+
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        wx.hideLoading();
+
+        wx.navigateTo({
+          url: '../cart/cart',
+        })
+      }
+    })
   },
+
   onBgClicked: function () {
     this.setData({ isShowClassView: 'hide' });
   },
@@ -158,6 +189,13 @@ Page({
               }
             }
           }
+
+          if (viewList.length > 0){
+            that.setData({ isShowEmpty: 'hide' })
+          }else{
+            that.setData({ isShowEmpty: '' })
+          }
+
           that.setData({ templateList: viewList, classList: that.data.classList });
           wx.hideLoading();
         }

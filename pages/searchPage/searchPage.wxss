@@ -13,8 +13,9 @@ page {
 .inputSearch {
   margin-left: 5px;
   height: 30px;
+  line-height: 30px;
   font-size: 14px;
-  width: calc(100% - 40px);
+  width: calc(100% - 35px);
   background-color: white;
 }
 
@@ -296,6 +297,7 @@ page {
   text-align: center;
   height: 30px;
   line-height: 30px;
+  border-radius: 5px;
 }
 
 .priceSpace {
@@ -327,7 +329,7 @@ page {
 .classItemText {
   display: inline-block;
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;

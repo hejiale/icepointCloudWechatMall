@@ -250,8 +250,19 @@ page {
   height: 38px;
 }
 
+.memberDiscounTextTitleView{
+  display: flex;
+  align-items: center;
+}
+
 .memberDiscounTextTitle {
   font-size: 14px;
+}
+
+.memberDiscounTextMemo{
+  margin-left: 10px;
+  color: #999999;
+  font-size: 12px;
 }
 
 .memberDiscounTextValue {

@@ -8,6 +8,7 @@ Page({
   data: {
     productList: [],
     isShowMemberRights: 'hide',
+    isShowContent: 'hide',
     isExtractEmail: 'show',
     isExtractSelf: 'hide',
     //自提或邮寄标签判定是否选择地址选项
@@ -91,7 +92,7 @@ Page({
 
     if (that.data.selectAddressId == null) {
       wx.showToast({
-        title: '请选择收货地址!',
+        title: '请选择联系人信息!',
         icon: 'none'
       })
       return;
@@ -101,7 +102,6 @@ Page({
       order: {
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
         netPointId: that.data.currentStore.id,
-        // netPointId: 2,
         addressId: that.data.selectAddressId,
         amountPayable: parseFloat(that.data.shouldPayPrice).toFixed(2),
         discount: that.data.memberInfo.mallCustomer.discount,
@@ -135,49 +135,15 @@ Page({
     }
     orderParameter.goodsOrders = products;
 
-    console.log(orderParameter);
-
-    wx.showLoading({
-      title: '正在提交订单...',
-    })
-    app.globalData.request.payOrder(orderParameter, function (data) {
-      if (data.retCode >= 306 && data.retCode <= 308) {
-        wx.showToast({
-          title: data.retMsg,
-          icon: "none"
-        })
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          that.offerOrderRequest(orderParameter);
+        });
       } else {
-        if (that.data.isFromCart == 1) {
-          app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
-            wx.hideLoading();
-
-            wx.showModal({
-              title: '提示',
-              content: '订单提交成功!',
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                  wx.navigateBack();
-                }
-              }
-            })
-          });
-        } else {
-          wx.hideLoading();
-
-          wx.showModal({
-            title: '提示',
-            content: '订单提交成功!',
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateBack();
-              }
-            }
-          })
-        }
+        that.offerOrderRequest(orderParameter, carts);
       }
-    });
+    })
   },
   onShowInputBalance: function () {
     var that = this;
@@ -251,6 +217,53 @@ Page({
     that.getShouldPayAmount();
     that.setData({ isShowMemberRights: 'hide' });
   },
+  //提交订单
+  offerOrderRequest: function (orderParameter, carts) {
+    var that = this;
+
+    wx.showLoading({
+      title: '正在提交订单...',
+    })
+
+    app.globalData.request.payOrder(orderParameter, function (data) {
+      if (data.retCode >= 306 && data.retCode <= 308) {
+        wx.showToast({
+          title: data.retMsg,
+          icon: "none"
+        })
+      } else {
+        if (that.data.isFromCart == 1) {
+          app.globalData.request.deleteCart({ cartIds: carts.join(',') }, function (data) {
+            wx.hideLoading();
+
+            wx.showModal({
+              title: '提示',
+              content: '订单提交成功!',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack();
+                }
+              }
+            })
+          });
+        } else {
+          wx.hideLoading();
+
+          wx.showModal({
+            title: '提示',
+            content: '订单提交成功!',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack();
+              }
+            }
+          })
+        }
+      }
+    });
+  },
   //计算商品总价
   getCartTotalPrice: function () {
     var that = this;
@@ -287,7 +300,7 @@ Page({
 
     app.globalData.request.queryStoreList(options, function (data) {
       var store = data.result.content[0];
-      that.setData({ currentStore: store, totalStore: data.result.numberOfElements });
+      that.setData({ currentStore: store, totalStore: data.result.numberOfElements, isShowContent: '' });
       wx.hideLoading();
 
       // map.calculateDistance({

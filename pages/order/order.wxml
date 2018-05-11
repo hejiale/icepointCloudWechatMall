@@ -14,7 +14,7 @@
       <view class='orderMenuView' bindtap='onProcess' wx:else style='color: #999;'>已处理</view>
     </view>
   </view>
-  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200'>
+  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200' wx:if="{{orderList.length > 0}}">
     <block wx:for-items="{{orderList}}">
       <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
         <view class="codeView">
@@ -47,4 +47,7 @@
       </view>
     </block>
   </scroll-view>
+  <view class='emptyCartView' wx:else>
+    <image src='../images/icon_emptyOrder@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
 </view>

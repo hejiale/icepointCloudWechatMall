@@ -41,7 +41,8 @@ page {
 }
 
 .productSingleImage{
-  width: 50%;
+  margin-left: 5%;
+  width: 40%;
   height: 128px;
 }
 
@@ -60,7 +61,7 @@ page {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 55%;
 }
 
 .productText {

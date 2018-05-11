@@ -23,7 +23,7 @@
     <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
   </view>
 </view>
-<view class="page">
+<view class="page {{isShowContent}}">
   <view class="scrollView">
     <view class="deliveryModeView">
       <text class="deliveryModeTitle">提货方式</text>
@@ -64,11 +64,6 @@
         </view>
       </block>
     </view>
-    <view class='shouldPayAmountView'>
-      <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
-      <text class="shouldPayAmountTitle">商品应付金额</text>
-      <text class="shouldPayAmountText">￥{{filter.numberToFix(shouldPayPrice)}}</text>
-    </view>
     <view class='memberRightsView'>
       <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
       <view class="memberContentView">
@@ -76,19 +71,33 @@
         <image class="memberLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
         <view class='memberDiscountView'>
           <view class="memberDiscounTextView" wx:if="{{memberInfo.mallCustomer.discount != null}}">
-            <text class="memberDiscounTextTitle">会员折扣</text>
-            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(discountPrice)}}</text>
+            <view class='memberDiscounTextTitleView'>
+              <text class="memberDiscounTextTitle">会员折扣</text>
+              <text class="memberDiscounTextMemo">{{memberInfo.mallCustomer.discount*10}}%</text>
+            </view>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(discountPrice)}}</text>
           </view>
           <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{memberInfo.mallCustomer.balance != null}}">
-            <text class="memberDiscounTextTitle">储值抵扣</text>
-            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(balancePrice)}}</text>
+            <view class='memberDiscounTextTitleView'>
+              <text class="memberDiscounTextTitle">储值抵扣</text>
+              <text class="memberDiscounTextMemo">账户储值余额{{memberInfo.mallCustomer.balance}}</text>
+            </view>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(balancePrice)}}</text>
           </view>
           <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{memberInfo.mallCustomer.integral != null}}">
-            <text class="memberDiscounTextTitle">积分</text>
-            <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(pointPrice)}}</text>
+            <view class='memberDiscounTextTitleView'>
+              <text class="memberDiscounTextTitle">积分抵扣</text>
+              <text class="memberDiscounTextMemo">账户积分{{memberInfo.mallCustomer.integral}}</text>
+            </view>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(pointPrice)}}</text>
           </view>
         </view>
       </view>
+    </view>
+    <view class='shouldPayAmountView'>
+      <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
+      <text class="shouldPayAmountTitle">商品应付金额</text>
+      <text class="shouldPayAmountText">￥{{filter.numberToFix(shouldPayPrice)}}</text>
     </view>
     <view class='storeInfoView'>
       <image class="storeIconImage" src='../images/address@2x.png'></image>

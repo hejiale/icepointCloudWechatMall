@@ -27,6 +27,25 @@ function login(options, callBack) {
     })
 }
 
+//校验登录情况
+function valityLoginStatus(callBack) {
+  var that = this;
+
+  let msg = {
+    url: port + '/validationUserStatus',
+    method: 'GET',
+    sessionId: 'JSESSIONID=' + that.sessionId
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
+
 //获取公司信息
 function getCompanyInfo(options, callBack) {
   var that = this;
@@ -529,7 +548,7 @@ function http(msg) {
           console.log(res);
         } else {
           wx.showToast({
-            title: '请求服务器端数据出错，请稍后重试',
+            title: '服务器繁忙，请重试',
             icon: 'none'
           })
         }
@@ -544,6 +563,7 @@ function http(msg) {
 
 module.exports = {
   login: login,
+  valityLoginStatus: valityLoginStatus,
   getCompanyInfo: getCompanyInfo,
   getMemberInfo: getMemberInfo,
   getCompanyTemplate: getCompanyTemplate,

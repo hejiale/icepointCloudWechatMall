@@ -4,12 +4,12 @@
     <view class='titleView'>
       <text class='topText'>商品列表</text>
       <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit && cartList.length > 0}}">编辑</text>
-      <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit}}">保存</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit && cartList.length > 0}}">保存</text>
     </view>
     <view class='topLine'>
     </view>
   </view>
-  <view class="contentView">
+  <view class="contentView" wx:if="{{cartList.length > 0}}">
     <scroll-view>
       <block wx:for-items="{{cartList}}">
         <view class="openView" wx:if="{{canEdit}}">
@@ -24,8 +24,8 @@
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <view class='openPriceView'>
                 <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
-                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.code != 200 && item.code != 305}}"></image>
-                <image class='shelvesImage' src='../images/icon_cartNoStock@2x.png' mode="aspectFit" wx:elif="{{item.code == 305}}"></image>
+                <view class='shelvesImage' wx:if="{{item.code != 200 && item.code != 305}}" style='color: #999;border: 1px solid #999;'>已失效</view>
+                <view class='shelvesImage' wx:elif="{{item.code == 305}}" style='color: #FF4848;border: 1px solid #FF4848;'>库存不足</view>
               </view>
               <view class='editCartNumView'>
                 <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
@@ -47,8 +47,8 @@
               <text class="productNameText">{{item.goods.goodsName}}</text>
               <view class='specificationsView'>
                 <text class='specificationsText'>{{item.specification}}</text>
-                <image class='shelvesImage' src='../images/icon_ shelves@2x.png' mode="aspectFit" wx:if="{{item.code != 200 && item.code != 305}}"></image>
-                <image class='shelvesImage' src='../images/icon_cartNoStock@2x.png' mode="aspectFit" wx:elif="{{item.code == 305}}"></image>
+                <view class='shelvesImage' wx:if="{{item.code != 200 && item.code != 305}}" style='color: #999;border: 1px solid #999;'>已失效</view>
+                <view class='shelvesImage' wx:elif="{{item.code == 305}}" style='color: #FF4848;border: 1px solid #FF4848;'>库存不足</view>
               </view>
               <view class="priceView">
                 <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
@@ -67,5 +67,8 @@
     <view class="chooseAllView" wx:if="{{canEdit}}" bindtap='onCleanCart'>
       <text class="totalOrderPriceText">全部删除</text>
     </view>
+  </view>
+  <view class='emptyCartView' wx:else>
+    <image src='../images/icon_emptyCart@2x.png' class='emptyImage' mode="aspectFit"></image>
   </view>
 </view>

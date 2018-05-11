@@ -51,37 +51,25 @@ Page({
     bindCode: '',
     clock: '获取验证码',
     userInfo: null,
-    isShowMemberRightsMemo: 'hide'
+    isShowMemberRightsMemo: 'hide',
+    isShowInfoAlert: '',
+    isShowContent: 'hide'
   },
   onLoad: function () {
 
   },
   onShow: function () {
     var that = this;
+  },
+  onGetUserInfo: function (e) {
+    console.log(e);
+    var that = this;
 
-    app.getUserInfo(function (userInfo) {
-      if (userInfo != null) {
-        that.setData({
-          userInfo: userInfo,
-        })
-      } else {
-        wx.showModal({
-          content: '检测到您未打开微信用户信息授权，开启后即可进行登录',
-          confirmText: '去开启',
-          success: function (res) {
-            if (res.confirm) {
-              wx.openSetting({
-                success: (res) => {
-
-                }
-              })
-            } else if (res.cancel) {
-              wx.navigateBack();
-            }
-          }
-        })
-      }
-    })
+    if (e.detail.userInfo != null) {
+      that.setData({ userInfo: e.detail.userInfo, isShowInfoAlert: 'hide', isShowContent: '' });
+    } else {
+      wx.navigateBack();
+    }
   },
   onBindPhone: function (e) {
     var that = this;

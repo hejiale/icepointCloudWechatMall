@@ -4,16 +4,31 @@ var app = getApp();
 Page({
   data: {
     addressList: null,
-    orderSelectAddressId:null
+    orderSelectAddressId: null
   },
 
-  onLoad: function (options){
+  onLoad: function (options) {
     var that = this;
-    that.setData({ orderSelectAddressId: options.id});
+    that.setData({ orderSelectAddressId: options.id });
   },
   onShow: function () {
     var that = this;
-    that.queryAddressList();
+
+    app.valityLogigStatus(function (e) {
+      if (e == false) {
+        app.userLogin(function () {
+          if (app.globalData.customer != null) {
+            that.queryAddressList();
+          } else {
+            wx.navigateTo({
+              url: '../bindPhone/bindPhone',
+            })
+          }
+        });
+      } else {
+        that.queryAddressList();
+      }
+    })
   },
   onSetDefault: function (e) {
     var that = this;
@@ -28,17 +43,17 @@ Page({
     var item = e.currentTarget.dataset.key;
 
     wx.navigateTo({
-      url: '../editAddress/editAddress?id='+item.id
+      url: '../editAddress/editAddress?id=' + item.id
     })
   },
   onDeleteAddress: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    if (that.data.orderSelectAddressId == item.id && that.data.orderSelectAddressId != null){
+    if (that.data.orderSelectAddressId == item.id && that.data.orderSelectAddressId != null) {
       wx.showToast({
         title: '当前选中的地址不可删除',
-        icon:'none'
+        icon: 'none'
       })
       return;
     }
@@ -52,7 +67,7 @@ Page({
       url: '../editAddress/editAddress'
     })
   },
-  onChooseAddress: function(e){
+  onChooseAddress: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
 

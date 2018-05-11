@@ -43,7 +43,7 @@ Page({
     var that = this;
     var value = e.currentTarget.dataset.key;
 
-    if (value.goods.isShelves) {
+    if (value.code == 200 || value.code == 305) {
       for (var i = 0; i < that.data.cartList.length; i++) {
         var object = that.data.cartList[i];
         if (object.shoppingCart.cartId == value.shoppingCart.cartId) {
@@ -113,11 +113,6 @@ Page({
         })
 
       });
-    } else {
-      wx.showToast({
-        title: '购物车未选中任何商品!',
-        icon: 'none'
-      })
     }
   },
   onCleanCart: function () {
@@ -130,7 +125,7 @@ Page({
   //查询购物车列表
   queryCartList: function () {
     var that = this;
-    // wx.showLoading();
+    wx.showLoading();
 
     app.globalData.request.queryCartList(function (data) {
       if (data.result != null) {
@@ -156,13 +151,10 @@ Page({
           }
           that.setData({ cartList: data.result });
           that.updateCartTotalPrice();
-          // wx.hideLoading();
+          wx.hideLoading();
         }
       } else {
-        wx.showToast({
-          title: '购物车未添加任何商品!',
-          icon: "none"
-        })
+        wx.hideLoading();
         that.setData({ cartList: null });
       }
     });
