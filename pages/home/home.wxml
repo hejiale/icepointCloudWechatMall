@@ -21,7 +21,7 @@
     <view class='classMenuView' wx:if="{{classList.length > 1}}">
       <scroll-view class="scroll-view-x" scroll-x="true" scroll-left="{{scrollLeft}}">
         <ul class="hengxiangul">
-          <li wx:for="{{classList}}" bindtap="onClassItemClicked" data-key="{{item}}">
+          <li wx:for="{{classList}}" id="{{item.typeId}}" bindtap="onClassItemClicked" data-key="{{item}}">
             <text class='liText' style='color: #222222;' wx:if="{{currentType == item.typeName}}">{{item.typeName}}</text>
             <text class='liText' style='color: #999999;' wx:else>{{item.typeName}}</text>
             <view class='liBottomLine' wx:if="{{currentType == item.typeName}}"></view>
@@ -41,7 +41,7 @@
           <text class='templateMainTitle'>{{template.mainTitle}}</text>
           <text class='templateSubTitle'>{{template.subTitle}}</text>
         </view>
-        <view class='templateGoodsView'>
+        <view class='templateGoodsView' wx:if="{{template.layout != '0'}}">
           <block wx:for-items="{{template.productBeans}}">
             <view class='productView' wx:if="{{item.shopWindow}}" bindtap='onGoodsDetail' data-key='{{item}}' style='{{template.layout == "2" ? "width: 50%;":"width: 100%;"}}'>
               <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutWidth}}px;' wx:if="{{template.layout == '2'}}"></image>

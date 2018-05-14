@@ -16,11 +16,11 @@
           <text class="TitleText">类别</text>
           <view class="classesView">
             <block wx:for-items="{{classList}}">
-              <view class="classItem" style="background-color: white;border: 1px solid #E7E7E7;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass'>
-                <label class="classItemText" style="color:#222222">{{item.type.typeName}}</label>
+              <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass'>
+                <text class="classItemText" style="color:#222">{{item.type.typeName}}</text>
               </view>
-              <view class="classItem" style="background-color: #F2F8FF;border: 1px solid #4D9FD8;" wx:else data-key="{{item}}" bindtap='onChooseClass'>
-                <label class="classItemText" style="color: #4D9FD8;">{{item.type.typeName}}</label>
+              <view class="classItem" style="background-color: #4D9FD8;" wx:else data-key="{{item}}" bindtap='onChooseClass'>
+                <text class="classItemText" style="color: #FFFFFF;">{{item.type.typeName}}</text>
               </view>
             </block>
           </view>
@@ -32,11 +32,11 @@
             </view>
             <view class='propertysView'>
               <block wx:for-items="{{item.goodsParameters}}">
-                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: white;border: 1px solid #E7E7E7;" wx:if="{{!item.selected}}">
-                  <text class="classItemText" style="color:#222222">{{item.parameterValue}}</text>
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}">
+                  <text class="classItemText" style="color:#222">{{item.parameterValue}}</text>
                 </view>
-                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F2F8FF;border: 1px solid #4D9FD8;" wx:else>
-                  <text class="classItemText" style="color:#4D9FD8">{{item.parameterValue}}</text>
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #4D9FD8;" wx:else>
+                  <text class="classItemText" style="color:#FFFFFF">{{item.parameterValue}}</text>
                 </view>
               </block>
             </view>

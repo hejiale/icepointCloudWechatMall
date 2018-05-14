@@ -16,7 +16,7 @@ Page({
     doubleLayoutWidth: 0,
     deviceWidth: 0,
     scrollLeft: 0,
-    isShowEmpty:'hide'
+    isShowEmpty: 'hide'
   },
   onLoad: function (options) {
     var that = this;
@@ -27,14 +27,17 @@ Page({
         deviceWidth: systemInfo.windowWidth,
       })
     })
-  },
-  onShow: function () {
-    var that = this;
 
-    if (that.data.currentType == '精选') {
-      wx.showLoading({});
-      that.getCompanyTemplate();
-    }
+    wx.showLoading({});
+    that.getCompanyTemplate();
+  },
+  onLoad:function(){
+    var query = wx.createSelectorQuery();
+    query.select('.hengxiangul').boundingClientRect()
+    query.exec(function (res) {
+      console.log(res);
+      console.log(res[0]);
+    })
   },
   onSearchProduct: function () {
     wx.navigateTo({
@@ -51,7 +54,7 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    that.setData({scrollLeft: e.currentTarget.offsetLeft });
+    that.setData({ scrollLeft: e.currentTarget.offsetLeft });
     that.chooseClassItem(item);
   },
   onCoverItemClicked: function (e) {
@@ -60,7 +63,7 @@ Page({
     that.chooseClassItem(item);
   },
   //选择类目
-  chooseClassItem:function(item){
+  chooseClassItem: function (item) {
     var that = this;
 
     that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
@@ -104,7 +107,7 @@ Page({
         app.userLogin(function () {
           if (app.globalData.customer != null) {
             wx.hideLoading();
-            
+
             wx.navigateTo({
               url: '../order/order',
             })
@@ -190,9 +193,9 @@ Page({
             }
           }
 
-          if (viewList.length > 0){
+          if (viewList.length > 0) {
             that.setData({ isShowEmpty: 'hide' })
-          }else{
+          } else {
             that.setData({ isShowEmpty: '' })
           }
 

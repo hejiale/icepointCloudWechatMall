@@ -3,7 +3,7 @@
 /* pages/home/home.wxss */
 
 page {
-  background-color: white;
+  background-color: #fbf9fe;
 }
 
 .contentView {
@@ -130,11 +130,12 @@ page {
   padding-bottom: 10px;
 }
 
-.templateTitleView{
+.templateTitleView {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 90px;
+  background-color: white;
 }
 
 .templateMainTitle {
@@ -150,7 +151,7 @@ page {
   text-align: center;
   margin-top: 5px;
   width: 100%;
-  color: #999999;
+  color: #999;
 }
 
 .templateGoodsView {
@@ -161,7 +162,7 @@ page {
 
 .productListView {
   position: relative;
-  width: 100%;
+  width: calc(100% - 5px);
 }
 
 .templateProductView {
@@ -175,7 +176,7 @@ page {
   align-items: center;
   box-sizing: border-box;
   padding-bottom: 20px;
-  /* background-color: white; */
+  background-color: white;
 }
 
 .productSubView {
@@ -183,7 +184,10 @@ page {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  width: 50%;
+  width: calc(50% - 5px);
+  background-color: white;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .productSingleView {
@@ -238,7 +242,7 @@ page {
   text-align: center;
 }
 
-.emptyCartView{
+.emptyCartView {
   position: fixed;
   display: flex;
   align-items: center;
@@ -248,7 +252,7 @@ page {
   background-color: white;
 }
 
-.emptyImage{
+.emptyImage {
   width: 182px;
   height: 218px;
 }
@@ -283,7 +287,7 @@ page {
   margin-left: 15px;
   margin-right: 10px;
   margin-bottom: 10px;
-   padding-left: 15px; 
+  padding-left: 15px;
   padding-right: 15px;
   height: 30px;
   line-height: 30px;

@@ -16,7 +16,8 @@ Page({
     parameterPrice: null,
     cartNum: 1,
     isToOrder: false,
-    tryGlassToOrder: false
+    tryGlassToOrder: false,
+    isFirstShowParameter:true
   },
   onLoad: function (options) {
     var that = this;
@@ -160,7 +161,7 @@ Page({
           icon: "none"
         })
       } else {
-        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
+        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
 
         wx.showToast({
           title: '加入购物车成功!'
@@ -173,7 +174,7 @@ Page({
 
     app.globalData.orderProducts = that.bindOrderProduct();
 
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
 
     wx.navigateTo({
       url: '../bookOrder/bookOrder?isFromCart=0',
@@ -232,7 +233,7 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [] });
+    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter:true });
   },
   //点击商品规格参数method
   onSelectParameter: function (e) {
@@ -288,6 +289,29 @@ Page({
         that.setData({ parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       }
 
+      if (that.data.isFirstShowParameter){
+        for (var i = 0; i < data.specifications.length; i++) {
+          var specification = data.specifications[i];
+          var selectNum = 0;
+          var parameter = null;
+
+          for (var j = 0; j < specification.values.length; j++) {
+            var value = specification.values[j];
+            if (value.enableSelect) {
+              selectNum += 1;
+              parameter = value;
+            }
+            if (j == specification.values.length - 1) {
+              if (selectNum == 1) {
+                that.data.selectParameters.push(parameter);
+                selectNum = 0;
+              }
+            }
+          }
+        }
+        that.setData({ isFirstShowParameter: false});
+      }
+    
       for (var z = 0; z < that.data.selectParameters.length; z++) {
         var selectParameter = that.data.selectParameters[z];
         for (var i = 0; i < data.specifications.length; i++) {

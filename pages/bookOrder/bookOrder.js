@@ -24,7 +24,7 @@ Page({
     isInputPoint: false,
     //当前输入折扣抵扣金额
     inputDiscountValue: 0,
-    inputValue: 0,
+    inputValue: '',
     useBalance: 0,
     usePoint: 0,
     isFromCart: false,
@@ -102,6 +102,7 @@ Page({
       order: {
         pickUpGoodsType: "PICK_UP_IN_A_STORE",
         netPointId: that.data.currentStore.id,
+        // netPointId: 2,
         addressId: that.data.selectAddressId,
         amountPayable: parseFloat(that.data.shouldPayPrice).toFixed(2),
         discount: that.data.memberInfo.mallCustomer.discount,
@@ -147,11 +148,23 @@ Page({
   },
   onShowInputBalance: function () {
     var that = this;
-    that.setData({ isShowMemberRights: 'show', isInputPoint: false, inputDiscountValue: that.data.balancePrice, inputValue: that.data.balancePrice });
+    that.setData({ isShowMemberRights: 'show', isInputPoint: false, inputDiscountValue: that.data.balancePrice});
+    
+    if (that.data.balancePrice > 0){
+      that.setData({ inputValue: that.data.balancePrice});
+    }else{
+      that.setData({ inputValue: '' });
+    }
   },
   onShowInputPoint: function () {
     var that = this;
-    that.setData({ isShowMemberRights: 'show', isInputPoint: true, inputDiscountValue: that.data.pointPrice, inputValue: that.data.pointPrice });
+    that.setData({ isShowMemberRights: 'show', isInputPoint: true, inputDiscountValue: that.data.pointPrice });
+
+    if (that.data.pointPrice > 0){
+      that.setData({ inputValue: that.data.pointPrice});
+    }else{
+      that.setData({ inputValue: '' });
+    }
   },
   onCoverClicked: function (e) {
     this.setData({ isShowMemberRights: 'hide' });
@@ -170,25 +183,29 @@ Page({
     var that = this;
     var str = event.detail.value;
 
+    //输入积分操作
     if (that.data.isInputPoint) {
+      //积分兑换金额
       var pointMoney = (parseInt(str) * that.data.memberInfo.integralTrade.money) / that.data.memberInfo.integralTrade.integral_sum;
 
+      //最大应付金额
       var shouldMoney = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.balancePrice);
 
       if (parseFloat(pointMoney) > shouldMoney) {
-        that.setData({ inputValue: '0' })
+        that.setData({ inputValue: '' })
       } else if (parseInt(str) > parseInt(that.data.memberInfo.mallCustomer.integral)) {
-        that.setData({ inputValue: '0' });
+        that.setData({ inputValue: '' });
       } else {
         that.setData({ inputValue: str })
       }
     } else {
+      //输入储值金额操作
       var shouldPay = parseFloat(that.data.totalPrice) - parseFloat(that.data.discountPrice) - parseFloat(that.data.pointPrice);
 
       if (parseFloat(str) > shouldPay) {
-        that.setData({ inputValue: '0' })
+        that.setData({ inputValue: '' })
       } else if (parseFloat(str) > parseFloat(that.data.memberInfo.mallCustomer.balance)) {
-        that.setData({ inputValue: that.data.memberInfo.mallCustomer.balance });
+        that.setData({ inputValue: '' });
       } else {
         that.setData({ inputValue: str })
       }
@@ -197,7 +214,7 @@ Page({
     if (str.length > 0) {
       if (that.data.isInputPoint) {
         var point = (parseInt(that.data.inputValue) * that.data.memberInfo.integralTrade.money) / that.data.memberInfo.integralTrade.integral_sum;
-        that.setData({ inputDiscountValue: point.toFixed(2) });
+        that.setData({ inputDiscountValue: point });
       } else {
         that.setData({ inputDiscountValue: that.data.inputValue })
       }
