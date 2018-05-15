@@ -327,6 +327,7 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -359,7 +360,6 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 5px;
   width: 100%;
 }
 

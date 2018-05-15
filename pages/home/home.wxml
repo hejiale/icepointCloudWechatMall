@@ -41,9 +41,17 @@
           <text class='templateMainTitle'>{{template.mainTitle}}</text>
           <text class='templateSubTitle'>{{template.subTitle}}</text>
         </view>
-        <view class='templateGoodsView' wx:if="{{template.layout != '0'}}">
+        <view  wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);":"width: 100%;"}}'>
           <block wx:for-items="{{template.productBeans}}">
-            <view class='productView' wx:if="{{item.shopWindow}}" bindtap='onGoodsDetail' data-key='{{item}}' style='{{template.layout == "2" ? "width: 50%;":"width: 100%;"}}'>
+            <view class='productView' wx:if="{{item.shopWindow}}" bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{template.layout == '2' && item.shopWindow}}">
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutWidth}}px;' wx:if="{{template.layout == '2'}}"></image>
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutWidth}}px;' wx:else></image>
+              <view class="productInfoView">
+                <text class="productText">{{item.goodsName}}</text>
+                <text class="priceText">￥{{item.price}}</text>
+              </view>
+            </view>
+            <view class='productLayoutView' bindtap='onGoodsDetail' data-key='{{item}}' wx:elif="{{template.layout == '1' && item.shopWindow}}">
               <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutWidth}}px;' wx:if="{{template.layout == '2'}}"></image>
               <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutWidth}}px;' wx:else></image>
               <view class="productInfoView">

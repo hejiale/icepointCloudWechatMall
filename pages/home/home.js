@@ -31,14 +31,6 @@ Page({
     wx.showLoading({});
     that.getCompanyTemplate();
   },
-  onLoad:function(){
-    var query = wx.createSelectorQuery();
-    query.select('.hengxiangul').boundingClientRect()
-    query.exec(function (res) {
-      console.log(res);
-      console.log(res[0]);
-    })
-  },
   onSearchProduct: function () {
     wx.navigateTo({
       url: '../searchPage/searchPage',
